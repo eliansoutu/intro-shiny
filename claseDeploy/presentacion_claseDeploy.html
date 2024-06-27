@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Introducción a Shiny</title>
+    <meta charset="utf-8" />
+    <script src="presentacion_claseDeploy_files/header-attrs-2.20/header-attrs.js"></script>
+    <link href="presentacion_claseDeploy_files/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="presentacion_claseDeploy_files/remark-css-0.0.1/nhsr.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Introducción a Shiny
+]
+.subtitle[
+## Deploy
+]
+.institute[
+### Estación R
+]
+
+---
+
+
+
+
+class: center, middle inverse
+
+# Deploy
+
+---
+
+# Deploy
+
+El *deploy* (despliegue) de una Shiny es el último paso para poder compartir nuestra app con otras personas. Necesitamos contar con un servidor acorde para poder alojar nuestra aplicación, es decir, un sistema que pueda ejecutar R y Shiny, con todas sus dependencias.
+
+En resumen necesitamos un [Shiny Server](https://posit.co/products/open-source/shinyserver/), una herramienta de código abierto para alojar múltiples aplicaciones en un solo lugar.
+
+
+.pull-left[
+&lt;img src="recursos/servidor.jpg" width="1365" /&gt;
+
+]
+
+
+.pull-right[
+&lt;img src="recursos/linux.png" width="60%" /&gt;
+
+]
+
+---
+
+# Deploy
+
+&lt;br&gt;
+
+¿Qué opciones tenemos para desplegar una app?
+
+--
+
+- [Posit Connect](https://posit.co/products/enterprise/connect/)
+
+--
+
+- [Shiny Server](https://posit.co/download/shiny-server/)
+
+--
+
+- [shinyapps.io](https://www.shinyapps.io/)
+
+---
+
+# ¿Fuera del server?
+
+&lt;br&gt;
+
+Otros caminos (experimentales) para compartir nuestra app:
+
+- Local:
+
+ - Scripts de código (¿+ git?): para users de R
+ - Compilar como app desktop con R portable (ej: [DesktopDeployR](https://github.com/wleepang/DesktopDeployR), [RInno](https://github.com/ficonsulting/RInno))
+
+--
+
+- Web:
+
+ - [Shinylive](https://posit-dev.github.io/r-shinylive/) + [webR](https://docs.r-wasm.org/webr/latest/)
+
+--
+
+- No Shiny:
+ 
+ - Se puede combinar Rmarkdown o Quarto con paquetes de R para hacer app "estáticas" sencillas. Ej: `flexdashboard` + `crosstalk`
+
+---
+
+# Volviendo a Shiny Server...
+
+&lt;br&gt;
+
+shinyapps.io ofrece una opción gratuita (limitada) para hacer el deploy de nuestra app.
+
+Pasos:
+
+1. Crear una cuenta https://www.shinyapps.io/
+
+2. Generar un token
+
+3. Vincular la cuenta desde Rstudio
+
+4. Publicar la aplicación
+
+---
+
+# Deploy
+
+2- Token
+
+&lt;img src="recursos/shinyapps_token.png" width="100%" /&gt;
+
+---
+
+# Deploy
+
+3- Conexión
+
+&lt;img src="recursos/shinyapps_connect.png" width="60%" /&gt;
+
+---
+
+# Deploy
+
+4- Publicación
+
+&lt;img src="recursos/shinyapps_publish.png" width="60%" /&gt;
+
+---
+
+# Deploy
+
+&lt;br&gt;
+
+¡Voilá!
+
+&lt;img src="recursos/shinyapps_deployed.png" width="100%" /&gt;
+
+---
+
+class: center, middle inverse
+
+# Buenas prácticas
+
+---
+
+# Buenas prácticas
+
+&lt;br&gt;
+
+--
+
+- Funcionalizar, modularizar, paquetizar
+
+--
+
+- Pre-procesar los datos fuera de la app
+
+--
+
+- Minimizar la reactividad: lógica app vs negocio
+
+--
+
+- Documentar y comentar el código
+
+--
+
+- Controlar los paquetes y sus versiones ([renv](https://rstudio.github.io/renv/articles/renv.html))
+
+--
+
+- Utilizar control de versiones
+
+--
+
+- Testing ([shinytest2](https://github.com/rstudio/shinytest2), [testthat](https://testthat.r-lib.org/index.html), [shinyloadtest](https://rstudio.github.io/shinyloadtest/)) - Profiling([profvis](https://rstudio.github.io/profvis/))
+
+---
+
+# Bases de datos e integración
+
+Local vs Remoto
+
+&lt;img src="recursos/shiny_database.png" width="80%" /&gt;
+
+https://shiny.posit.co/r/articles/build/persistent-data-storage/
+
+---
+
+# Ejemplos
+
+Probemos distintos enfoques para leer y procesar nuestros datos sobre bosques usados en el taller.
+
+
+
+¿Cuánto tarda el proceso de limpieza de datos que hicimos?
+
+`recursos/data/limpieza.R`
+
+
+```
+## 2.14 sec elapsed
+```
+
+---
+
+# Ejemplos
+
+¿Y cuánto demora leer los datos?
+
+.xlsx
+
+```r
+tic()
+xlsx &lt;- readxl::read_excel("recursos/data/data_shiny.xlsx")
+toc()
+```
+
+```
+## 0.29 sec elapsed
+```
+
+
+
+.csv
+
+```r
+tic()
+csv &lt;- read.csv("recursos/data/data_shiny.csv")
+toc()
+```
+
+```
+## 0.08 sec elapsed
+```
+
+
+
+---
+
+# Ejemplos
+
+.parquet
+
+```r
+tic()
+parquet &lt;- arrow::open_dataset("recursos/data/data_shiny.parquet")
+toc()
+```
+
+```
+## 0.51 sec elapsed
+```
+
+
+
+.db
+
+```r
+tic()
+db &lt;- DBI::dbConnect(RSQLite::SQLite(), "recursos/data/data_shiny.db")
+toc()
+```
+
+```
+## 0.22 sec elapsed
+```
+
+---
+
+# Peso de los objetos
+
+
+```
+## [1] "xlsx 666824"
+```
+
+```
+## [1] "csv 613408"
+```
+
+```
+## [1] "parquet 504"
+```
+
+```
+## [1] "db 2176"
+```
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create();
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

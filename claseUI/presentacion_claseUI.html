@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Introducción a Shiny</title>
+    <meta charset="utf-8" />
+    <script src="presentacion_claseUI_files/header-attrs-2.20/header-attrs.js"></script>
+    <link href="presentacion_claseUI_files/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="presentacion_claseUI_files/remark-css-0.0.1/nhsr.css" rel="stylesheet" />
+    <script src="presentacion_claseUI_files/jquery-3.6.0/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link href="presentacion_claseUI_files/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet" />
+    <script src="presentacion_claseUI_files/bootstrap-5.3.1/bootstrap.bundle.min.js"></script>
+    <script src="presentacion_claseUI_files/bs3compat-0.6.1/transition.js"></script>
+    <script src="presentacion_claseUI_files/bs3compat-0.6.1/tabs.js"></script>
+    <script src="presentacion_claseUI_files/bs3compat-0.6.1/bs3compat.js"></script>
+    <link href="presentacion_claseUI_files/htmltools-fill-0.5.7/fill.css" rel="stylesheet" />
+    <script src="presentacion_claseUI_files/bslib-component-js-0.6.1/components.min.js"></script>
+    <script src="presentacion_claseUI_files/bslib-component-js-0.6.1/web-components.min.js" type="module"></script>
+    <link href="presentacion_claseUI_files/bslib-component-css-0.6.1/components.css" rel="stylesheet" />
+    <script src="presentacion_claseUI_files/bslib-tag-require-0.6.1/tag-require.js"></script>
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Introducción a Shiny
+]
+.subtitle[
+## UI
+]
+.institute[
+### Estación R
+]
+
+---
+
+
+
+
+# User Interface (UI)
+
+&lt;br&gt;
+
+### ¿Por dónde empiezo mi app?
+
+Pensar cómo lucirá nuestra app, su estructura y visualizaciones es un buen inicio. Plasmar estas ideas en un boceto nos ayudará a ordenarnos y a ordenar nuestro código.
+
+&lt;br&gt;
+
+### Componentes principales de una UI
+
+- Framework
+
+- Layout
+
+- Outputs
+
+- Inputs
+
+- Themes
+
+---
+class: center, middle inverse
+
+# Framework
+
+---
+
+# Framework
+
+&lt;br&gt;
+
+Shiny usa el marco de trabajo o *framework* llamado Bootstrap (BS), el cual constituye una colección de convenciones HTML, estilos CSS y fragmentos JS agrupados en un formato determinado enfocado en el diseño.
+
+Conocer Bootstrap nos permite ir un poco más allá de la apariencia básica que nos ofrecen las funciones de Shiny para:
+
+- Potenciar nuestra UI utilizando el paquete `bslib` (última versión de BS)
+
+- Manipular las clases (CSS) para personalizar nuestros componentes
+
+- Generar nuestras propias funciones de elementos UI
+
+&lt;br&gt;
+
+[Sitio de Bootstrap](https://getbootstrap.com/)
+
+&lt;br&gt;
+
+Existen otros *framework* como [shinydashboard](https://rstudio.github.io/shinydashboard/), [shiny.semantic](https://appsilon.github.io/shiny.semantic/), [shinymaterial](https://ericrayanderson.github.io/shinymaterial/) o [shinymobile](https://rinterface.github.io/shinyMobile/)
+
+---
+
+class: split-four
+
+# Framework: ejemplos
+
+&lt;br&gt;
+
+.pull-left[
+Bootstrap (bslib)
+[&lt;img src="recursos/bslib.png"&gt;](https://shiny.posit.co/blog/posts/bslib-dashboards/)
+]
+
+.pull-right[
+Dashboard
+[&lt;img src="recursos/dashboard.png"&gt;](https://gallery.shinyapps.io/087-crandash/)
+]
+
+
+.pull-left[
+Semantic
+[&lt;img src="recursos/semantic.png"&gt;](https://demo.prod.appsilon.ai/flights_fraud_demo/)
+]
+
+.pull-right[
+Material
+[&lt;img src="recursos/material.png"&gt;](https://ericrayanderson.shinyapps.io/shinymaterial_dashboard/)
+]
+
+---
+
+# Framework
+
+&lt;br&gt;
+
+&lt;img src="recursos/atencion.png" width="30%" style="display: block; margin: auto;" /&gt;
+
+&lt;br&gt;
+
+Recientemente, Shiny incorporó `bslib` en su documentación oficial. Dado que aún mucho del material y el código de aplicaciones desarrolladas como ejemplos se mantiene con la anterior versión, en este curso alternaremos entre ambas.
+
+---
+
+class: center, middle inverse
+
+# Layout
+
+---
+
+# Layout
+
+&lt;br&gt;
+
+Podemos entender al layout como nuestra estructura de jerarquías base para la organización de la UI.
+
+Algunas funciones de Shiny base para construir nuestro layout son:
+
+- `fluidPage()`: crea el lienzo en blanco el cual consiste en filas que incluyen columnas, formando una cuadrícula de 12 unidades de ancho. Una fluidpage escala sus componentes para que se adapten al tamaño de la pantalla. Es necesaria ya que configura el marco de trabajo que Shiny necesita. 
+
+- `titlePanel()` define un título para la página.
+
+- `sidebarLayout()` crea una página con una barra lateral y un panel principal:
+
+ - `sidebarPanel()` barra lateral. Generalmente se ubican *inputs*.
+
+ - `mainPanel()` panel principal. Generalmente se ubican *outputs*.
+
+- `fluidRow()` controla la organización de los componentes por fila.
+
+- `column()` controla el ancho de los componentes por fila.
+
+---
+
+# Página con barra lateral
+
+&lt;br&gt;
+
+.pull-left[
+```
+fluidPage(
+  titlePanel(
+    "Mi título"
+  ),
+  sidebarLayout(
+    sidebarPanel(
+      # inputs
+    ),
+    mainPanel(
+      # outputs
+    )
+  )
+)
+```
+]
+
+.pull-right[
+![](recursos/sidebar.png)
+Fuente: https://mastering-shiny.org/action-layout.html#page-with-sidebar
+]
+
+---
+
+# Página con filas y columnas
+
+&lt;br&gt;
+
+.pull-left[
+```
+fluidPage(
+ 
+ fluidRow(
+ 
+  column(4, ...), 
+  column(8, ...)
+  
+ ),
+ 
+ fluidRow(
+ 
+  column(6, ...), 
+  column(6, ...)
+ )
+ 
+)
+```
+]
+
+.pull-right[
+![](recursos/multirow.png)
+Fuente: https://mastering-shiny.org/action-layout.html#multi-row
+]
+
+---
+
+# Secciones múltiples
+
+&lt;br&gt;
+
+Si nuestra app va a abarcar mucho contenido o temas diversos podemos utilizar un *layout* que nos permita navegar por distintas secciones y organizar nuestra UI. Cabe aclarar que **no van a ser páginas separadas, sino paneles contenidos bajo la misma URL de la app**.
+
+Las opciones de base son:
+
+- `tabsetPanel()` 
+ - horizontal
+ 
+
+- `navlistPanel()` 
+ - vertical
+
+
+- `navbarPage()` 
+ - horizontal
+ - alternativa a `fluidPage()`
+
+--
+
+&lt;br&gt;
+
+Las cuales combinamos con:
+
+- `tabPanel()`
+- `navbarMenu()`
+
+---
+
+# tabsetPanel
+
+.pull-left[
+
+```r
+library(shiny)
+
+ui &lt;- fluidPage(
+  
+  tabsetPanel(
+    tabPanel("tab 1", "..1"),
+    tabPanel("tab 2", "..2")
+  )
+)
+```
+]
+
+.pull-right[
+<div class="container-fluid">
+<div class="tabbable">
+<ul class="nav nav-tabs" data-tabsetid="4699">
+<li class="active">
+<a href="#tab-4699-1" data-toggle="tab" data-bs-toggle="tab" data-value="tab 1">tab 1</a>
+</li>
+<li>
+<a href="#tab-4699-2" data-toggle="tab" data-bs-toggle="tab" data-value="tab 2">tab 2</a>
+</li>
+</ul>
+<div class="tab-content" data-tabsetid="4699">
+<div class="tab-pane active" data-value="tab 1" id="tab-4699-1">..1</div>
+<div class="tab-pane" data-value="tab 2" id="tab-4699-2">..2</div>
+</div>
+</div>
+</div>
+]
+
+.pull-left[
+
+```r
+ui &lt;- fluidPage(
+  
+  sidebarLayout(
+    sidebarPanel("Barra"),
+    mainPanel(
+      tabsetPanel(
+        tabPanel("tab 1", "1"),
+        tabPanel("tab 2", "2"))
+    )
+  )
+)
+```
+]
+
+.pull-right[
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-4">
+<form class="well" role="complementary">Barra</form>
+</div>
+<div class="col-sm-8" role="main">
+<div class="tabbable">
+<ul class="nav nav-tabs" data-tabsetid="8992">
+<li class="active">
+<a href="#tab-8992-1" data-toggle="tab" data-bs-toggle="tab" data-value="tab 1">tab 1</a>
+</li>
+<li>
+<a href="#tab-8992-2" data-toggle="tab" data-bs-toggle="tab" data-value="tab 2">tab 2</a>
+</li>
+</ul>
+<div class="tab-content" data-tabsetid="8992">
+<div class="tab-pane active" data-value="tab 1" id="tab-8992-1">1</div>
+<div class="tab-pane" data-value="tab 2" id="tab-8992-2">2</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+]
+
+---
+
+# navlistPanel
+
+&lt;br&gt;
+
+.pull-left[
+
+```r
+ui &lt;- fluidPage(
+  
+  navlistPanel(
+    tabPanel("tab 1", "..1"),
+    tabPanel("tab 2", "..2")
+  )
+)
+```
+]
+
+.pull-right[
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-4 well">
+<ul class="nav nav-pills nav-stacked" data-tabsetid="6388">
+<li class="active">
+<a href="#tab-6388-1" data-toggle="tab" data-bs-toggle="tab" data-value="tab 1">tab 1</a>
+</li>
+<li>
+<a href="#tab-6388-2" data-toggle="tab" data-bs-toggle="tab" data-value="tab 2">tab 2</a>
+</li>
+</ul>
+</div>
+<div class="col-sm-8">
+<div class="tab-content" data-tabsetid="6388">
+<div class="tab-pane active" data-value="tab 1" id="tab-6388-1">..1</div>
+<div class="tab-pane" data-value="tab 2" id="tab-6388-2">..2</div>
+</div>
+</div>
+</div>
+</div>
+]
+
+---
+
+# navbarPage
+
+&lt;br&gt;
+
+.pull-left[
+
+```r
+ui &lt;- navbarPage(
+  title = "Título",
+  
+  tabPanel("tab 1", "..1"),
+  tabPanel("tab 2", "..2"),
+  
+  navbarMenu(
+    title = "Otros",
+    tabPanel("tab 3", "..3")
+  )
+  
+)
+```
+]
+
+.pull-right[
+<body class="bslib-page-navbar">
+<nav class="navbar navbar-default navbar-static-top" role="navigation">
+<div class="container-fluid">
+<div class="navbar-header">
+<span class="navbar-brand">Título</span>
+</div>
+<ul class="nav navbar-nav nav-underline" data-tabsetid="7376">
+<li class="active">
+<a href="#tab-7376-1" data-toggle="tab" data-bs-toggle="tab" data-value="tab 1">tab 1</a>
+</li>
+<li>
+<a href="#tab-7376-2" data-toggle="tab" data-bs-toggle="tab" data-value="tab 2">tab 2</a>
+</li>
+<li class="dropdown">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" data-value="Otros">
+Otros
+<b class="caret"></b>
+</a>
+<ul class="dropdown-menu" data-tabsetid="4110">
+<li>
+<a href="#tab-4110-1" data-toggle="tab" data-bs-toggle="tab" data-value="tab 3">tab 3</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+<div class="container-fluid">
+<div class="tab-content" data-tabsetid="7376">
+<div class="tab-pane active" data-value="tab 1" id="tab-7376-1">..1</div>
+<div class="tab-pane" data-value="tab 2" id="tab-7376-2">..2</div>
+<div class="tab-pane" data-value="tab 3" id="tab-4110-1">..3</div>
+</div>
+</div>
+</body>
+]
+
+---
+
+# Layout con `bslib`
+
+&lt;br&gt;
+
+`bslib` provee funciones similares para construir layouts con un estilo más moderno:
+
+- `page_fluid()`
+
+- `page_sidebar()`
+
+- `page_navbar()`
+ 
+ - `nav_panel()`
+ - `nav_item()`
+ - `nav_menu()`
+
+
+- `navset_tab()`
+
+- `navset_pill()`
+
+- `layout_column()` como alternativa al uso de `fluidRow()` + `column()`
+
+---
+
+# page_sidebar
+
+&lt;br&gt;
+&lt;br&gt;
+
+.pull-left[
+
+```r
+library(bslib)
+
+ui &lt;- page_sidebar(
+  title = "bslib app",
+  sidebar = "Sidebar", 
+  "Contenido"
+)
+```
+]
+
+.pull-right[
+<body class="bslib-page-fill bslib-gap-spacing bslib-flow-mobile bslib-page-sidebar html-fill-container" style="padding:0px;gap:0px;">
+<h1 class="bslib-page-title">bslib app</h1>
+<div class="bslib-sidebar-layout bslib-mb-spacing html-fill-item" data-bslib-sidebar-border="false" data-bslib-sidebar-border-radius="false" data-bslib-sidebar-init="TRUE" data-bslib-sidebar-open="desktop" data-require-bs-caller="layout_sidebar()" data-require-bs-version="5" style="--_sidebar-width:250px;--_mobile-max-height:250px;">
+<div class="main bslib-gap-spacing html-fill-container">Contenido</div>
+<aside id="bslib-sidebar-1536" class="sidebar" hidden>
+<div class="sidebar-content bslib-gap-spacing">Sidebar</div>
+</aside>
+<button class="collapse-toggle" type="button" title="Toggle sidebar" aria-expanded="true" aria-controls="bslib-sidebar-1536"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="bi bi-chevron-left collapse-icon" style="height:;width:;fill:currentColor;vertical-align:-0.125em;" aria-hidden="true" role="img" ><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"></path></svg></button>
+<script data-bslib-sidebar-init>bslib.Sidebar.initCollapsibleAll()</script>
+</div>
+</body>
+]
+
+---
+
+# page_navbar
+
+&lt;br&gt;
+&lt;br&gt;
+
+.pull-left[
+
+```r
+ui &lt;-page_navbar(
+  title = "Navbar page",
+  sidebar = "Sidebar",
+  
+  nav_panel("Panel 1", "..1"),
+  nav_panel("Panel 2", "..2")
+)
+```
+]
+
+.pull-right[
+<body class="bslib-page-fill bslib-gap-spacing bslib-flow-mobile bslib-page-navbar has-page-sidebar html-fill-container" style="padding:0px;gap:0px;">
+<nav class="navbar navbar-default navbar-static-top" role="navigation">
+<div class="container-fluid">
+<div class="navbar-header">
+<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-5785" data-bs-toggle="collapse" data-bs-target="#navbar-collapse-5785">
+<span class="sr-only visually-hidden">Toggle navigation</span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
+<span class="navbar-brand">Navbar page</span>
+</div>
+<div class="navbar-collapse collapse" id="navbar-collapse-5785">
+<ul class="nav navbar-nav nav-underline" data-tabsetid="2087">
+<li class="active">
+<a href="#tab-2087-1" data-toggle="tab" data-bs-toggle="tab" data-value="Panel 1">Panel 1</a>
+</li>
+<li>
+<a href="#tab-2087-2" data-toggle="tab" data-bs-toggle="tab" data-value="Panel 2">Panel 2</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<div class="html-fill-item html-fill-container">
+<div class="bslib-sidebar-layout bslib-mb-spacing html-fill-item" data-bslib-sidebar-border="false" data-bslib-sidebar-border-radius="false" data-bslib-sidebar-init="TRUE" data-bslib-sidebar-open="desktop" data-require-bs-caller="layout_sidebar()" data-require-bs-version="5" style="--_sidebar-width:250px;--_mobile-max-height:250px;">
+<div class="main bslib-gap-spacing html-fill-container">
+<div class="tab-content html-fill-item html-fill-container" data-tabsetid="2087">
+<div class="tab-pane active html-fill-item html-fill-container bslib-gap-spacing" data-value="Panel 1" id="tab-2087-1" style="--bslib-navbar-margin:0;">..1</div>
+<div class="tab-pane html-fill-item html-fill-container bslib-gap-spacing" data-value="Panel 2" id="tab-2087-2" style="--bslib-navbar-margin:0;">..2</div>
+</div>
+</div>
+<aside id="bslib-sidebar-3285" class="sidebar" hidden>
+<div class="sidebar-content bslib-gap-spacing">Sidebar</div>
+</aside>
+<button class="collapse-toggle" type="button" title="Toggle sidebar" aria-expanded="true" aria-controls="bslib-sidebar-3285"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="bi bi-chevron-left collapse-icon" style="height:;width:;fill:currentColor;vertical-align:-0.125em;" aria-hidden="true" role="img" ><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"></path></svg></button>
+<script data-bslib-sidebar-init>bslib.Sidebar.initCollapsibleAll()</script>
+</div>
+</div>
+</body>
+]
+
+---
+
+# Layout con `bslib`
+
+&lt;br&gt;
+
+Además de un aspecto más moderno, `bslib` incorpora algunos elementos interesantes para construir layouts que no eran tan accesibles con Shiny base como:
+
+- `cards`
+
+<div class="card bslib-card bslib-mb-spacing html-fill-item html-fill-container" data-bslib-card-init data-require-bs-caller="card()" data-require-bs-version="5">
+<div class="card-header">Título</div>
+<div class="card-body bslib-gap-spacing html-fill-item html-fill-container" style="margin-top:auto;margin-bottom:auto;flex:1 1 auto;">Contenido</div>
+<script data-bslib-card-init>bslib.Card.initializeAllCards();</script>
+</div>
+
+- `valueBox`
+
+<div class="card bslib-card bslib-mb-spacing html-fill-item html-fill-container bslib-value-box default showcase-left-center" data-bslib-card-init data-require-bs-caller="card() value_box()" data-require-bs-version="5 5">
+<div class="card-body bslib-gap-spacing html-fill-item html-fill-container" style="margin-top:auto;margin-bottom:auto;flex:1 1 auto; padding:0;">
+<div class="value-box-grid html-fill-item" style="--bslib-grid-height:auto;--bslib-grid-height-mobile:auto;---bslib-value-box-showcase-w:30%;---bslib-value-box-showcase-w-fs:1fr;---bslib-value-box-showcase-max-h:100px;---bslib-value-box-showcase-max-h-fs:67%;">
+<div class="value-box-showcase html-fill-item html-fill-container"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="bi bi-geo " style="height:1em;width:1em;fill:currentColor;vertical-align:-0.125em;" aria-hidden="true" role="img" ><path fill-rule="evenodd" d="M8 1a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999zm2.493 8.574a.5.5 0 0 1-.411.575c-.712.118-1.28.295-1.655.493a1.319 1.319 0 0 0-.37.265.301.301 0 0 0-.057.09V14l.002.008a.147.147 0 0 0 .016.033.617.617 0 0 0 .145.15c.165.13.435.27.813.395.751.25 1.82.414 3.024.414s2.273-.163 3.024-.414c.378-.126.648-.265.813-.395a.619.619 0 0 0 .146-.15.148.148 0 0 0 .015-.033L12 14v-.004a.301.301 0 0 0-.057-.09 1.318 1.318 0 0 0-.37-.264c-.376-.198-.943-.375-1.655-.493a.5.5 0 1 1 .164-.986c.77.127 1.452.328 1.957.594C12.5 13 13 13.4 13 14c0 .426-.26.752-.544.977-.29.228-.68.413-1.116.558-.878.293-2.059.465-3.34.465-1.281 0-2.462-.172-3.34-.465-.436-.145-.826-.33-1.116-.558C3.26 14.752 3 14.426 3 14c0-.599.5-1 .961-1.243.505-.266 1.187-.467 1.957-.594a.5.5 0 0 1 .575.411z"></path></svg></div>
+<div class="value-box-area html-fill-item html-fill-container">
+<p class="value-box-title">Título</p>
+<p class="value-box-value">99%</p>
+Interesante
+</div>
+</div>
+</div>
+<script data-bslib-card-init>bslib.Card.initializeAllCards();</script>
+</div>
+
+
+---
+
+# Layout con `bslib`
+
+&lt;br&gt;
+
+- `accordion`
+
+<div id="bslib-accordion-7759" class="accordion" data-require-bs-version="5" data-require-bs-caller="accordion()">
+<div class="accordion-item" data-value="Controles A">
+<div class="accordion-header">
+<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#bslib-accordion-panel-3509" aria-controls="bslib-accordion-panel-3509" aria-expanded="true">
+<div class="accordion-icon"></div>
+<div class="accordion-title">Controles A</div>
+</button>
+</div>
+<div id="bslib-accordion-panel-3509" class="accordion-collapse collapse show">
+<div class="accordion-body">Contenido</div>
+</div>
+</div>
+<div class="accordion-item" data-value="Controles B">
+<div class="accordion-header">
+<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#bslib-accordion-panel-8592" aria-expanded="false" aria-controls="bslib-accordion-panel-8592">
+<div class="accordion-icon"></div>
+<div class="accordion-title">Controles B</div>
+</button>
+</div>
+<div id="bslib-accordion-panel-8592" class="accordion-collapse collapse">
+<div class="accordion-body">Contenido</div>
+</div>
+</div>
+</div>
+
+---
+
+# Ejercicios
+
+&lt;br&gt;
+
+--
+
+Replique los siguientes *layouts*:
+
+&lt;br&gt;
+
+<div class="container-fluid">
+<h2>App muy interesante</h2>
+<div class="row">
+<div class="col-sm-4 well">
+<ul class="nav nav-pills nav-stacked" data-tabsetid="5880">
+<li class="active">
+<a href="#tab-5880-1" data-toggle="tab" data-bs-toggle="tab" data-value="Panel con datos interesantes">Panel con datos interesantes</a>
+</li>
+<li>
+<a href="#tab-5880-2" data-toggle="tab" data-bs-toggle="tab" data-value="Panel con texto aburrido">Panel con texto aburrido</a>
+</li>
+</ul>
+</div>
+<div class="col-sm-8">
+<div class="tab-content" data-tabsetid="5880">
+<div class="tab-pane active" data-value="Panel con datos interesantes" id="tab-5880-1">
+<div class="row">
+<div class="col-sm-4">
+<form class="well" role="complementary">Inputs para filtrar datos</form>
+</div>
+<div class="col-sm-8" role="main">Datos interesantes</div>
+</div>
+</div>
+<div class="tab-pane" data-value="Panel con texto aburrido" id="tab-5880-2">Texto aburrido</div>
+</div>
+</div>
+</div>
+</div>
+
+---
+
+<body class="bslib-page-fill bslib-gap-spacing bslib-flow-mobile bslib-page-navbar html-fill-container" style="padding:0px;gap:0px;">
+<nav class="navbar navbar-default navbar-static-top" role="navigation">
+<div class="container-fluid">
+<div class="navbar-header">
+<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-8255" data-bs-toggle="collapse" data-bs-target="#navbar-collapse-8255">
+<span class="sr-only visually-hidden">Toggle navigation</span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
+<span class="navbar-brand">App increíble</span>
+</div>
+<div class="navbar-collapse collapse" id="navbar-collapse-8255">
+<ul class="nav navbar-nav nav-underline" data-tabsetid="3371">
+<li class="active">
+<a href="#tab-3371-1" data-toggle="tab" data-bs-toggle="tab" data-value="Datos increíbles">Datos increíbles</a>
+</li>
+<li class="dropdown">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" data-value="Más">
+Más
+<b class="caret"></b>
+</a>
+<ul class="dropdown-menu" data-tabsetid="4022">
+<li>
+<a href="#tab-4022-1" data-toggle="tab" data-bs-toggle="tab" data-value="Metodología">Metodología</a>
+</li>
+<li>
+<a href="#tab-4022-2" data-toggle="tab" data-bs-toggle="tab" data-value="Contacto">Contacto</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<div class="container-fluid html-fill-item html-fill-container">
+<div class="tab-content html-fill-item html-fill-container" data-tabsetid="3371">
+<div class="tab-pane active html-fill-item html-fill-container bslib-gap-spacing" data-value="Datos increíbles" id="tab-3371-1" style="--bslib-navbar-margin:0;">
+<div class="tabbable">
+<ul class="nav nav-tabs" data-tabsetid="4083">
+<li class="active">
+<a href="#tab-4083-1" data-toggle="tab" data-bs-toggle="tab" data-value="Datos A">Datos A</a>
+</li>
+<li>
+<a href="#tab-4083-2" data-toggle="tab" data-bs-toggle="tab" data-value="Datos B">Datos B</a>
+</li>
+</ul>
+<div class="tab-content" data-tabsetid="4083">
+<div class="tab-pane active html-fill-item html-fill-container bslib-gap-spacing" data-value="Datos A" id="tab-4083-1" style="--bslib-navbar-margin:0;">Acá van datos increíbles</div>
+<div class="tab-pane html-fill-item html-fill-container bslib-gap-spacing" data-value="Datos B" id="tab-4083-2" style="--bslib-navbar-margin:0;">Acá van más datos increíbles</div>
+</div>
+</div>
+</div>
+<div class="tab-pane html-fill-item html-fill-container bslib-gap-spacing" data-value="Metodología" id="tab-4022-1" style="--bslib-navbar-margin:0;">Texto con la metodología increíble</div>
+<div class="tab-pane html-fill-item html-fill-container bslib-gap-spacing" data-value="Contacto" id="tab-4022-2" style="--bslib-navbar-margin:0;">Contacto de la persona increíble que desarrolló esta app</div>
+</div>
+</div>
+</body>
+
+---
+
+class: center, middle inverse
+
+# Outputs
+
+---
+
+# Outputs
+
+&lt;br&gt;
+
+Son las salidas que generamos con información para el usuario, principalmente las visualizaciones.
+
+En la UI debemos definir no sólo dónde estarán ubicados estos outputs sino también de qué tipo serán (textos, gráficos, tablas, imágenes, etc). Luego, el código que genera la visualización lo escribiremos en el server u otro script.
+
+&lt;img src="recursos/outputs.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+Fuente: https://shiny.posit.co/r/getstarted/shiny-basics/lesson4/
+
+---
+
+# Outputs
+
+&lt;br&gt;
+
+Shiny nos provee de algunos outputs típicos pero, ¿qué sucede si quiero usar una visualización de un paquete específico?
+
+Por ejemplo, supongamos que quiero mostrar gráficos interactivos usando `plotly`. La mayoría de las librerías vienen con una función de output específica, compatible con Shiny. En este caso: `plotly::plotlyOutput()`.
+
+&lt;br&gt;
+
+Así tenemos más ejemplos como:
+
+- `highcharter::highchartOutput()` 
+
+- `gt::gt_output()` 
+
+- `reactable::reactableOutput()`
+
+- `leaflet::leafletOutput()`
+
+- etc.
+
+---
+
+# Outputs
+
+&lt;br&gt;
+
+Para definir un output en nuestra UI debemos escribir la función correspondiente y **asignarle un ID**. Todas las funciones de output mencionadas, tienen el parámetro: `outputId`. Este ID es obligatorio dado que luego lo necesitaremos para generar la visualización que queremos.
+
+Adicionalmente, algunos output permiten pasarles parámetros de ancho y alto, entre otros.
+
+```
+fluidPage(
+ 
+ fluidRow(
+ 
+  column(6, dataTableOutput(outputId = "tabla1")), 
+  column(6, plotOutput(outputId = "grafico1", width = 100, height = 100))
+  
+  )
+ )
+
+```
+---
+
+# Tags
+
+&lt;br&gt;
+
+En algunos casos querremos incluir elementos HTML estáticos como títulos o links, los cuales no requieren generarse mediante código de R. Para esto Shiny nos brinda funciones que son un atajo para las etiquetas HTML.
+
+Con el objeto `tags` seguido del signo `$` podemos acceder a estas etiquetas.
+
+.pull-left[
+```
+
+fluidPage(
+h1("Título 1"),
+h2("Título 2"),
+h3("Título 3"),
+h4("Título 4"),
+h5("Título 5"),
+h6("Título 6"),
+
+tags$iframe(src = "https://estacion-r.netlify.app/")
+)
+```
+]
+
+.pull-right[
+<div class="container-fluid">
+<h1>Título 1</h1>
+<h2>Título 2</h2>
+<h3>Título 3</h3>
+<h4>Título 4</h4>
+<h5>Título 5</h5>
+<h6>Título 6</h6>
+<iframe src="https://estacion-r.netlify.app/"></iframe>
+</div>
+
+]
+
+---
+
+class: center, middle inverse
+
+# Inputs
+
+---
+
+# Inputs
+
+&lt;br&gt;
+
+Shiny posee un conjunto de *widgets* para ofrecer interactividad: se trata de elementos web que proveen al usuario la capacidad de mandar mensajes a la aplicación, y a la aplicación, de recibir consultas del usuario. 
+
+&lt;img src="recursos/inputs.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+Fuente: https://shiny.posit.co/r/getstarted/shiny-basics/lesson3/
+
+---
+
+# Inputs
+
+&lt;br&gt;
+
+![](recursos/widgets.png)
+
+---
+
+# Inputs
+
+&lt;br&gt;
+
+Al igual que un output, un input se escribe con un llamado a la función correspondiente. Se debe **asignar un ID** y demás parámetros requeridos. Por ejemplo, para un selector con dos opciones de colores:
+
+
+```
+selectInput(inputId = "selectorColor", #obligatorio
+            label = "Elegir color:", #obligatorio
+            choices = c("Rojo","Azul"), #obligatorio
+            selected = "Rojo",
+            multiple = F)
+```
+
+![](recursos/selectInput.png)
+
+---
+
+# Inputs
+
+&lt;br&gt;
+
+Un *slider*:
+
+```
+sliderInput(inputId = "sliderNumero", #obligatorio
+            label = "Número:", #obligatorio
+            min = 1, #obligatorio
+            max = 5, #obligatorio
+            value = 3 #obligatorio
+            )
+```
+
+![](recursos/sliderInput.png)
+
+---
+
+# Inputs
+
+&lt;br&gt;
+
+Recordemos que Shiny nos brinda funciones para que no tengamos que escribir el HTML, CSS o JS de estos widgets. Este es el código fuente de nuestro selector:
+
+
+```
+&lt;div class="form-group shiny-input-container"&gt;
+  &lt;label class="control-label" id="selectorColor-label" for="selectorColor"&gt;Elegir color:&lt;/label&gt;
+  &lt;div&gt;
+    &lt;select id="selectorColor" class="shiny-input-select"&gt;&lt;option value="Rojo" selected&gt;Rojo&lt;/option&gt;
+&lt;option value="Azul"&gt;Azul&lt;/option&gt;&lt;/select&gt;
+    &lt;script type="application/json" data-for="selectorColor" data-nonempty=""&gt;{"plugins":["selectize-plugin-a11y"]}&lt;/script&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+```
+
+&lt;br&gt;
+
+**Nota**: corriendo nuestros inputs en consola o en un script podemos ver el código fuente que los genera
+
+---
+
+# Ejercicios
+
+&lt;br&gt;
+
+Con todo lo visto, crear un archivo de Shiny y escribir el código de una interfaz de usuario que tenga al menos:
+
+&lt;br&gt;
+
+- 2 secciones
+
+- 2 outputs distintos
+
+- 2 inputs distintos
+
+- 2 textos
+
+&lt;br&gt;
+
+**Nota**: dejar el lado del server vacío
+---
+
+class: center, middle inverse
+
+# Themes
+
+---
+
+# Themes
+
+&lt;br&gt;
+
+Si bien una app debe cumplir con el propósito de ser útil, el aspecto visual de la misma también es importante para orientar al usuario y causar un buen impacto.
+
+Además, a veces querremos personalizar nuestra app para que se adecúe a parámetros estéticos propios o de nuestra organización (identidad), con paletas de colores o fuentes predefinidas.
+
+&lt;br&gt;
+
+Tenemos tres caminos principales para mejorar la estética de nuestra Shiny:
+
+1. Utilizar un tema predefinido
+
+2. Editar un tema predefinido
+
+3. Crear nuestro propio tema
+
+---
+
+# Themes
+
+&lt;br&gt;
+
+Supongamos que tenemos esta funcional, pero poco atractiva, app:
+
+![](recursos/basic_ui_no_theme.png)
+
+https://gallery.shinyapps.io/064-telephones-by-region/
+
+---
+
+# Themes
+
+&lt;br&gt;
+
+Utilizando el paquete [`shinythemes`](https://rstudio.github.io/shinythemes/) o [`bslib`](https://rstudio.github.io/bslib/) podemos acceder rápidamente a algunos temas predefinidos de Bootstrap.
+
+`fluidPage()` o `navbarPage()` tienen la opción de pasarle un `theme` que se aplicará a la app. Por ejemplo, `theme = bslib::bs_theme(bootswatch = "superhero")` produce esta salida:
+
+&lt;br&gt;
+
+&lt;img src="recursos/basic_ui_bs_theme.png" width="100%" /&gt;
+
+---
+
+# Themes
+
+&lt;br&gt;
+
+Podríamos modificar nuestro ggplot para que el fondo blanco no choque con el tema, pero por suerte el paquete [`thematic`](https://rstudio.github.io/thematic/index.html) hace esto por nosotros, agregando `thematic::thematic_shiny()` a nuestra app.
+
+&lt;br&gt;
+
+&lt;img src="recursos/basic_ui_bs_thematic.png" width="100%" /&gt;
+
+---
+
+# Themes
+
+&lt;br&gt;
+
+Ambos paquetes brindan un widget para probar los temas en tiempo real, escribiendo en nuestro código:
+
+- `shinythemes::themeSelector()` en algún lugar de la UI
+
+- `bslib::bs_themer()` en algún lugar del server
+
+&lt;br&gt;
+
+.pull-left[
+![](recursos/bs_themer.png)
+]
+
+.pull-right[
+![](recursos/bs_themer2.png)
+]
+
+---
+
+# Themes
+
+&lt;br&gt;
+
+Aprovechando el widget de `bslib`, podemos jugar a cambiar colores y fuentes, para luego modificar los parámetros que querramos retocar de nuestro tema
+
+```
+bs_theme(bootswatch = "superhero",
+  bg = "#0b3d91", 
+  fg = "white"
+)
+
+```
+
+o podemos crear nuestro propio tema 
+
+```
+theme &lt;- bs_theme(bg = "#202123", 
+  fg = "#B8BCC2",
+  primary = "#EA80FC", 
+  secondary = "#48DAC6",
+  base_font = c("Grandstander", "sans-serif"), ...
+)
+
+bs_theme_preview(theme)
+
+```
+
+---
+
+# Themes
+
+&lt;br&gt;
+
+Si preferimos hacer algo aún más personalizado, tenemos la opción de crear nuestro un archivo CSS y pasárselo a nuestra app.
+
+&lt;br&gt;
+
+--
+
+.pull-left[
+Nuestro styles.css
+
+```css
+body {
+  background-color: red;
+}
+```
+
+Nuestro código
+```
+fluidPage(
+
+ includeCSS("styles.css")
+ 
+)
+```
+]
+
+--
+
+Nuestra salida
+.pull-right[
+
+![](recursos/basic_ui_css.png)
+
+¡Claro que podemos hacer algo más lindo que poner el fondo rojo!
+]
+
+--
+
+**Nota**: para casos puntuales podemos escribir CSS *inline* (ver https://shiny.posit.co/r/articles/build/css/)
+
+---
+
+# Ejercicio
+
+&lt;br&gt;
+
+1. Agregar un theme a la app previamente desarrollada
+
+--
+
+`theme_app/app.R`
+
+---
+
+# Recursos adicionales
+
+&lt;br&gt;
+
+Para consultar:
+
+- [Mastering Shiny](https://mastering-shiny.org/index.html)
+
+- [Cheatsheet de Shiny](https://rstudio.github.io/cheatsheets/shiny.pdf)
+
+- [Outstanding User Interfaces with Shiny](https://unleash-shiny.rinterface.com/)
+
+--
+
+&lt;br&gt;
+
+Para explorar:
+
+.pull-left[
+- [`shinyWidgets` para más opciones](https://shinyapps.dreamrs.fr/shinyWidgets/)
+
+- [Layout con `bslib`](https://shiny.posit.co/r/articles/build/layout-guide/)
+
+- [`fresh` para crear temas](https://github.com/dreamRs/fresh/)
+]
+
+.pull-right[
+- [`imola` para Grid y Flexbox](https://www.anatomyofcode.com/imola/)
+
+- [`shiny.fluent` para Microsoft UI](https://appsilon.github.io/shiny.fluent/index.html)
+
+- [`lcars` para fans de Star Trek](https://github.com/leonawicz/lcars)
+]
+
+--
+
+&lt;br&gt;
+
+Para experimentar:
+
+- [`designer`](https://ashbaldry.github.io/designer/)
+
+- [`shinyUiEditor`](https://rstudio.github.io/shinyuieditor/)
+
+- [`dashboardBuilder`](https://github.com/petergandenberger/dashboard-builder)
+
+---
+
+class: center, middle inverse
+
+# Recapitulando
+
+---
+
+# Recapitulando
+
+&lt;br&gt;
+
+- Empezar por la UI es una buena forma de encarar un proyecto de Shiny ya que permite ordenarnos y pensar la lógica del server
+
+--
+
+&lt;br&gt;
+
+- Una UI con un buen diseño puede marcar la diferencia en términos de impacto y usabilidad
+
+--
+
+&lt;br&gt;
+
+- Los pasos a seguir incluyen:
+
+ 1. Elegir un framework de nuestro agrado
+ 2. Definir un layout general para estructurar el contenido
+ 3. Optar por inputs y outputs acordes a nuestra idea de app
+ 4. Tematizar nuestra app a gusto personal/organizacional
+ 5. Probar, repensar y ajustar
+
+--
+
+&lt;br&gt;
+
+- Un siguiente paso es armar un prototipo de app, para lo cual conviene adentrarnos un poco en el lado del servidor
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create();
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
