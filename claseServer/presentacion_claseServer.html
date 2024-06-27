@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Introducción a Shiny</title>
+    <meta charset="utf-8" />
+    <script src="presentacion_claseServer_files/header-attrs-2.20/header-attrs.js"></script>
+    <link href="presentacion_claseServer_files/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="presentacion_claseServer_files/remark-css-0.0.1/nhsr.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Introducción a Shiny
+]
+.subtitle[
+## Server
+]
+.institute[
+### Estación R
+]
+
+---
+
+
+
+
+class: center, middle inverse
+
+# Server
+
+---
+
+# Server
+
+
+El servidor es el que le da vida a nuestra app: todos los inputs y outputs que creamos requieren de algo que los una y renderice para que sean funcionales. Como la UI, el server también se construye como una función:
+
+```
+server &lt;- function(input, output, session) {...}
+```
+
+donde
+
+- `input` es el parámetro que nos permite acceder a los valores de los inputs definidos en la UI, es decir, que el servidor puede recibir la información provista por el usuario.
+
+- `output` por el otro lado, permite conectarnos con los outputs declarados en la UI y mostrarlos, es decir, enviar información desde el servidor al navegador.
+
+- `session` que sirve para acceder a información relacionada con la sesión iniciada por el usuario.
+
+La función del server se ejecuta cada vez que comienza una nueva sesión creando un entorno nuevo, de manera de garantizar la independencia entre sesiones.
+
+---
+
+# Server
+
+¿Cómo podemos entonces renderizar un output?
+
+Para cada tipo de output definido en la UI, le corresponde una función de **render** en el server:
+
+&lt;img src="recursos/outputs-renders.png" width="85%" style="display: block; margin: auto;" /&gt;
+
+Fuente: https://shiny.posit.co/r/getstarted/build-an-app/reactive-flow/render-functions.html
+
+---
+
+# Server
+
+&lt;br&gt;
+
+Las funciones de render nos permiten "rellenar" los espacios en blanco que habíamos declarado en la UI con las funciones de output (plotOutput(), tableOutput(), etc.), convirtiendo el código R correspondiente en una salida interpretable por el navegador.
+
+De la misma forma que existen outputs por fuera de las funciones de Shiny base, existen renders para otros paquetes:
+
+- `gt::render_gt()`
+
+- `reactable::renderReactable()`
+
+- `plotly::renderPlotly()`
+
+- etc.
+
+---
+
+# Server
+
+&lt;br&gt;
+
+¿Cómo se renderiza?
+
+```
+output$distPlot &lt;- renderPlot({ ... })
+```
+
+- `output` llama a nuestro objeto que lista todas las salidas de la UI
+
+- `$id` accedemos al ID declarado para el output
+
+- `renderAlgo()` llamamos a la función que se corresponda al tipo de output
+
+- `{}` se utilizan para escribir bloques de código
+
+- `...` código R que genera nuestro Algo
+
+---
+
+# Server
+
+Supongamos que tenemos una app sencilla en la que queremos mostrar únicamente el siguiente `ggplot` hecho con el dataset de [Palmer Penguins](https://allisonhorst.github.io/palmerpenguins/)
+
+```
+library(ggplot2)
+
+ggplot(data = palmerpenguins::penguins, 
+       aes(bill_length_mm, bill_depth_mm, color = species)) +
+        geom_point()
+```
+
+![](presentacion_claseServer_files/figure-html/unnamed-chunk-3-1.png)&lt;!-- --&gt;
+
+---
+
+# Server
+
+Nuestro código luciría así:
+
+```
+library(shiny)
+library(ggplot2)
+
+ui &lt;- fluidPage(
+  h1("Palmer Penguins"),
+  plotOutput("grafico")
+)
+
+server &lt;- function(input, output) {
+  
+  output$grafico &lt;- renderPlot({
+    
+  ggplot(data = palmerpenguins::penguins, 
+       aes(bill_length_mm, bill_depth_mm, color = species)) +
+        geom_point()
+ })
+}
+
+shinyApp(ui, server)
+```
+
+---
+
+# Server
+
+Y nuestra app así:
+
+![](recursos/shiny_penguins.png)
+
+---
+
+class: center, middle inverse
+
+# Prototipo
+
+---
+
+# Prototipo
+
+&lt;br&gt;
+
+Hasta el momento, logramos armar la estructura de la UI de una app, o al menos de una primera versión de la misma, y vimos cómo cargar los output. Antes de profundizar en el server, veamos una herramienta que nos permite tener una mejor idea de cómo podría lucir realmente nuestra app.
+
+El prototipado nos sirve para hacer una prueba de concepto de nuestra app, antes de comenzar. Esto puede ser útil para:
+
+- Probar y repensar nuestra UI y lógica de server
+
+- Recibir *feedback* de otras personas (clientes o colegas, por ejemplo)
+
+- Ahorrar esfuerzos
+
+- Organizar nuestro calendario de trabajo
+
+---
+
+# Prototipo
+
+&lt;br&gt;
+
+Si bien podemos optar por hacer un dibujo con lápiz y papel o utilizar una herramienta de diseño en particular, el mundo de los paquetes de R nos brinda una opción nativa: [`shinipsum`](https://github.com/ThinkR-open/shinipsum)
+
+Este paquete nos provee funciones para generar algunos outputs random que sirven como guía:
+
+- random_ggplot()
+
+- random_text()
+
+- random_table()
+
+- etc.
+
+---
+
+# Prototipo
+
+Por ejemplo, tomemos esta app:
+
+```
+library(shiny)
+
+ui &lt;- fluidPage(
+
+ titlePanel("Mi Shiny app de prueba"),
+  
+  sidebarLayout(
+    sidebarPanel(
+      selectInput("selector", "Selector de algo", choices = c("Opción A", "Opción B")),
+      checkboxGroupInput("checkbox", "Opciones", choices = c(1,2,3))
+    ),
+    
+    mainPanel(
+      fluidRow(
+        column(6, plotOutput("grafico")),
+        column(6, tableOutput("tabla")))
+    )
+  )
+)
+```
+---
+
+# Prototipo
+
+Podemos renderizar nuestros output llamando a las funciones `random_`
+
+```
+library(shinipsum)
+
+server &lt;- function(input, output) {
+  
+  output$grafico &lt;- renderPlot({
+    random_ggplot("bar")
+  })
+  
+  output$tabla &lt;- renderTable({
+    random_table(10, 5)
+  })
+  
+}
+shinyApp(ui, server)
+```
+---
+
+# Prototipo
+
+![](recursos/shiny_ipsum.png)
+
+---
+
+# Ejercicio
+
+1. Renderizar los output de la app desarrollada en el último ejercicio. Puede utilizar `shinipsum` o generar el código a partir de un dataset de R.
+
+--
+
+Ejemplo en `prototipo_app/app.R`
+
+---
+
+class: center, middle inverse
+
+# Inputs
+
+---
+
+# Inputs
+
+&lt;br&gt;
+
+Una Shiny con muchos outputs puede cumplir con nuestro objetivo de presentar datos visualmente atractivos pero lo interesante es ofrecerle al usuario interactividad.
+
+Para capturar en el server la información que el cliente nos envía debemos utilizar el ID de nuestro input de interés. Recordemos cómo definíamos un input:
+
+```
+selectInput(inputId = "selectorColor",
+            label = "Elegir color:", 
+            choices = c("Rojo","Azul"))
+```
+
+De forma similar a los outputs, llamando a nuestro argumento de input (lista) y nombrando el inputId correspondiente podemos acceder al valor seleccionado por el usuario:
+
+```
+input$selectorColor
+```
+
+---
+
+# Inputs
+
+&lt;br&gt;
+
+Los valores de los inputs solo son accesibles en un **contexto reactivo**, condición que cumplen las funciones de render. Así, podemos empezar a hacer nuestra app más interactiva modificando nuestros outputs en función de nuestros inputs.
+
+Veamos cómo funciona nuestra app de Palmer Penguins: `input_app/app.R`
+
+![](recursos/input_app.png)
+
+---
+
+class: center, middle inverse
+
+# Conclusiones
+
+---
+
+# Conclusiones
+
+&lt;br&gt;
+
+- Todo output de la UI tiene su pareja de render en el server
+
+- A través de los inputs el server recibe info del navegador
+
+- A través de los outputs el server envía info al navegador
+
+- Un output que depende de uno o más inputs se renderiza cada vez que alguno de esos inputs se modifique (reactividad)
+
+- Para acceder/asignar un output o input se utiliza su ID
+
+---
+
+# Recursos adicionales
+
+[Repaso sobre input-output](https://shiny.posit.co/r/getstarted/shiny-basics/lesson4/)
+
+&lt;br&gt;
+
+Para datos y textos de juguete:
+
+- [`fakir`](https://thinkr-open.github.io/fakir/)
+
+- [`charlatan`](https://github.com/ropensci/charlatan)
+
+- [`lorem`](https://github.com/gadenbuie/lorem)
+
+&lt;br&gt;
+
+Para prototipar sin escribir código:
+
+- [`designer`](https://ashbaldry.github.io/designer/)
+
+- [`shinyUiEditor`](https://rstudio.github.io/shinyuieditor/)
+
+- [`dashboardBuilder`](https://github.com/petergandenberger/dashboard-builder)
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create();
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
