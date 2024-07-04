@@ -929,27 +929,7 @@ Para consultar:
 
 - [Outstanding User Interfaces with Shiny](https://unleash-shiny.rinterface.com/)
 
---
-
-<br>
-
-Para explorar:
-
-.pull-left[
-- [`shinyWidgets` para más opciones](https://shinyapps.dreamrs.fr/shinyWidgets/)
-
-- [Layout con `bslib`](https://shiny.posit.co/r/articles/build/layout-guide/)
-
-- [`fresh` para crear temas](https://github.com/dreamRs/fresh/)
-]
-
-.pull-right[
-- [`imola` para Grid y Flexbox](https://www.anatomyofcode.com/imola/)
-
-- [`shiny.fluent` para Microsoft UI](https://appsilon.github.io/shiny.fluent/index.html)
-
-- [`lcars` para fans de Star Trek](https://github.com/leonawicz/lcars)
-]
+- [How To Make Your Shiny App Beautiful](https://www.appsilon.com/post/how-to-make-your-shiny-app-beautiful)
 
 --
 
@@ -962,6 +942,26 @@ Para experimentar:
 - [`shinyUiEditor`](https://rstudio.github.io/shinyuieditor/)
 
 - [`dashboardBuilder`](https://github.com/petergandenberger/dashboard-builder)
+
+---
+
+# Recursos adicionales
+
+<br>
+
+Para explorar:
+
+- [`shinyWidgets` para más opciones](https://shinyapps.dreamrs.fr/shinyWidgets/)
+
+- [Layout con `bslib`](https://shiny.posit.co/r/articles/build/layout-guide/)
+
+- [`fresh` para crear temas](https://github.com/dreamRs/fresh/)
+
+- [`imola` para Grid y Flexbox](https://www.anatomyofcode.com/imola/)
+
+- [`shiny.fluent` para Microsoft UI](https://appsilon.github.io/shiny.fluent/index.html)
+
+- [`lcars` para fans de Star Trek](https://github.com/leonawicz/lcars)
 
 ---
 
@@ -987,7 +987,7 @@ class: center, middle inverse
 
 <br>
 
-- Los pasos a seguir incluyen:
+- Los pasos (sugeridos) a seguir incluyen:
 
  1. Elegir un framework de nuestro agrado
  2. Definir un layout general para estructurar el contenido
