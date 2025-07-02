@@ -156,6 +156,8 @@ Otro ejemplo: [mapeAr](https://tableros.yvera.tur.ar/mapeAr)
 
 [Appsilon](https://www.appsilon.com/shiny-demo-gallery)
 
+[Shiny Assistant IA](https://gallery.shinyapps.io/assistant/)
+
 ---
 
 class: center, middle inverse

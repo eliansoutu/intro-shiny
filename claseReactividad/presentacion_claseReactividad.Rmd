@@ -19,7 +19,7 @@ class: center, middle inverse
 
 # Reactividad
 
-La **programación reactiva** es un paradigma que se centra en la idea de valores que cambian con el tiempo y en procesos y acciones que reaccionan a esos valores (**dependencia**). Esto es central en Shiny dado que, como vimos, queremos que nuestros usuarios interactúen con la app cambiando valores de los inputs que repercutan en los outputs.
+La **programación reactiva** es un paradigma que se centra en la idea de valores que cambian con el tiempo y en procesos y acciones que reaccionan a esos valores (**dependencia**). Esto es central en Shiny dado que, como vimos, queremos que nuestros usuarios interactúen con la app cambiando valores de los inputs para que modifiquen los outputs.
 
 La reactividad en Shiny tiene además una propiedad denominada **lazyness** ("pereza") que determina que el código se ejecutará cuando es necesario. Esto difiere del código R al que estamos acostumbrados, el cual se lee y ejecuta de arriba a abajo.
 
@@ -146,11 +146,11 @@ server <- function(input, output, session) {
 
 **reactive()**
 
-eventReactive()
+eventReactive() / bindEvent()
 
 observe()
 
-observeEvent()
+observeEvent() / bindEvent()
 
 reactiveVal()
 

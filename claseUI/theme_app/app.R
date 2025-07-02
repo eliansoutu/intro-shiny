@@ -6,13 +6,7 @@ library(bslib)
 thematic::thematic_shiny()
 
 # Use a fluid Bootstrap layout
-ui <- fluidPage(
-  
-  ### shinythemes
-  #theme = shinythemes::shinytheme("darkly"),
-  
-  ### shinythemes selector
-  #shinythemes::themeSelector(),
+ui <- page_fluid(
   
   ### bslib theme
   #theme = bslib::bs_theme(bootswatch = "superhero"),
@@ -26,26 +20,15 @@ ui <- fluidPage(
   
   ### css personalizado
   #includeCSS("styles.css"),
-    
-  # Give the page a title
-  titlePanel("Telephones by region"),
+  layout_sidebar(
+    sidebar = sidebar(
+  selectInput("region", "Region:", 
+              choices=colnames(WorldPhones)),
+  hr(),
+  helpText("Data from AT&T (1961) The World's Telephones."),
+  ),
   
-  # Generate a row with a sidebar
-  sidebarLayout(      
-    
-    # Define the sidebar with one input
-    sidebarPanel(
-      selectInput("region", "Region:", 
-                  choices=colnames(WorldPhones)),
-      hr(),
-      helpText("Data from AT&T (1961) The World's Telephones.")
-    ),
-    
-    # Create a spot for the barplot
-    mainPanel(
-      plotOutput("phonePlot")  
-    )
-    
+  plotOutput("phonePlot")  
   )
 )
 

@@ -119,9 +119,189 @@ class: center, middle inverse
 
 Podemos entender al layout como nuestra estructura de jerarquías base para la organización de la UI.
 
-Algunas funciones de Shiny base para construir nuestro layout son:
+### Layout con `bslib`
 
-- `fluidPage()`: crea el lienzo en blanco el cual consiste en filas que incluyen columnas, formando una cuadrícula de 12 unidades de ancho. Una fluidpage escala sus componentes para que se adapten al tamaño de la pantalla. Es necesaria ya que configura el marco de trabajo que Shiny necesita. 
+<br>
+
+`bslib` provee funciones para construir layouts modernos:
+
+- `page_fluid()` crea el lienzo en blanco el cual consiste en filas que incluyen columnas, formando una cuadrícula de 12 unidades de ancho. Una page_fluid escala sus componentes para que se adapten al tamaño de la pantalla. Configura el marco de trabajo que Shiny necesita para que los elementos se visualicen correctamente. Alternativas: `page_fixed()` y `page_fillable()`
+
+- `page_sidebar()` página con barra lateral. Generalmente se ubican *inputs*.
+
+- `page_navbar()` página con barra horizontal para navegación. 
+
+ - `nav_panel()`
+ - `nav_menu()`
+ - `nav_item()`
+
+- `navset_tab()` contenedor de paneles (tabs horizontales)
+
+- `navset_pill()`  contenedor de paneles (tabs verticales)
+
+- `layout_column()` controla el ancho de los componentes por fila.
+
+---
+
+# page_sidebar
+
+<br>
+<br>
+
+.pull-left[
+```{r echo=TRUE, warning=FALSE, message=FALSE}
+
+library(bslib)
+
+ui <- page_sidebar(
+  title = "bslib app",
+  sidebar = "Sidebar", 
+  "Contenido"
+)
+```
+]
+
+.pull-right[
+```{r}
+ui
+```
+]
+
+---
+
+# Secciones múltiples
+
+<br>
+
+Si nuestra app va a abarcar mucho contenido o temas diversos podemos utilizar un *layout* que nos permita navegar por distintas secciones y organizar nuestra UI. Cabe aclarar que **no van a ser páginas separadas, sino paneles contenidos bajo la misma URL de la app**.
+
+<br>
+<br>
+
+.pull-left[
+```{r echo=TRUE, warning=FALSE, message=FALSE}
+ui <-page_navbar(
+  title = "Navbar page",
+  sidebar = "Sidebar",
+  
+  nav_panel("Panel 1", "..1"),
+  nav_panel("Panel 2", "..2")
+)
+```
+]
+
+.pull-right[
+```{r}
+ui
+```
+]
+
+---
+
+.pull-left[
+```{r echo=TRUE, warning=FALSE, message=FALSE}
+ui <-page_navbar(
+  title = "Navbar page",
+  sidebar = "Sidebar",
+  
+  nav_panel("Panel 1", "..1"),
+  nav_menu("Panel 2", 
+           nav_item("Menú 1"),
+           nav_item("Menú 2")
+           )
+)
+```
+]
+
+.pull-right[
+```{r}
+ui
+```
+]
+
+---
+
+.pull-left[
+```{r echo=TRUE, warning=FALSE, message=FALSE}
+ui <-page_navbar(
+  title = "Navbar page",
+  sidebar = "Sidebar",
+  
+  navset_tab(
+  nav_panel("Panel 1", "..1"),
+  nav_panel("Panel 2", 
+            navset_card_underline(title = "Opciones de panel 2",
+                                  nav_panel("A", "..2a"),
+                                  nav_panel("B", "..2b")
+                                  )
+            )
+  )
+)
+```
+]
+
+.pull-right[
+```{r}
+ui
+```
+]
+
+---
+# Layout con `bslib`
+
+<br>
+
+Además de un aspecto más moderno, `bslib` incorpora algunos elementos interesantes para construir layouts que no eran tan accesibles con Shiny base como:
+
+- `cards`
+
+```{r warning=FALSE, message=FALSE}
+card(
+  card_header("Título"),
+  card_body("Contenido")
+)
+```
+
+- `valueBox`
+
+```{r warning=FALSE, message=FALSE}
+library(bsicons)
+
+value_box(
+  title = "Título",
+  value = "99%",
+  showcase = bs_icon(name = "geo"),
+  "Interesante"
+)
+```
+
+
+---
+
+# Layout con `bslib`
+
+<br>
+
+- `accordion`
+
+```{r warning=FALSE, message=FALSE}
+accordion(
+  accordion_panel(
+    "Controles A",
+    "Contenido"
+  ),
+  accordion_panel(
+    "Controles B", 
+    "Contenido"
+  )
+)
+```
+
+---
+
+# Layout con Shiny base:
+
+- `fluidPage()`
 
 - `titlePanel()` define un título para la página.
 
@@ -201,8 +381,6 @@ Fuente: https://mastering-shiny.org/action-layout.html#multi-row
 # Secciones múltiples
 
 <br>
-
-Si nuestra app va a abarcar mucho contenido o temas diversos podemos utilizar un *layout* que nos permita navegar por distintas secciones y organizar nuestra UI. Cabe aclarar que **no van a ser páginas separadas, sino paneles contenidos bajo la misma URL de la app**.
 
 Las opciones de base son:
 
@@ -327,135 +505,7 @@ ui
 ```
 ]
 
----
-
-# Layout con `bslib`
-
-<br>
-
-`bslib` provee funciones similares para construir layouts con un estilo más moderno:
-
-- `page_fluid()`
-
-- `page_sidebar()`
-
-- `page_navbar()`
- 
- - `nav_panel()`
- - `nav_item()`
- - `nav_menu()`
-
-
-- `navset_tab()`
-
-- `navset_pill()`
-
-- `layout_column()` como alternativa al uso de `fluidRow()` + `column()`
-
----
-
-# page_sidebar
-
-<br>
-<br>
-
-.pull-left[
-```{r echo=TRUE, warning=FALSE, message=FALSE}
-
-library(bslib)
-
-ui <- page_sidebar(
-  title = "bslib app",
-  sidebar = "Sidebar", 
-  "Contenido"
-)
-```
-]
-
-.pull-right[
-```{r}
-ui
-```
-]
-
----
-
-# page_navbar
-
-<br>
-<br>
-
-.pull-left[
-```{r echo=TRUE, warning=FALSE, message=FALSE}
-ui <-page_navbar(
-  title = "Navbar page",
-  sidebar = "Sidebar",
-  
-  nav_panel("Panel 1", "..1"),
-  nav_panel("Panel 2", "..2")
-)
-```
-]
-
-.pull-right[
-```{r}
-ui
-```
-]
-
----
-
-# Layout con `bslib`
-
-<br>
-
-Además de un aspecto más moderno, `bslib` incorpora algunos elementos interesantes para construir layouts que no eran tan accesibles con Shiny base como:
-
-- `cards`
-
-```{r warning=FALSE, message=FALSE}
-card(
-  card_header("Título"),
-  card_body("Contenido")
-)
-```
-
-- `valueBox`
-
-```{r warning=FALSE, message=FALSE}
-library(bsicons)
-
-value_box(
-  title = "Título",
-  value = "99%",
-  showcase = bs_icon(name = "geo"),
-  "Interesante"
-)
-```
-
-
----
-
-# Layout con `bslib`
-
-<br>
-
-- `accordion`
-
-```{r warning=FALSE, message=FALSE}
-accordion(
-  accordion_panel(
-    "Controles A",
-    "Contenido"
-  ),
-  accordion_panel(
-    "Controles B", 
-    "Contenido"
-  )
-)
-```
-
----
+--
 
 # Ejercicios
 
@@ -466,6 +516,30 @@ accordion(
 Replique los siguientes *layouts*:
 
 <br>
+
+```{r}
+ui <- page_navbar(title = "App increíble",
+  
+  nav_panel("Datos increíbles", 
+           
+           navset_tab(
+             nav_panel("Datos A", "Acá van datos increíbles"),
+             nav_panel("Datos B", "Acá van más datos increíbles")
+           )
+  ),
+  
+  nav_menu("Más", 
+             
+             nav_panel("Metodología","Texto con la metodología increíble"),
+             nav_panel("Contacto", "Contacto de la persona increíble que desarrolló esta app"))
+)
+
+ui
+```
+
+---
+
+Shiny base
 
 ```{r}
 ui <- fluidPage(
@@ -492,28 +566,6 @@ ui <- fluidPage(
     
   )
 )
-ui
-```
-
----
-
-```{r}
-ui <- page_navbar(title = "App increíble",
-  
-  nav_panel("Datos increíbles", 
-           
-           navset_tab(
-             nav_panel("Datos A", "Acá van datos increíbles"),
-             nav_panel("Datos B", "Acá van más datos increíbles")
-           )
-  ),
-  
-  nav_menu("Más", 
-             
-             nav_panel("Metodología","Texto con la metodología increíble"),
-             nav_panel("Contacto", "Contacto de la persona increíble que desarrolló esta app"))
-)
-
 ui
 ```
 
@@ -576,14 +628,12 @@ Para definir un output en nuestra UI debemos escribir la función correspondient
 Adicionalmente, algunos output permiten pasarles parámetros de ancho y alto, entre otros.
 
 ```
-fluidPage(
+page_fluid(
  
- fluidRow(
- 
-  column(6, dataTableOutput(outputId = "tabla1")), 
-  column(6, plotOutput(outputId = "grafico1", width = 100, height = 100))
+  layout_columns(dataTableOutput(outputId = "tabla1"),  
+                 plotOutput(outputId = "grafico1", width = 100, height = 100)
+                 )
   
-  )
  )
 
 ```
@@ -600,7 +650,7 @@ Con el objeto `tags` seguido del signo `$` podemos acceder a estas etiquetas.
 .pull-left[
 ```
 
-fluidPage(
+page_fluid(
 h1("Título 1"),
 h2("Título 2"),
 h3("Título 3"),
@@ -608,14 +658,14 @@ h4("Título 4"),
 h5("Título 5"),
 h6("Título 6"),
 
-tags$iframe(src = "https://estacion-r.netlify.app/")
+tags$iframe(src = "https://estacion-r.com/")
 )
 ```
 ]
 
 .pull-right[
 ```{r}
-fluidPage(
+page_fluid(
 h1("Título 1"),
 h2("Título 2"),
 h3("Título 3"),
@@ -623,7 +673,7 @@ h4("Título 4"),
 h5("Título 5"),
 h6("Título 6"),
 
-tags$iframe(src = "https://estacion-r.netlify.app/")
+tags$iframe(src = "https://estacion-r.com/")
 )
 ```
 
@@ -750,13 +800,13 @@ class: center, middle inverse
 
 <br>
 
-Si bien una app debe cumplir con el propósito de ser útil, el aspecto visual de la misma también es importante para orientar al usuario y causar un buen impacto.
+Si bien una app debe cumplir con el propósito de ser útil, el aspecto visual de la misma también es importante para orientar al usuario y causar un impacto positivo.
 
-Además, a veces querremos personalizar nuestra app para que se adecúe a parámetros estéticos propios o de nuestra organización (identidad), con paletas de colores o fuentes predefinidas.
+Además, a veces vamos a querer personalizar nuestra app para que se adecúe a parámetros estéticos propios o de nuestra organización (identidad de marca), con paletas de colores o fuentes predefinidas.
 
 <br>
 
-Tenemos tres caminos principales para mejorar la estética de nuestra Shiny:
+Tenemos tres caminos principales para modificar la estética de nuestra Shiny:
 
 1. Utilizar un tema predefinido
 
@@ -782,15 +832,17 @@ https://gallery.shinyapps.io/064-telephones-by-region/
 
 <br>
 
-Utilizando el paquete [`shinythemes`](https://rstudio.github.io/shinythemes/) o [`bslib`](https://rstudio.github.io/bslib/) podemos acceder rápidamente a algunos temas predefinidos de Bootstrap.
+Utilizando el paquete [`bslib`](https://rstudio.github.io/bslib/) podemos acceder rápidamente a algunos temas predefinidos de Bootstrap.
 
-`fluidPage()` o `navbarPage()` tienen la opción de pasarle un `theme` que se aplicará a la app. Por ejemplo, `theme = bslib::bs_theme(bootswatch = "superhero")` produce esta salida:
+`page_fluid()` o `page_navbar()` tienen la opción de pasarle un `theme` que se aplicará a la app. Por ejemplo, `theme = bslib::bs_theme(preset = "superhero")` produce esta salida:
 
 <br>
 
 ```{r out.width="100%"}
 knitr::include_graphics("recursos/basic_ui_bs_theme.png")
 ```
+
+Nota: ver [`shinythemes`](https://rstudio.github.io/shinythemes/) para shiny base
 
 ---
 
@@ -812,9 +864,7 @@ knitr::include_graphics("recursos/basic_ui_bs_thematic.png")
 
 <br>
 
-Ambos paquetes brindan un widget para probar los temas en tiempo real, escribiendo en nuestro código:
-
-- `shinythemes::themeSelector()` en algún lugar de la UI
+El paquete brinda un widget para probar los temas en tiempo real, escribiendo en nuestro código:
 
 - `bslib::bs_themer()` en algún lugar del server
 
@@ -923,6 +973,8 @@ Nuestra salida
 
 Para consultar:
 
+- [Blog UI con bslib](https://shiny.posit.co/r/articles/build/layout-guide/)
+
 - [Mastering Shiny](https://mastering-shiny.org/index.html)
 
 - [Cheatsheet de Shiny](https://rstudio.github.io/cheatsheets/shiny.pdf)
@@ -952,8 +1004,6 @@ Para experimentar:
 Para explorar:
 
 - [`shinyWidgets` para más opciones](https://shinyapps.dreamrs.fr/shinyWidgets/)
-
-- [Layout con `bslib`](https://shiny.posit.co/r/articles/build/layout-guide/)
 
 - [`fresh` para crear temas](https://github.com/dreamRs/fresh/)
 
