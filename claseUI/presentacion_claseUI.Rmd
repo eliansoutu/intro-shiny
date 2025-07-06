@@ -11,6 +11,7 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+
 # User Interface (UI)
 
 <br>
@@ -103,7 +104,7 @@ knitr::include_graphics("recursos/atencion.png")
 
 <br>
 
-Recientemente, Shiny incorporó `bslib` en su documentación oficial. Dado que aún mucho del material y el código de aplicaciones desarrolladas como ejemplos se mantiene con la anterior versión, en este curso alternaremos entre ambas.
+Recientemente, Shiny incorporó `bslib` en su documentación oficial por lo que muchas funciones de base fueron reemplazadas por una versión de este paquete. En este curso nos centraremos en la nueva versión, aunque en algunos casos veremos ejemplos de shiny base ya que mucho del material y el código de aplicaciones desarrolladas se mantiene con la anterior versión.
 
 ---
 
@@ -118,10 +119,6 @@ class: center, middle inverse
 <br>
 
 Podemos entender al layout como nuestra estructura de jerarquías base para la organización de la UI.
-
-### Layout con `bslib`
-
-<br>
 
 `bslib` provee funciones para construir layouts modernos:
 

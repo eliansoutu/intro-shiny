@@ -3,21 +3,21 @@
   <head>
     <title>Introducción a Shiny</title>
     <meta charset="utf-8" />
-    <script src="presentacion_claseUI_files/header-attrs-2.20/header-attrs.js"></script>
+    <script src="presentacion_claseUI_files/header-attrs-2.26/header-attrs.js"></script>
     <link href="presentacion_claseUI_files/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="presentacion_claseUI_files/remark-css-0.0.1/nhsr.css" rel="stylesheet" />
-    <script src="presentacion_claseUI_files/jquery-3.6.0/jquery.min.js"></script>
+    <script src="presentacion_claseUI_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <link href="presentacion_claseUI_files/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet" />
     <script src="presentacion_claseUI_files/bootstrap-5.3.1/bootstrap.bundle.min.js"></script>
-    <script src="presentacion_claseUI_files/bs3compat-0.6.1/transition.js"></script>
-    <script src="presentacion_claseUI_files/bs3compat-0.6.1/tabs.js"></script>
-    <script src="presentacion_claseUI_files/bs3compat-0.6.1/bs3compat.js"></script>
-    <link href="presentacion_claseUI_files/htmltools-fill-0.5.7/fill.css" rel="stylesheet" />
-    <script src="presentacion_claseUI_files/bslib-component-js-0.6.1/components.min.js"></script>
-    <script src="presentacion_claseUI_files/bslib-component-js-0.6.1/web-components.min.js" type="module"></script>
-    <link href="presentacion_claseUI_files/bslib-component-css-0.6.1/components.css" rel="stylesheet" />
-    <script src="presentacion_claseUI_files/bslib-tag-require-0.6.1/tag-require.js"></script>
+    <script src="presentacion_claseUI_files/bs3compat-0.7.0/transition.js"></script>
+    <script src="presentacion_claseUI_files/bs3compat-0.7.0/tabs.js"></script>
+    <script src="presentacion_claseUI_files/bs3compat-0.7.0/bs3compat.js"></script>
+    <link href="presentacion_claseUI_files/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+    <script src="presentacion_claseUI_files/bslib-component-js-0.7.0/components.min.js"></script>
+    <script src="presentacion_claseUI_files/bslib-component-js-0.7.0/web-components.min.js" type="module"></script>
+    <link href="presentacion_claseUI_files/bslib-component-css-0.7.0/components.css" rel="stylesheet" />
+    <script src="presentacion_claseUI_files/bslib-tag-require-0.7.0/tag-require.js"></script>
   </head>
   <body>
     <textarea id="source">
@@ -34,6 +34,7 @@ class: center, middle, inverse, title-slide
 ]
 
 ---
+
 
 
 
@@ -128,7 +129,7 @@ Material
 
 &lt;br&gt;
 
-Recientemente, Shiny incorporó `bslib` en su documentación oficial. Dado que aún mucho del material y el código de aplicaciones desarrolladas como ejemplos se mantiene con la anterior versión, en este curso alternaremos entre ambas.
+Recientemente, Shiny incorporó `bslib` en su documentación oficial por lo que muchas funciones de base fueron reemplazadas por una versión de este paquete. En este curso nos centraremos en la nueva versión, aunque en algunos casos veremos ejemplos de shiny base ya que mucho del material y el código de aplicaciones desarrolladas se mantiene con la anterior versión.
 
 ---
 
@@ -144,9 +145,363 @@ class: center, middle inverse
 
 Podemos entender al layout como nuestra estructura de jerarquías base para la organización de la UI.
 
-Algunas funciones de Shiny base para construir nuestro layout son:
+`bslib` provee funciones para construir layouts modernos:
 
-- `fluidPage()`: crea el lienzo en blanco el cual consiste en filas que incluyen columnas, formando una cuadrícula de 12 unidades de ancho. Una fluidpage escala sus componentes para que se adapten al tamaño de la pantalla. Es necesaria ya que configura el marco de trabajo que Shiny necesita. 
+- `page_fluid()` crea el lienzo en blanco el cual consiste en filas que incluyen columnas, formando una cuadrícula de 12 unidades de ancho. Una page_fluid escala sus componentes para que se adapten al tamaño de la pantalla. Configura el marco de trabajo que Shiny necesita para que los elementos se visualicen correctamente. Alternativas: `page_fixed()` y `page_fillable()`
+
+- `page_sidebar()` página con barra lateral. Generalmente se ubican *inputs*.
+
+- `page_navbar()` página con barra horizontal para navegación. 
+
+ - `nav_panel()`
+ - `nav_menu()`
+ - `nav_item()`
+
+- `navset_tab()` contenedor de paneles (tabs horizontales)
+
+- `navset_pill()`  contenedor de paneles (tabs verticales)
+
+- `layout_column()` controla el ancho de los componentes por fila.
+
+---
+
+# page_sidebar
+
+&lt;br&gt;
+&lt;br&gt;
+
+.pull-left[
+
+```r
+library(bslib)
+
+ui &lt;- page_sidebar(
+  title = "bslib app",
+  sidebar = "Sidebar", 
+  "Contenido"
+)
+```
+]
+
+.pull-right[
+<body class="bslib-page-fill bslib-gap-spacing bslib-flow-mobile bslib-page-sidebar html-fill-container" style="padding:0px;gap:0px;">
+<div class="navbar navbar-static-top">
+<div class="container-fluid">
+<h1 class="bslib-page-title navbar-brand">bslib app</h1>
+</div>
+</div>
+<div class="bslib-sidebar-layout bslib-mb-spacing html-fill-item" data-bslib-sidebar-border="false" data-bslib-sidebar-border-radius="false" data-bslib-sidebar-init="TRUE" data-collapsible-desktop="true" data-collapsible-mobile="false" data-open-desktop="open" data-open-mobile="always" data-require-bs-caller="layout_sidebar()" data-require-bs-version="5" style="--_sidebar-width:250px;">
+<div class="main bslib-gap-spacing html-fill-container">Contenido</div>
+<aside id="bslib-sidebar-7209" class="sidebar" hidden>
+<div class="sidebar-content bslib-gap-spacing">Sidebar</div>
+</aside>
+<button class="collapse-toggle" type="button" title="Toggle sidebar" aria-expanded="true" aria-controls="bslib-sidebar-7209"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="bi bi-chevron-left collapse-icon" style="height:;width:;fill:currentColor;vertical-align:-0.125em;" aria-hidden="true" role="img" ><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"></path></svg></button>
+<script data-bslib-sidebar-init>bslib.Sidebar.initCollapsibleAll()</script>
+</div>
+</body>
+]
+
+---
+
+# Secciones múltiples
+
+&lt;br&gt;
+
+Si nuestra app va a abarcar mucho contenido o temas diversos podemos utilizar un *layout* que nos permita navegar por distintas secciones y organizar nuestra UI. Cabe aclarar que **no van a ser páginas separadas, sino paneles contenidos bajo la misma URL de la app**.
+
+&lt;br&gt;
+&lt;br&gt;
+
+.pull-left[
+
+```r
+ui &lt;-page_navbar(
+  title = "Navbar page",
+  sidebar = "Sidebar",
+  
+  nav_panel("Panel 1", "..1"),
+  nav_panel("Panel 2", "..2")
+)
+```
+]
+
+.pull-right[
+<body class="bslib-page-fill bslib-gap-spacing bslib-flow-mobile bslib-page-navbar has-page-sidebar html-fill-container" style="padding:0px;gap:0px;">
+<nav class="navbar navbar-default navbar-static-top" role="navigation">
+<div class="container-fluid">
+<div class="navbar-header">
+<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-2138" data-bs-toggle="collapse" data-bs-target="#navbar-collapse-2138">
+<span class="sr-only visually-hidden">Toggle navigation</span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
+<span class="navbar-brand">Navbar page</span>
+</div>
+<div class="navbar-collapse collapse" id="navbar-collapse-2138">
+<ul class="nav navbar-nav nav-underline" data-tabsetid="3144">
+<li class="active">
+<a href="#tab-3144-1" data-toggle="tab" data-bs-toggle="tab" data-value="Panel 1">Panel 1</a>
+</li>
+<li>
+<a href="#tab-3144-2" data-toggle="tab" data-bs-toggle="tab" data-value="Panel 2">Panel 2</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<div class="html-fill-item html-fill-container">
+<div class="bslib-sidebar-layout bslib-mb-spacing html-fill-item" data-bslib-sidebar-border="false" data-bslib-sidebar-border-radius="false" data-bslib-sidebar-init="TRUE" data-collapsible-desktop="true" data-collapsible-mobile="false" data-open-desktop="open" data-open-mobile="always" data-require-bs-caller="layout_sidebar()" data-require-bs-version="5" style="--_sidebar-width:250px;">
+<div class="main bslib-gap-spacing html-fill-container">
+<div class="tab-content html-fill-item html-fill-container" data-tabsetid="3144">
+<div class="tab-pane active html-fill-item html-fill-container bslib-gap-spacing" data-value="Panel 1" id="tab-3144-1" style="--bslib-navbar-margin:0;">..1</div>
+<div class="tab-pane html-fill-item html-fill-container bslib-gap-spacing" data-value="Panel 2" id="tab-3144-2" style="--bslib-navbar-margin:0;">..2</div>
+</div>
+</div>
+<aside id="bslib-sidebar-5094" class="sidebar" hidden>
+<div class="sidebar-content bslib-gap-spacing">Sidebar</div>
+</aside>
+<button class="collapse-toggle" type="button" title="Toggle sidebar" aria-expanded="true" aria-controls="bslib-sidebar-5094"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="bi bi-chevron-left collapse-icon" style="height:;width:;fill:currentColor;vertical-align:-0.125em;" aria-hidden="true" role="img" ><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"></path></svg></button>
+<script data-bslib-sidebar-init>bslib.Sidebar.initCollapsibleAll()</script>
+</div>
+</div>
+</body>
+]
+
+---
+
+.pull-left[
+
+```r
+ui &lt;-page_navbar(
+  title = "Navbar page",
+  sidebar = "Sidebar",
+  
+  nav_panel("Panel 1", "..1"),
+  nav_menu("Panel 2", 
+           nav_item("Menú 1"),
+           nav_item("Menú 2")
+           )
+)
+```
+]
+
+.pull-right[
+<body class="bslib-page-fill bslib-gap-spacing bslib-flow-mobile bslib-page-navbar has-page-sidebar html-fill-container" style="padding:0px;gap:0px;">
+<nav class="navbar navbar-default navbar-static-top" role="navigation">
+<div class="container-fluid">
+<div class="navbar-header">
+<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-4801" data-bs-toggle="collapse" data-bs-target="#navbar-collapse-4801">
+<span class="sr-only visually-hidden">Toggle navigation</span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
+<span class="navbar-brand">Navbar page</span>
+</div>
+<div class="navbar-collapse collapse" id="navbar-collapse-4801">
+<ul class="nav navbar-nav nav-underline" data-tabsetid="9930">
+<li class="active">
+<a href="#tab-9930-1" data-toggle="tab" data-bs-toggle="tab" data-value="Panel 1">Panel 1</a>
+</li>
+<li class="dropdown">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" data-value="Panel 2">
+Panel 2
+<b class="caret"></b>
+</a>
+<ul class="dropdown-menu" data-tabsetid="4287">
+<li class="bslib-nav-item nav-item form-inline">Menú 1</li>
+<li class="bslib-nav-item nav-item form-inline">Menú 2</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<div class="html-fill-item html-fill-container">
+<div class="bslib-sidebar-layout bslib-mb-spacing html-fill-item" data-bslib-sidebar-border="false" data-bslib-sidebar-border-radius="false" data-bslib-sidebar-init="TRUE" data-collapsible-desktop="true" data-collapsible-mobile="false" data-open-desktop="open" data-open-mobile="always" data-require-bs-caller="layout_sidebar()" data-require-bs-version="5" style="--_sidebar-width:250px;">
+<div class="main bslib-gap-spacing html-fill-container">
+<div class="tab-content html-fill-item html-fill-container" data-tabsetid="9930">
+<div class="tab-pane active html-fill-item html-fill-container bslib-gap-spacing" data-value="Panel 1" id="tab-9930-1" style="--bslib-navbar-margin:0;">..1</div>
+</div>
+</div>
+<aside id="bslib-sidebar-8394" class="sidebar" hidden>
+<div class="sidebar-content bslib-gap-spacing">Sidebar</div>
+</aside>
+<button class="collapse-toggle" type="button" title="Toggle sidebar" aria-expanded="true" aria-controls="bslib-sidebar-8394"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="bi bi-chevron-left collapse-icon" style="height:;width:;fill:currentColor;vertical-align:-0.125em;" aria-hidden="true" role="img" ><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"></path></svg></button>
+<script data-bslib-sidebar-init>bslib.Sidebar.initCollapsibleAll()</script>
+</div>
+</div>
+</body>
+]
+
+---
+
+.pull-left[
+
+```r
+ui &lt;-page_navbar(
+  title = "Navbar page",
+  sidebar = "Sidebar",
+  
+  navset_tab(
+  nav_panel("Panel 1", "..1"),
+  nav_panel("Panel 2", 
+            navset_card_underline(title = "Opciones de panel 2",
+                                  nav_panel("A", "..2a"),
+                                  nav_panel("B", "..2b")
+                                  )
+            )
+  )
+)
+```
+]
+
+.pull-right[
+<body class="bslib-page-fill bslib-gap-spacing bslib-flow-mobile bslib-page-navbar has-page-sidebar html-fill-container" style="padding:0px;gap:0px;">
+<nav class="navbar navbar-default navbar-static-top" role="navigation">
+<div class="container-fluid">
+<div class="navbar-header">
+<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-7675" data-bs-toggle="collapse" data-bs-target="#navbar-collapse-7675">
+<span class="sr-only visually-hidden">Toggle navigation</span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
+<span class="navbar-brand">Navbar page</span>
+</div>
+<div class="navbar-collapse collapse" id="navbar-collapse-7675">
+<ul class="nav navbar-nav nav-underline" data-tabsetid="5664">
+<li>
+<a href="#tab-5664-1" data-toggle="tab" data-bs-toggle="tab"></a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<div class="html-fill-item html-fill-container">
+<div class="bslib-sidebar-layout bslib-mb-spacing html-fill-item" data-bslib-sidebar-border="false" data-bslib-sidebar-border-radius="false" data-bslib-sidebar-init="TRUE" data-collapsible-desktop="true" data-collapsible-mobile="false" data-open-desktop="open" data-open-mobile="always" data-require-bs-caller="layout_sidebar()" data-require-bs-version="5" style="--_sidebar-width:250px;">
+<div class="main bslib-gap-spacing html-fill-container">
+<div class="tab-content html-fill-item html-fill-container" data-tabsetid="5664">
+<div class="tabbable" id="tab-5664-1">
+<ul class="nav nav-tabs" data-tabsetid="6931">
+<li class="active">
+<a href="#tab-6931-1" data-toggle="tab" data-bs-toggle="tab" data-value="Panel 1">Panel 1</a>
+</li>
+<li>
+<a href="#tab-6931-2" data-toggle="tab" data-bs-toggle="tab" data-value="Panel 2">Panel 2</a>
+</li>
+</ul>
+<div class="tab-content" data-tabsetid="6931">
+<div class="tab-pane active html-fill-item html-fill-container bslib-gap-spacing" data-value="Panel 1" id="tab-6931-1" style="--bslib-navbar-margin:0;">..1</div>
+<div class="tab-pane html-fill-item html-fill-container bslib-gap-spacing" data-value="Panel 2" id="tab-6931-2" style="--bslib-navbar-margin:0;">
+<div class="card bslib-card bslib-mb-spacing html-fill-item html-fill-container" data-bslib-card-init data-require-bs-caller="card()" data-require-bs-version="5">
+<div class="card-header bslib-navs-card-title">
+<span>Opciones de panel 2</span>
+<ul class="nav nav-underline" data-tabsetid="4983">
+<li class="active">
+<a href="#tab-4983-1" data-toggle="tab" data-bs-toggle="tab" data-value="A">A</a>
+</li>
+<li>
+<a href="#tab-4983-2" data-toggle="tab" data-bs-toggle="tab" data-value="B">B</a>
+</li>
+</ul>
+</div>
+<div class="tab-content html-fill-item html-fill-container" data-tabsetid="4983">
+<div class="tab-pane active html-fill-item html-fill-container bslib-gap-spacing html-fill-item html-fill-container bslib-gap-spacing" data-value="A" id="tab-4983-1" style="gap:0;padding:0; --bslib-navbar-margin:0;">
+<div class="card-body bslib-gap-spacing html-fill-item html-fill-container" style="margin-top:auto;margin-bottom:auto;flex:1 1 auto;">..2a</div>
+</div>
+<div class="tab-pane html-fill-item html-fill-container bslib-gap-spacing html-fill-item html-fill-container bslib-gap-spacing" data-value="B" id="tab-4983-2" style="gap:0;padding:0; --bslib-navbar-margin:0;">
+<div class="card-body bslib-gap-spacing html-fill-item html-fill-container" style="margin-top:auto;margin-bottom:auto;flex:1 1 auto;">..2b</div>
+</div>
+</div>
+<script data-bslib-card-init>bslib.Card.initializeAllCards();</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<aside id="bslib-sidebar-3761" class="sidebar" hidden>
+<div class="sidebar-content bslib-gap-spacing">Sidebar</div>
+</aside>
+<button class="collapse-toggle" type="button" title="Toggle sidebar" aria-expanded="true" aria-controls="bslib-sidebar-3761"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="bi bi-chevron-left collapse-icon" style="height:;width:;fill:currentColor;vertical-align:-0.125em;" aria-hidden="true" role="img" ><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"></path></svg></button>
+<script data-bslib-sidebar-init>bslib.Sidebar.initCollapsibleAll()</script>
+</div>
+</div>
+</body>
+]
+
+---
+# Layout con `bslib`
+
+&lt;br&gt;
+
+Además de un aspecto más moderno, `bslib` incorpora algunos elementos interesantes para construir layouts que no eran tan accesibles con Shiny base como:
+
+- `cards`
+
+<div class="card bslib-card bslib-mb-spacing html-fill-item html-fill-container" data-bslib-card-init data-require-bs-caller="card()" data-require-bs-version="5">
+<div class="card-header">Título</div>
+<div class="card-body bslib-gap-spacing html-fill-item html-fill-container" style="margin-top:auto;margin-bottom:auto;flex:1 1 auto;">Contenido</div>
+<script data-bslib-card-init>bslib.Card.initializeAllCards();</script>
+</div>
+
+- `valueBox`
+
+<div class="card bslib-card bslib-mb-spacing html-fill-item html-fill-container bslib-value-box default showcase-left-center" data-bslib-card-init data-require-bs-caller="card() value_box()" data-require-bs-version="5 5">
+<div class="card-body bslib-gap-spacing html-fill-item html-fill-container" style="margin-top:auto;margin-bottom:auto;flex:1 1 auto; padding:0;">
+<div class="value-box-grid html-fill-item" style="--bslib-grid-height:auto;--bslib-grid-height-mobile:auto;---bslib-value-box-showcase-w:30%;---bslib-value-box-showcase-w-fs:1fr;---bslib-value-box-showcase-max-h:100px;---bslib-value-box-showcase-max-h-fs:67%;">
+<div class="value-box-showcase html-fill-item html-fill-container"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="bi bi-geo " style="height:1em;width:1em;fill:currentColor;vertical-align:-0.125em;" aria-hidden="true" role="img" ><path fill-rule="evenodd" d="M8 1a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999zm2.493 8.574a.5.5 0 0 1-.411.575c-.712.118-1.28.295-1.655.493a1.319 1.319 0 0 0-.37.265.301.301 0 0 0-.057.09V14l.002.008a.147.147 0 0 0 .016.033.617.617 0 0 0 .145.15c.165.13.435.27.813.395.751.25 1.82.414 3.024.414s2.273-.163 3.024-.414c.378-.126.648-.265.813-.395a.619.619 0 0 0 .146-.15.148.148 0 0 0 .015-.033L12 14v-.004a.301.301 0 0 0-.057-.09 1.318 1.318 0 0 0-.37-.264c-.376-.198-.943-.375-1.655-.493a.5.5 0 1 1 .164-.986c.77.127 1.452.328 1.957.594C12.5 13 13 13.4 13 14c0 .426-.26.752-.544.977-.29.228-.68.413-1.116.558-.878.293-2.059.465-3.34.465-1.281 0-2.462-.172-3.34-.465-.436-.145-.826-.33-1.116-.558C3.26 14.752 3 14.426 3 14c0-.599.5-1 .961-1.243.505-.266 1.187-.467 1.957-.594a.5.5 0 0 1 .575.411z"></path></svg></div>
+<div class="value-box-area html-fill-item html-fill-container">
+<p class="value-box-title">Título</p>
+<p class="value-box-value">99%</p>
+Interesante
+</div>
+</div>
+</div>
+<script data-bslib-card-init>bslib.Card.initializeAllCards();</script>
+</div>
+
+
+---
+
+# Layout con `bslib`
+
+&lt;br&gt;
+
+- `accordion`
+
+<div id="bslib-accordion-1612" class="accordion" data-require-bs-version="5" data-require-bs-caller="accordion()">
+<div class="accordion-item" data-value="Controles A">
+<div class="accordion-header">
+<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#bslib-accordion-panel-8367" aria-controls="bslib-accordion-panel-8367" aria-expanded="true">
+<div class="accordion-icon"></div>
+<div class="accordion-title">Controles A</div>
+</button>
+</div>
+<div id="bslib-accordion-panel-8367" class="accordion-collapse collapse show">
+<div class="accordion-body">Contenido</div>
+</div>
+</div>
+<div class="accordion-item" data-value="Controles B">
+<div class="accordion-header">
+<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#bslib-accordion-panel-4110" aria-expanded="false" aria-controls="bslib-accordion-panel-4110">
+<div class="accordion-icon"></div>
+<div class="accordion-title">Controles B</div>
+</button>
+</div>
+<div id="bslib-accordion-panel-4110" class="accordion-collapse collapse">
+<div class="accordion-body">Contenido</div>
+</div>
+</div>
+</div>
+
+---
+
+# Layout con Shiny base:
+
+- `fluidPage()`
 
 - `titlePanel()` define un título para la página.
 
@@ -227,8 +582,6 @@ Fuente: https://mastering-shiny.org/action-layout.html#multi-row
 
 &lt;br&gt;
 
-Si nuestra app va a abarcar mucho contenido o temas diversos podemos utilizar un *layout* que nos permita navegar por distintas secciones y organizar nuestra UI. Cabe aclarar que **no van a ser páginas separadas, sino paneles contenidos bajo la misma URL de la app**.
-
 Las opciones de base son:
 
 - `tabsetPanel()` 
@@ -274,17 +627,17 @@ ui &lt;- fluidPage(
 .pull-right[
 <div class="container-fluid">
 <div class="tabbable">
-<ul class="nav nav-tabs" data-tabsetid="9167">
+<ul class="nav nav-tabs" data-tabsetid="7580">
 <li class="active">
-<a href="#tab-9167-1" data-toggle="tab" data-bs-toggle="tab" data-value="tab 1">tab 1</a>
+<a href="#tab-7580-1" data-toggle="tab" data-bs-toggle="tab" data-value="tab 1">tab 1</a>
 </li>
 <li>
-<a href="#tab-9167-2" data-toggle="tab" data-bs-toggle="tab" data-value="tab 2">tab 2</a>
+<a href="#tab-7580-2" data-toggle="tab" data-bs-toggle="tab" data-value="tab 2">tab 2</a>
 </li>
 </ul>
-<div class="tab-content" data-tabsetid="9167">
-<div class="tab-pane active" data-value="tab 1" id="tab-9167-1">..1</div>
-<div class="tab-pane" data-value="tab 2" id="tab-9167-2">..2</div>
+<div class="tab-content" data-tabsetid="7580">
+<div class="tab-pane active" data-value="tab 1" id="tab-7580-1">..1</div>
+<div class="tab-pane" data-value="tab 2" id="tab-7580-2">..2</div>
 </div>
 </div>
 </div>
@@ -315,17 +668,17 @@ ui &lt;- fluidPage(
 </div>
 <div class="col-sm-8" role="main">
 <div class="tabbable">
-<ul class="nav nav-tabs" data-tabsetid="4176">
+<ul class="nav nav-tabs" data-tabsetid="9158">
 <li class="active">
-<a href="#tab-4176-1" data-toggle="tab" data-bs-toggle="tab" data-value="tab 1">tab 1</a>
+<a href="#tab-9158-1" data-toggle="tab" data-bs-toggle="tab" data-value="tab 1">tab 1</a>
 </li>
 <li>
-<a href="#tab-4176-2" data-toggle="tab" data-bs-toggle="tab" data-value="tab 2">tab 2</a>
+<a href="#tab-9158-2" data-toggle="tab" data-bs-toggle="tab" data-value="tab 2">tab 2</a>
 </li>
 </ul>
-<div class="tab-content" data-tabsetid="4176">
-<div class="tab-pane active" data-value="tab 1" id="tab-4176-1">1</div>
-<div class="tab-pane" data-value="tab 2" id="tab-4176-2">2</div>
+<div class="tab-content" data-tabsetid="9158">
+<div class="tab-pane active" data-value="tab 1" id="tab-9158-1">1</div>
+<div class="tab-pane" data-value="tab 2" id="tab-9158-2">2</div>
 </div>
 </div>
 </div>
@@ -356,19 +709,19 @@ ui &lt;- fluidPage(
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-4 well">
-<ul class="nav nav-pills nav-stacked" data-tabsetid="9383">
+<ul class="nav nav-pills nav-stacked" data-tabsetid="9666">
 <li class="active">
-<a href="#tab-9383-1" data-toggle="tab" data-bs-toggle="tab" data-value="tab 1">tab 1</a>
+<a href="#tab-9666-1" data-toggle="tab" data-bs-toggle="tab" data-value="tab 1">tab 1</a>
 </li>
 <li>
-<a href="#tab-9383-2" data-toggle="tab" data-bs-toggle="tab" data-value="tab 2">tab 2</a>
+<a href="#tab-9666-2" data-toggle="tab" data-bs-toggle="tab" data-value="tab 2">tab 2</a>
 </li>
 </ul>
 </div>
 <div class="col-sm-8">
-<div class="tab-content" data-tabsetid="9383">
-<div class="tab-pane active" data-value="tab 1" id="tab-9383-1">..1</div>
-<div class="tab-pane" data-value="tab 2" id="tab-9383-2">..2</div>
+<div class="tab-content" data-tabsetid="9666">
+<div class="tab-pane active" data-value="tab 1" id="tab-9666-1">..1</div>
+<div class="tab-pane" data-value="tab 2" id="tab-9666-2">..2</div>
 </div>
 </div>
 </div>
@@ -406,21 +759,21 @@ ui &lt;- navbarPage(
 <div class="navbar-header">
 <span class="navbar-brand">Título</span>
 </div>
-<ul class="nav navbar-nav nav-underline" data-tabsetid="3789">
+<ul class="nav navbar-nav nav-underline" data-tabsetid="8141">
 <li class="active">
-<a href="#tab-3789-1" data-toggle="tab" data-bs-toggle="tab" data-value="tab 1">tab 1</a>
+<a href="#tab-8141-1" data-toggle="tab" data-bs-toggle="tab" data-value="tab 1">tab 1</a>
 </li>
 <li>
-<a href="#tab-3789-2" data-toggle="tab" data-bs-toggle="tab" data-value="tab 2">tab 2</a>
+<a href="#tab-8141-2" data-toggle="tab" data-bs-toggle="tab" data-value="tab 2">tab 2</a>
 </li>
 <li class="dropdown">
 <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" data-value="Otros">
 Otros
 <b class="caret"></b>
 </a>
-<ul class="dropdown-menu" data-tabsetid="5294">
+<ul class="dropdown-menu" data-tabsetid="9892">
 <li>
-<a href="#tab-5294-1" data-toggle="tab" data-bs-toggle="tab" data-value="tab 3">tab 3</a>
+<a href="#tab-9892-1" data-toggle="tab" data-bs-toggle="tab" data-value="tab 3">tab 3</a>
 </li>
 </ul>
 </li>
@@ -428,204 +781,16 @@ Otros
 </div>
 </nav>
 <div class="container-fluid">
-<div class="tab-content" data-tabsetid="3789">
-<div class="tab-pane active" data-value="tab 1" id="tab-3789-1">..1</div>
-<div class="tab-pane" data-value="tab 2" id="tab-3789-2">..2</div>
-<div class="tab-pane" data-value="tab 3" id="tab-5294-1">..3</div>
+<div class="tab-content" data-tabsetid="8141">
+<div class="tab-pane active" data-value="tab 1" id="tab-8141-1">..1</div>
+<div class="tab-pane" data-value="tab 2" id="tab-8141-2">..2</div>
+<div class="tab-pane" data-value="tab 3" id="tab-9892-1">..3</div>
 </div>
 </div>
 </body>
 ]
 
----
-
-# Layout con `bslib`
-
-&lt;br&gt;
-
-`bslib` provee funciones similares para construir layouts con un estilo más moderno:
-
-- `page_fluid()`
-
-- `page_sidebar()`
-
-- `page_navbar()`
- 
- - `nav_panel()`
- - `nav_item()`
- - `nav_menu()`
-
-
-- `navset_tab()`
-
-- `navset_pill()`
-
-- `layout_column()` como alternativa al uso de `fluidRow()` + `column()`
-
----
-
-# page_sidebar
-
-&lt;br&gt;
-&lt;br&gt;
-
-.pull-left[
-
-```r
-library(bslib)
-
-ui &lt;- page_sidebar(
-  title = "bslib app",
-  sidebar = "Sidebar", 
-  "Contenido"
-)
-```
-]
-
-.pull-right[
-<body class="bslib-page-fill bslib-gap-spacing bslib-flow-mobile bslib-page-sidebar html-fill-container" style="padding:0px;gap:0px;">
-<h1 class="bslib-page-title">bslib app</h1>
-<div class="bslib-sidebar-layout bslib-mb-spacing html-fill-item" data-bslib-sidebar-border="false" data-bslib-sidebar-border-radius="false" data-bslib-sidebar-init="TRUE" data-bslib-sidebar-open="desktop" data-require-bs-caller="layout_sidebar()" data-require-bs-version="5" style="--_sidebar-width:250px;--_mobile-max-height:250px;">
-<div class="main bslib-gap-spacing html-fill-container">Contenido</div>
-<aside id="bslib-sidebar-8752" class="sidebar" hidden>
-<div class="sidebar-content bslib-gap-spacing">Sidebar</div>
-</aside>
-<button class="collapse-toggle" type="button" title="Toggle sidebar" aria-expanded="true" aria-controls="bslib-sidebar-8752"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="bi bi-chevron-left collapse-icon" style="height:;width:;fill:currentColor;vertical-align:-0.125em;" aria-hidden="true" role="img" ><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"></path></svg></button>
-<script data-bslib-sidebar-init>bslib.Sidebar.initCollapsibleAll()</script>
-</div>
-</body>
-]
-
----
-
-# page_navbar
-
-&lt;br&gt;
-&lt;br&gt;
-
-.pull-left[
-
-```r
-ui &lt;-page_navbar(
-  title = "Navbar page",
-  sidebar = "Sidebar",
-  
-  nav_panel("Panel 1", "..1"),
-  nav_panel("Panel 2", "..2")
-)
-```
-]
-
-.pull-right[
-<body class="bslib-page-fill bslib-gap-spacing bslib-flow-mobile bslib-page-navbar has-page-sidebar html-fill-container" style="padding:0px;gap:0px;">
-<nav class="navbar navbar-default navbar-static-top" role="navigation">
-<div class="container-fluid">
-<div class="navbar-header">
-<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-3685" data-bs-toggle="collapse" data-bs-target="#navbar-collapse-3685">
-<span class="sr-only visually-hidden">Toggle navigation</span>
-<span class="icon-bar"></span>
-<span class="icon-bar"></span>
-<span class="icon-bar"></span>
-</button>
-<span class="navbar-brand">Navbar page</span>
-</div>
-<div class="navbar-collapse collapse" id="navbar-collapse-3685">
-<ul class="nav navbar-nav nav-underline" data-tabsetid="2283">
-<li class="active">
-<a href="#tab-2283-1" data-toggle="tab" data-bs-toggle="tab" data-value="Panel 1">Panel 1</a>
-</li>
-<li>
-<a href="#tab-2283-2" data-toggle="tab" data-bs-toggle="tab" data-value="Panel 2">Panel 2</a>
-</li>
-</ul>
-</div>
-</div>
-</nav>
-<div class="html-fill-item html-fill-container">
-<div class="bslib-sidebar-layout bslib-mb-spacing html-fill-item" data-bslib-sidebar-border="false" data-bslib-sidebar-border-radius="false" data-bslib-sidebar-init="TRUE" data-bslib-sidebar-open="desktop" data-require-bs-caller="layout_sidebar()" data-require-bs-version="5" style="--_sidebar-width:250px;--_mobile-max-height:250px;">
-<div class="main bslib-gap-spacing html-fill-container">
-<div class="tab-content html-fill-item html-fill-container" data-tabsetid="2283">
-<div class="tab-pane active html-fill-item html-fill-container bslib-gap-spacing" data-value="Panel 1" id="tab-2283-1" style="--bslib-navbar-margin:0;">..1</div>
-<div class="tab-pane html-fill-item html-fill-container bslib-gap-spacing" data-value="Panel 2" id="tab-2283-2" style="--bslib-navbar-margin:0;">..2</div>
-</div>
-</div>
-<aside id="bslib-sidebar-7155" class="sidebar" hidden>
-<div class="sidebar-content bslib-gap-spacing">Sidebar</div>
-</aside>
-<button class="collapse-toggle" type="button" title="Toggle sidebar" aria-expanded="true" aria-controls="bslib-sidebar-7155"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="bi bi-chevron-left collapse-icon" style="height:;width:;fill:currentColor;vertical-align:-0.125em;" aria-hidden="true" role="img" ><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"></path></svg></button>
-<script data-bslib-sidebar-init>bslib.Sidebar.initCollapsibleAll()</script>
-</div>
-</div>
-</body>
-]
-
----
-
-# Layout con `bslib`
-
-&lt;br&gt;
-
-Además de un aspecto más moderno, `bslib` incorpora algunos elementos interesantes para construir layouts que no eran tan accesibles con Shiny base como:
-
-- `cards`
-
-<div class="card bslib-card bslib-mb-spacing html-fill-item html-fill-container" data-bslib-card-init data-require-bs-caller="card()" data-require-bs-version="5">
-<div class="card-header">Título</div>
-<div class="card-body bslib-gap-spacing html-fill-item html-fill-container" style="margin-top:auto;margin-bottom:auto;flex:1 1 auto;">Contenido</div>
-<script data-bslib-card-init>bslib.Card.initializeAllCards();</script>
-</div>
-
-- `valueBox`
-
-<div class="card bslib-card bslib-mb-spacing html-fill-item html-fill-container bslib-value-box default showcase-left-center" data-bslib-card-init data-require-bs-caller="card() value_box()" data-require-bs-version="5 5">
-<div class="card-body bslib-gap-spacing html-fill-item html-fill-container" style="margin-top:auto;margin-bottom:auto;flex:1 1 auto; padding:0;">
-<div class="value-box-grid html-fill-item" style="--bslib-grid-height:auto;--bslib-grid-height-mobile:auto;---bslib-value-box-showcase-w:30%;---bslib-value-box-showcase-w-fs:1fr;---bslib-value-box-showcase-max-h:100px;---bslib-value-box-showcase-max-h-fs:67%;">
-<div class="value-box-showcase html-fill-item html-fill-container"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="bi bi-geo " style="height:1em;width:1em;fill:currentColor;vertical-align:-0.125em;" aria-hidden="true" role="img" ><path fill-rule="evenodd" d="M8 1a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999zm2.493 8.574a.5.5 0 0 1-.411.575c-.712.118-1.28.295-1.655.493a1.319 1.319 0 0 0-.37.265.301.301 0 0 0-.057.09V14l.002.008a.147.147 0 0 0 .016.033.617.617 0 0 0 .145.15c.165.13.435.27.813.395.751.25 1.82.414 3.024.414s2.273-.163 3.024-.414c.378-.126.648-.265.813-.395a.619.619 0 0 0 .146-.15.148.148 0 0 0 .015-.033L12 14v-.004a.301.301 0 0 0-.057-.09 1.318 1.318 0 0 0-.37-.264c-.376-.198-.943-.375-1.655-.493a.5.5 0 1 1 .164-.986c.77.127 1.452.328 1.957.594C12.5 13 13 13.4 13 14c0 .426-.26.752-.544.977-.29.228-.68.413-1.116.558-.878.293-2.059.465-3.34.465-1.281 0-2.462-.172-3.34-.465-.436-.145-.826-.33-1.116-.558C3.26 14.752 3 14.426 3 14c0-.599.5-1 .961-1.243.505-.266 1.187-.467 1.957-.594a.5.5 0 0 1 .575.411z"></path></svg></div>
-<div class="value-box-area html-fill-item html-fill-container">
-<p class="value-box-title">Título</p>
-<p class="value-box-value">99%</p>
-Interesante
-</div>
-</div>
-</div>
-<script data-bslib-card-init>bslib.Card.initializeAllCards();</script>
-</div>
-
-
----
-
-# Layout con `bslib`
-
-&lt;br&gt;
-
-- `accordion`
-
-<div id="bslib-accordion-7372" class="accordion" data-require-bs-version="5" data-require-bs-caller="accordion()">
-<div class="accordion-item" data-value="Controles A">
-<div class="accordion-header">
-<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#bslib-accordion-panel-5505" aria-controls="bslib-accordion-panel-5505" aria-expanded="true">
-<div class="accordion-icon"></div>
-<div class="accordion-title">Controles A</div>
-</button>
-</div>
-<div id="bslib-accordion-panel-5505" class="accordion-collapse collapse show">
-<div class="accordion-body">Contenido</div>
-</div>
-</div>
-<div class="accordion-item" data-value="Controles B">
-<div class="accordion-header">
-<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#bslib-accordion-panel-8808" aria-expanded="false" aria-controls="bslib-accordion-panel-8808">
-<div class="accordion-icon"></div>
-<div class="accordion-title">Controles B</div>
-</button>
-</div>
-<div id="bslib-accordion-panel-8808" class="accordion-collapse collapse">
-<div class="accordion-body">Contenido</div>
-</div>
-</div>
-</div>
-
----
+--
 
 # Ejercicios
 
@@ -637,42 +802,11 @@ Replique los siguientes *layouts*:
 
 &lt;br&gt;
 
-<div class="container-fluid">
-<h2>App muy interesante</h2>
-<div class="row">
-<div class="col-sm-4 well">
-<ul class="nav nav-pills nav-stacked" data-tabsetid="1370">
-<li class="active">
-<a href="#tab-1370-1" data-toggle="tab" data-bs-toggle="tab" data-value="Panel con datos interesantes">Panel con datos interesantes</a>
-</li>
-<li>
-<a href="#tab-1370-2" data-toggle="tab" data-bs-toggle="tab" data-value="Panel con texto aburrido">Panel con texto aburrido</a>
-</li>
-</ul>
-</div>
-<div class="col-sm-8">
-<div class="tab-content" data-tabsetid="1370">
-<div class="tab-pane active" data-value="Panel con datos interesantes" id="tab-1370-1">
-<div class="row">
-<div class="col-sm-4">
-<form class="well" role="complementary">Inputs para filtrar datos</form>
-</div>
-<div class="col-sm-8" role="main">Datos interesantes</div>
-</div>
-</div>
-<div class="tab-pane" data-value="Panel con texto aburrido" id="tab-1370-2">Texto aburrido</div>
-</div>
-</div>
-</div>
-</div>
-
----
-
 <body class="bslib-page-fill bslib-gap-spacing bslib-flow-mobile bslib-page-navbar html-fill-container" style="padding:0px;gap:0px;">
 <nav class="navbar navbar-default navbar-static-top" role="navigation">
 <div class="container-fluid">
 <div class="navbar-header">
-<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-5254" data-bs-toggle="collapse" data-bs-target="#navbar-collapse-5254">
+<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-4126" data-bs-toggle="collapse" data-bs-target="#navbar-collapse-4126">
 <span class="sr-only visually-hidden">Toggle navigation</span>
 <span class="icon-bar"></span>
 <span class="icon-bar"></span>
@@ -680,22 +814,22 @@ Replique los siguientes *layouts*:
 </button>
 <span class="navbar-brand">App increíble</span>
 </div>
-<div class="navbar-collapse collapse" id="navbar-collapse-5254">
-<ul class="nav navbar-nav nav-underline" data-tabsetid="2046">
+<div class="navbar-collapse collapse" id="navbar-collapse-4126">
+<ul class="nav navbar-nav nav-underline" data-tabsetid="3262">
 <li class="active">
-<a href="#tab-2046-1" data-toggle="tab" data-bs-toggle="tab" data-value="Datos increíbles">Datos increíbles</a>
+<a href="#tab-3262-1" data-toggle="tab" data-bs-toggle="tab" data-value="Datos increíbles">Datos increíbles</a>
 </li>
 <li class="dropdown">
 <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" data-value="Más">
 Más
 <b class="caret"></b>
 </a>
-<ul class="dropdown-menu" data-tabsetid="5848">
+<ul class="dropdown-menu" data-tabsetid="2520">
 <li>
-<a href="#tab-5848-1" data-toggle="tab" data-bs-toggle="tab" data-value="Metodología">Metodología</a>
+<a href="#tab-2520-1" data-toggle="tab" data-bs-toggle="tab" data-value="Metodología">Metodología</a>
 </li>
 <li>
-<a href="#tab-5848-2" data-toggle="tab" data-bs-toggle="tab" data-value="Contacto">Contacto</a>
+<a href="#tab-2520-2" data-toggle="tab" data-bs-toggle="tab" data-value="Contacto">Contacto</a>
 </li>
 </ul>
 </li>
@@ -704,28 +838,61 @@ Más
 </div>
 </nav>
 <div class="container-fluid html-fill-item html-fill-container">
-<div class="tab-content html-fill-item html-fill-container" data-tabsetid="2046">
-<div class="tab-pane active html-fill-item html-fill-container bslib-gap-spacing" data-value="Datos increíbles" id="tab-2046-1" style="--bslib-navbar-margin:0;">
+<div class="tab-content html-fill-item html-fill-container" data-tabsetid="3262">
+<div class="tab-pane active html-fill-item html-fill-container bslib-gap-spacing" data-value="Datos increíbles" id="tab-3262-1" style="--bslib-navbar-margin:0;">
 <div class="tabbable">
-<ul class="nav nav-tabs" data-tabsetid="2610">
+<ul class="nav nav-tabs" data-tabsetid="4249">
 <li class="active">
-<a href="#tab-2610-1" data-toggle="tab" data-bs-toggle="tab" data-value="Datos A">Datos A</a>
+<a href="#tab-4249-1" data-toggle="tab" data-bs-toggle="tab" data-value="Datos A">Datos A</a>
 </li>
 <li>
-<a href="#tab-2610-2" data-toggle="tab" data-bs-toggle="tab" data-value="Datos B">Datos B</a>
+<a href="#tab-4249-2" data-toggle="tab" data-bs-toggle="tab" data-value="Datos B">Datos B</a>
 </li>
 </ul>
-<div class="tab-content" data-tabsetid="2610">
-<div class="tab-pane active html-fill-item html-fill-container bslib-gap-spacing" data-value="Datos A" id="tab-2610-1" style="--bslib-navbar-margin:0;">Acá van datos increíbles</div>
-<div class="tab-pane html-fill-item html-fill-container bslib-gap-spacing" data-value="Datos B" id="tab-2610-2" style="--bslib-navbar-margin:0;">Acá van más datos increíbles</div>
+<div class="tab-content" data-tabsetid="4249">
+<div class="tab-pane active html-fill-item html-fill-container bslib-gap-spacing" data-value="Datos A" id="tab-4249-1" style="--bslib-navbar-margin:0;">Acá van datos increíbles</div>
+<div class="tab-pane html-fill-item html-fill-container bslib-gap-spacing" data-value="Datos B" id="tab-4249-2" style="--bslib-navbar-margin:0;">Acá van más datos increíbles</div>
 </div>
 </div>
 </div>
-<div class="tab-pane html-fill-item html-fill-container bslib-gap-spacing" data-value="Metodología" id="tab-5848-1" style="--bslib-navbar-margin:0;">Texto con la metodología increíble</div>
-<div class="tab-pane html-fill-item html-fill-container bslib-gap-spacing" data-value="Contacto" id="tab-5848-2" style="--bslib-navbar-margin:0;">Contacto de la persona increíble que desarrolló esta app</div>
+<div class="tab-pane html-fill-item html-fill-container bslib-gap-spacing" data-value="Metodología" id="tab-2520-1" style="--bslib-navbar-margin:0;">Texto con la metodología increíble</div>
+<div class="tab-pane html-fill-item html-fill-container bslib-gap-spacing" data-value="Contacto" id="tab-2520-2" style="--bslib-navbar-margin:0;">Contacto de la persona increíble que desarrolló esta app</div>
 </div>
 </div>
 </body>
+
+---
+
+Shiny base
+
+<div class="container-fluid">
+<h2>App muy interesante</h2>
+<div class="row">
+<div class="col-sm-4 well">
+<ul class="nav nav-pills nav-stacked" data-tabsetid="8750">
+<li class="active">
+<a href="#tab-8750-1" data-toggle="tab" data-bs-toggle="tab" data-value="Panel con datos interesantes">Panel con datos interesantes</a>
+</li>
+<li>
+<a href="#tab-8750-2" data-toggle="tab" data-bs-toggle="tab" data-value="Panel con texto aburrido">Panel con texto aburrido</a>
+</li>
+</ul>
+</div>
+<div class="col-sm-8">
+<div class="tab-content" data-tabsetid="8750">
+<div class="tab-pane active" data-value="Panel con datos interesantes" id="tab-8750-1">
+<div class="row">
+<div class="col-sm-4">
+<form class="well" role="complementary">Inputs para filtrar datos</form>
+</div>
+<div class="col-sm-8" role="main">Datos interesantes</div>
+</div>
+</div>
+<div class="tab-pane" data-value="Panel con texto aburrido" id="tab-8750-2">Texto aburrido</div>
+</div>
+</div>
+</div>
+</div>
 
 ---
 
@@ -782,14 +949,12 @@ Para definir un output en nuestra UI debemos escribir la función correspondient
 Adicionalmente, algunos output permiten pasarles parámetros de ancho y alto, entre otros.
 
 ```
-fluidPage(
+page_fluid(
  
- fluidRow(
- 
-  column(6, dataTableOutput(outputId = "tabla1")), 
-  column(6, plotOutput(outputId = "grafico1", width = 100, height = 100))
+  layout_columns(dataTableOutput(outputId = "tabla1"),  
+                 plotOutput(outputId = "grafico1", width = 100, height = 100)
+                 )
   
-  )
  )
 
 ```
@@ -806,7 +971,7 @@ Con el objeto `tags` seguido del signo `$` podemos acceder a estas etiquetas.
 .pull-left[
 ```
 
-fluidPage(
+page_fluid(
 h1("Título 1"),
 h2("Título 2"),
 h3("Título 3"),
@@ -814,7 +979,7 @@ h4("Título 4"),
 h5("Título 5"),
 h6("Título 6"),
 
-tags$iframe(src = "https://estacion-r.netlify.app/")
+tags$iframe(src = "https://estacion-r.com/")
 )
 ```
 ]
@@ -827,7 +992,7 @@ tags$iframe(src = "https://estacion-r.netlify.app/")
 <h4>Título 4</h4>
 <h5>Título 5</h5>
 <h6>Título 6</h6>
-<iframe src="https://estacion-r.netlify.app/"></iframe>
+<iframe src="https://estacion-r.com/"></iframe>
 </div>
 
 ]
@@ -953,13 +1118,13 @@ class: center, middle inverse
 
 &lt;br&gt;
 
-Si bien una app debe cumplir con el propósito de ser útil, el aspecto visual de la misma también es importante para orientar al usuario y causar un buen impacto.
+Si bien una app debe cumplir con el propósito de ser útil, el aspecto visual de la misma también es importante para orientar al usuario y causar un impacto positivo.
 
-Además, a veces querremos personalizar nuestra app para que se adecúe a parámetros estéticos propios o de nuestra organización (identidad), con paletas de colores o fuentes predefinidas.
+Además, a veces vamos a querer personalizar nuestra app para que se adecúe a parámetros estéticos propios o de nuestra organización (identidad de marca), con paletas de colores o fuentes predefinidas.
 
 &lt;br&gt;
 
-Tenemos tres caminos principales para mejorar la estética de nuestra Shiny:
+Tenemos tres caminos principales para modificar la estética de nuestra Shiny:
 
 1. Utilizar un tema predefinido
 
@@ -985,13 +1150,15 @@ https://gallery.shinyapps.io/064-telephones-by-region/
 
 &lt;br&gt;
 
-Utilizando el paquete [`shinythemes`](https://rstudio.github.io/shinythemes/) o [`bslib`](https://rstudio.github.io/bslib/) podemos acceder rápidamente a algunos temas predefinidos de Bootstrap.
+Utilizando el paquete [`bslib`](https://rstudio.github.io/bslib/) podemos acceder rápidamente a algunos temas predefinidos de Bootstrap.
 
-`fluidPage()` o `navbarPage()` tienen la opción de pasarle un `theme` que se aplicará a la app. Por ejemplo, `theme = bslib::bs_theme(bootswatch = "superhero")` produce esta salida:
+`page_fluid()` o `page_navbar()` tienen la opción de pasarle un `theme` que se aplicará a la app. Por ejemplo, `theme = bslib::bs_theme(preset = "superhero")` produce esta salida:
 
 &lt;br&gt;
 
 &lt;img src="recursos/basic_ui_bs_theme.png" width="100%" /&gt;
+
+Nota: ver [`shinythemes`](https://rstudio.github.io/shinythemes/) para shiny base
 
 ---
 
@@ -1011,9 +1178,7 @@ Podríamos modificar nuestro ggplot para que el fondo blanco no choque con el te
 
 &lt;br&gt;
 
-Ambos paquetes brindan un widget para probar los temas en tiempo real, escribiendo en nuestro código:
-
-- `shinythemes::themeSelector()` en algún lugar de la UI
+El paquete brinda un widget para probar los temas en tiempo real, escribiendo en nuestro código:
 
 - `bslib::bs_themer()` en algún lugar del server
 
@@ -1122,6 +1287,8 @@ Nuestra salida
 
 Para consultar:
 
+- [Blog UI con bslib](https://shiny.posit.co/r/articles/build/layout-guide/)
+
 - [Mastering Shiny](https://mastering-shiny.org/index.html)
 
 - [Cheatsheet de Shiny](https://rstudio.github.io/cheatsheets/shiny.pdf)
@@ -1151,8 +1318,6 @@ Para experimentar:
 Para explorar:
 
 - [`shinyWidgets` para más opciones](https://shinyapps.dreamrs.fr/shinyWidgets/)
-
-- [Layout con `bslib`](https://shiny.posit.co/r/articles/build/layout-guide/)
 
 - [`fresh` para crear temas](https://github.com/dreamRs/fresh/)
 
@@ -1186,7 +1351,7 @@ class: center, middle inverse
 
 &lt;br&gt;
 
-- Los pasos a seguir incluyen:
+- Los pasos (sugeridos) a seguir incluyen:
 
  1. Elegir un framework de nuestro agrado
  2. Definir un layout general para estructurar el contenido

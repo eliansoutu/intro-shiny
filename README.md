@@ -1,6 +1,6 @@
 # intro-shiny
 
-Material del curso de Introducción a Shiny
+Material del curso de Introducción a Shiny - Estación R
 
 ## Contenidos
 

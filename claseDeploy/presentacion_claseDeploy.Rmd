@@ -309,3 +309,19 @@ paste("csv", object.size(csv))
 paste("parquet", object.size(parquet))
 paste("db", object.size(db))
 ```
+
+---
+
+# Recursos 
+
+<br>
+
+- [Optimización - repo latin-r](https://github.com/Appsilon/latin-r-2024)
+
+- [Blog - opciones de deploy](https://www.appsilon.com/post/r-shiny-deployment)
+
+- [Shiny without boundaries - repo deploy](https://github.com/coatless-talks/stat447-shiny-without-boundaries-one-app-multiple-destinations)
+
+- [`golem`](https://engineering-shiny.org/golem.html) o [`Rhino`](https://appsilon.github.io/rhino/) para modularizar
+
+- [Shiny code explained](https://hypebright.nl/en/home-en/blog/)
