@@ -1,16 +1,15 @@
 library(shiny)
+library(bslib)
 library(tidyverse)
 library(plotly)
 
 penguins <- palmerpenguins::penguins
 
-ui <- fluidPage(
+ui <- page_sidebar(
   
-  titlePanel("Exploración de Palmer Penguins"),
-  
-  sidebarLayout(
-    
-    sidebarPanel(
+  title = "Exploración de Palmer Penguins",
+
+    sidebar = sidebar(width = 400, 
       
       #Creamos inputs automatizados
       selectInput("islandSelect", "Isla", unique(penguins$island)),
@@ -23,17 +22,14 @@ ui <- fluidPage(
       
       br(),
       
-      imageOutput("penguinImage", height = 200)
+      imageOutput("penguinImage", height = 50)
       
     ),
+      
+    plotlyOutput("plotPenguin"),
     
-    mainPanel(
-      
-      plotlyOutput("plotPenguin"),
-      
-      helpText("Fuente: https://allisonhorst.github.io/palmerpenguins/index.html")
-    )
-  )
+    helpText("Fuente: https://allisonhorst.github.io/palmerpenguins/index.html")
+    
 )
 
 server <- function(input, output, session) {

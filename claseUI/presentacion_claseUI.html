@@ -116,7 +116,7 @@ Semantic
 
 .pull-right[
 Material
-[&lt;img src="recursos/material.png"&gt;](https://ericrayanderson.shinyapps.io/shinymaterial_dashboard/)
+[&lt;img src="recursos/material.png"&gt;](https://ericrayanderson.github.io/shinymaterial_showcase/)
 ]
 
 ---
@@ -157,9 +157,8 @@ Podemos entender al layout como nuestra estructura de jerarquías base para la o
  - `nav_menu()`
  - `nav_item()`
 
-- `navset_tab()` contenedor de paneles (tabs horizontales)
 
-- `navset_pill()`  contenedor de paneles (tabs verticales)
+- `navset_tab()`/`navset_pill()` contenedor de paneles (tabs horizontales/verticales)
 
 - `layout_column()` controla el ancho de los componentes por fila.
 
@@ -192,10 +191,10 @@ ui &lt;- page_sidebar(
 </div>
 <div class="bslib-sidebar-layout bslib-mb-spacing html-fill-item" data-bslib-sidebar-border="false" data-bslib-sidebar-border-radius="false" data-bslib-sidebar-init="TRUE" data-collapsible-desktop="true" data-collapsible-mobile="false" data-open-desktop="open" data-open-mobile="always" data-require-bs-caller="layout_sidebar()" data-require-bs-version="5" style="--_sidebar-width:250px;">
 <div class="main bslib-gap-spacing html-fill-container">Contenido</div>
-<aside id="bslib-sidebar-7209" class="sidebar" hidden>
+<aside id="bslib-sidebar-9858" class="sidebar" hidden>
 <div class="sidebar-content bslib-gap-spacing">Sidebar</div>
 </aside>
-<button class="collapse-toggle" type="button" title="Toggle sidebar" aria-expanded="true" aria-controls="bslib-sidebar-7209"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="bi bi-chevron-left collapse-icon" style="height:;width:;fill:currentColor;vertical-align:-0.125em;" aria-hidden="true" role="img" ><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"></path></svg></button>
+<button class="collapse-toggle" type="button" title="Toggle sidebar" aria-expanded="true" aria-controls="bslib-sidebar-9858"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="bi bi-chevron-left collapse-icon" style="height:;width:;fill:currentColor;vertical-align:-0.125em;" aria-hidden="true" role="img" ><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"></path></svg></button>
 <script data-bslib-sidebar-init>bslib.Sidebar.initCollapsibleAll()</script>
 </div>
 </body>
@@ -217,7 +216,6 @@ Si nuestra app va a abarcar mucho contenido o temas diversos podemos utilizar un
 ```r
 ui &lt;-page_navbar(
   title = "Navbar page",
-  sidebar = "Sidebar",
   
   nav_panel("Panel 1", "..1"),
   nav_panel("Panel 2", "..2")
@@ -226,11 +224,11 @@ ui &lt;-page_navbar(
 ]
 
 .pull-right[
-<body class="bslib-page-fill bslib-gap-spacing bslib-flow-mobile bslib-page-navbar has-page-sidebar html-fill-container" style="padding:0px;gap:0px;">
+<body class="bslib-page-fill bslib-gap-spacing bslib-flow-mobile bslib-page-navbar html-fill-container" style="padding:0px;gap:0px;">
 <nav class="navbar navbar-default navbar-static-top" role="navigation">
 <div class="container-fluid">
 <div class="navbar-header">
-<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-2138" data-bs-toggle="collapse" data-bs-target="#navbar-collapse-2138">
+<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-7194" data-bs-toggle="collapse" data-bs-target="#navbar-collapse-7194">
 <span class="sr-only visually-hidden">Toggle navigation</span>
 <span class="icon-bar"></span>
 <span class="icon-bar"></span>
@@ -238,31 +236,22 @@ ui &lt;-page_navbar(
 </button>
 <span class="navbar-brand">Navbar page</span>
 </div>
-<div class="navbar-collapse collapse" id="navbar-collapse-2138">
-<ul class="nav navbar-nav nav-underline" data-tabsetid="3144">
+<div class="navbar-collapse collapse" id="navbar-collapse-7194">
+<ul class="nav navbar-nav nav-underline" data-tabsetid="1347">
 <li class="active">
-<a href="#tab-3144-1" data-toggle="tab" data-bs-toggle="tab" data-value="Panel 1">Panel 1</a>
+<a href="#tab-1347-1" data-toggle="tab" data-bs-toggle="tab" data-value="Panel 1">Panel 1</a>
 </li>
 <li>
-<a href="#tab-3144-2" data-toggle="tab" data-bs-toggle="tab" data-value="Panel 2">Panel 2</a>
+<a href="#tab-1347-2" data-toggle="tab" data-bs-toggle="tab" data-value="Panel 2">Panel 2</a>
 </li>
 </ul>
 </div>
 </div>
 </nav>
-<div class="html-fill-item html-fill-container">
-<div class="bslib-sidebar-layout bslib-mb-spacing html-fill-item" data-bslib-sidebar-border="false" data-bslib-sidebar-border-radius="false" data-bslib-sidebar-init="TRUE" data-collapsible-desktop="true" data-collapsible-mobile="false" data-open-desktop="open" data-open-mobile="always" data-require-bs-caller="layout_sidebar()" data-require-bs-version="5" style="--_sidebar-width:250px;">
-<div class="main bslib-gap-spacing html-fill-container">
-<div class="tab-content html-fill-item html-fill-container" data-tabsetid="3144">
-<div class="tab-pane active html-fill-item html-fill-container bslib-gap-spacing" data-value="Panel 1" id="tab-3144-1" style="--bslib-navbar-margin:0;">..1</div>
-<div class="tab-pane html-fill-item html-fill-container bslib-gap-spacing" data-value="Panel 2" id="tab-3144-2" style="--bslib-navbar-margin:0;">..2</div>
-</div>
-</div>
-<aside id="bslib-sidebar-5094" class="sidebar" hidden>
-<div class="sidebar-content bslib-gap-spacing">Sidebar</div>
-</aside>
-<button class="collapse-toggle" type="button" title="Toggle sidebar" aria-expanded="true" aria-controls="bslib-sidebar-5094"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="bi bi-chevron-left collapse-icon" style="height:;width:;fill:currentColor;vertical-align:-0.125em;" aria-hidden="true" role="img" ><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"></path></svg></button>
-<script data-bslib-sidebar-init>bslib.Sidebar.initCollapsibleAll()</script>
+<div class="container-fluid html-fill-item html-fill-container">
+<div class="tab-content html-fill-item html-fill-container" data-tabsetid="1347">
+<div class="tab-pane active html-fill-item html-fill-container bslib-gap-spacing" data-value="Panel 1" id="tab-1347-1" style="--bslib-navbar-margin:0;">..1</div>
+<div class="tab-pane html-fill-item html-fill-container bslib-gap-spacing" data-value="Panel 2" id="tab-1347-2" style="--bslib-navbar-margin:0;">..2</div>
 </div>
 </div>
 </body>
@@ -270,7 +259,7 @@ ui &lt;-page_navbar(
 
 ---
 
-.pull-left[
+
 
 ```r
 ui &lt;-page_navbar(
@@ -284,14 +273,13 @@ ui &lt;-page_navbar(
            )
 )
 ```
-]
 
-.pull-right[
+
 <body class="bslib-page-fill bslib-gap-spacing bslib-flow-mobile bslib-page-navbar has-page-sidebar html-fill-container" style="padding:0px;gap:0px;">
 <nav class="navbar navbar-default navbar-static-top" role="navigation">
 <div class="container-fluid">
 <div class="navbar-header">
-<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-4801" data-bs-toggle="collapse" data-bs-target="#navbar-collapse-4801">
+<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-9861" data-bs-toggle="collapse" data-bs-target="#navbar-collapse-9861">
 <span class="sr-only visually-hidden">Toggle navigation</span>
 <span class="icon-bar"></span>
 <span class="icon-bar"></span>
@@ -299,17 +287,17 @@ ui &lt;-page_navbar(
 </button>
 <span class="navbar-brand">Navbar page</span>
 </div>
-<div class="navbar-collapse collapse" id="navbar-collapse-4801">
-<ul class="nav navbar-nav nav-underline" data-tabsetid="9930">
+<div class="navbar-collapse collapse" id="navbar-collapse-9861">
+<ul class="nav navbar-nav nav-underline" data-tabsetid="2966">
 <li class="active">
-<a href="#tab-9930-1" data-toggle="tab" data-bs-toggle="tab" data-value="Panel 1">Panel 1</a>
+<a href="#tab-2966-1" data-toggle="tab" data-bs-toggle="tab" data-value="Panel 1">Panel 1</a>
 </li>
 <li class="dropdown">
 <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" data-value="Panel 2">
 Panel 2
 <b class="caret"></b>
 </a>
-<ul class="dropdown-menu" data-tabsetid="4287">
+<ul class="dropdown-menu" data-tabsetid="6365">
 <li class="bslib-nav-item nav-item form-inline">Menú 1</li>
 <li class="bslib-nav-item nav-item form-inline">Menú 2</li>
 </ul>
@@ -321,23 +309,23 @@ Panel 2
 <div class="html-fill-item html-fill-container">
 <div class="bslib-sidebar-layout bslib-mb-spacing html-fill-item" data-bslib-sidebar-border="false" data-bslib-sidebar-border-radius="false" data-bslib-sidebar-init="TRUE" data-collapsible-desktop="true" data-collapsible-mobile="false" data-open-desktop="open" data-open-mobile="always" data-require-bs-caller="layout_sidebar()" data-require-bs-version="5" style="--_sidebar-width:250px;">
 <div class="main bslib-gap-spacing html-fill-container">
-<div class="tab-content html-fill-item html-fill-container" data-tabsetid="9930">
-<div class="tab-pane active html-fill-item html-fill-container bslib-gap-spacing" data-value="Panel 1" id="tab-9930-1" style="--bslib-navbar-margin:0;">..1</div>
+<div class="tab-content html-fill-item html-fill-container" data-tabsetid="2966">
+<div class="tab-pane active html-fill-item html-fill-container bslib-gap-spacing" data-value="Panel 1" id="tab-2966-1" style="--bslib-navbar-margin:0;">..1</div>
 </div>
 </div>
-<aside id="bslib-sidebar-8394" class="sidebar" hidden>
+<aside id="bslib-sidebar-7615" class="sidebar" hidden>
 <div class="sidebar-content bslib-gap-spacing">Sidebar</div>
 </aside>
-<button class="collapse-toggle" type="button" title="Toggle sidebar" aria-expanded="true" aria-controls="bslib-sidebar-8394"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="bi bi-chevron-left collapse-icon" style="height:;width:;fill:currentColor;vertical-align:-0.125em;" aria-hidden="true" role="img" ><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"></path></svg></button>
+<button class="collapse-toggle" type="button" title="Toggle sidebar" aria-expanded="true" aria-controls="bslib-sidebar-7615"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="bi bi-chevron-left collapse-icon" style="height:;width:;fill:currentColor;vertical-align:-0.125em;" aria-hidden="true" role="img" ><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"></path></svg></button>
 <script data-bslib-sidebar-init>bslib.Sidebar.initCollapsibleAll()</script>
 </div>
 </div>
 </body>
-]
+
 
 ---
 
-.pull-left[
+
 
 ```r
 ui &lt;-page_navbar(
@@ -355,14 +343,12 @@ ui &lt;-page_navbar(
   )
 )
 ```
-]
 
-.pull-right[
 <body class="bslib-page-fill bslib-gap-spacing bslib-flow-mobile bslib-page-navbar has-page-sidebar html-fill-container" style="padding:0px;gap:0px;">
 <nav class="navbar navbar-default navbar-static-top" role="navigation">
 <div class="container-fluid">
 <div class="navbar-header">
-<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-7675" data-bs-toggle="collapse" data-bs-target="#navbar-collapse-7675">
+<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-7999" data-bs-toggle="collapse" data-bs-target="#navbar-collapse-7999">
 <span class="sr-only visually-hidden">Toggle navigation</span>
 <span class="icon-bar"></span>
 <span class="icon-bar"></span>
@@ -370,10 +356,10 @@ ui &lt;-page_navbar(
 </button>
 <span class="navbar-brand">Navbar page</span>
 </div>
-<div class="navbar-collapse collapse" id="navbar-collapse-7675">
-<ul class="nav navbar-nav nav-underline" data-tabsetid="5664">
+<div class="navbar-collapse collapse" id="navbar-collapse-7999">
+<ul class="nav navbar-nav nav-underline" data-tabsetid="8899">
 <li>
-<a href="#tab-5664-1" data-toggle="tab" data-bs-toggle="tab"></a>
+<a href="#tab-8899-1" data-toggle="tab" data-bs-toggle="tab"></a>
 </li>
 </ul>
 </div>
@@ -382,36 +368,36 @@ ui &lt;-page_navbar(
 <div class="html-fill-item html-fill-container">
 <div class="bslib-sidebar-layout bslib-mb-spacing html-fill-item" data-bslib-sidebar-border="false" data-bslib-sidebar-border-radius="false" data-bslib-sidebar-init="TRUE" data-collapsible-desktop="true" data-collapsible-mobile="false" data-open-desktop="open" data-open-mobile="always" data-require-bs-caller="layout_sidebar()" data-require-bs-version="5" style="--_sidebar-width:250px;">
 <div class="main bslib-gap-spacing html-fill-container">
-<div class="tab-content html-fill-item html-fill-container" data-tabsetid="5664">
-<div class="tabbable" id="tab-5664-1">
-<ul class="nav nav-tabs" data-tabsetid="6931">
+<div class="tab-content html-fill-item html-fill-container" data-tabsetid="8899">
+<div class="tabbable" id="tab-8899-1">
+<ul class="nav nav-tabs" data-tabsetid="2136">
 <li class="active">
-<a href="#tab-6931-1" data-toggle="tab" data-bs-toggle="tab" data-value="Panel 1">Panel 1</a>
+<a href="#tab-2136-1" data-toggle="tab" data-bs-toggle="tab" data-value="Panel 1">Panel 1</a>
 </li>
 <li>
-<a href="#tab-6931-2" data-toggle="tab" data-bs-toggle="tab" data-value="Panel 2">Panel 2</a>
+<a href="#tab-2136-2" data-toggle="tab" data-bs-toggle="tab" data-value="Panel 2">Panel 2</a>
 </li>
 </ul>
-<div class="tab-content" data-tabsetid="6931">
-<div class="tab-pane active html-fill-item html-fill-container bslib-gap-spacing" data-value="Panel 1" id="tab-6931-1" style="--bslib-navbar-margin:0;">..1</div>
-<div class="tab-pane html-fill-item html-fill-container bslib-gap-spacing" data-value="Panel 2" id="tab-6931-2" style="--bslib-navbar-margin:0;">
+<div class="tab-content" data-tabsetid="2136">
+<div class="tab-pane active html-fill-item html-fill-container bslib-gap-spacing" data-value="Panel 1" id="tab-2136-1" style="--bslib-navbar-margin:0;">..1</div>
+<div class="tab-pane html-fill-item html-fill-container bslib-gap-spacing" data-value="Panel 2" id="tab-2136-2" style="--bslib-navbar-margin:0;">
 <div class="card bslib-card bslib-mb-spacing html-fill-item html-fill-container" data-bslib-card-init data-require-bs-caller="card()" data-require-bs-version="5">
 <div class="card-header bslib-navs-card-title">
 <span>Opciones de panel 2</span>
-<ul class="nav nav-underline" data-tabsetid="4983">
+<ul class="nav nav-underline" data-tabsetid="2700">
 <li class="active">
-<a href="#tab-4983-1" data-toggle="tab" data-bs-toggle="tab" data-value="A">A</a>
+<a href="#tab-2700-1" data-toggle="tab" data-bs-toggle="tab" data-value="A">A</a>
 </li>
 <li>
-<a href="#tab-4983-2" data-toggle="tab" data-bs-toggle="tab" data-value="B">B</a>
+<a href="#tab-2700-2" data-toggle="tab" data-bs-toggle="tab" data-value="B">B</a>
 </li>
 </ul>
 </div>
-<div class="tab-content html-fill-item html-fill-container" data-tabsetid="4983">
-<div class="tab-pane active html-fill-item html-fill-container bslib-gap-spacing html-fill-item html-fill-container bslib-gap-spacing" data-value="A" id="tab-4983-1" style="gap:0;padding:0; --bslib-navbar-margin:0;">
+<div class="tab-content html-fill-item html-fill-container" data-tabsetid="2700">
+<div class="tab-pane active html-fill-item html-fill-container bslib-gap-spacing html-fill-item html-fill-container bslib-gap-spacing" data-value="A" id="tab-2700-1" style="gap:0;padding:0; --bslib-navbar-margin:0;">
 <div class="card-body bslib-gap-spacing html-fill-item html-fill-container" style="margin-top:auto;margin-bottom:auto;flex:1 1 auto;">..2a</div>
 </div>
-<div class="tab-pane html-fill-item html-fill-container bslib-gap-spacing html-fill-item html-fill-container bslib-gap-spacing" data-value="B" id="tab-4983-2" style="gap:0;padding:0; --bslib-navbar-margin:0;">
+<div class="tab-pane html-fill-item html-fill-container bslib-gap-spacing html-fill-item html-fill-container bslib-gap-spacing" data-value="B" id="tab-2700-2" style="gap:0;padding:0; --bslib-navbar-margin:0;">
 <div class="card-body bslib-gap-spacing html-fill-item html-fill-container" style="margin-top:auto;margin-bottom:auto;flex:1 1 auto;">..2b</div>
 </div>
 </div>
@@ -422,15 +408,14 @@ ui &lt;-page_navbar(
 </div>
 </div>
 </div>
-<aside id="bslib-sidebar-3761" class="sidebar" hidden>
+<aside id="bslib-sidebar-6497" class="sidebar" hidden>
 <div class="sidebar-content bslib-gap-spacing">Sidebar</div>
 </aside>
-<button class="collapse-toggle" type="button" title="Toggle sidebar" aria-expanded="true" aria-controls="bslib-sidebar-3761"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="bi bi-chevron-left collapse-icon" style="height:;width:;fill:currentColor;vertical-align:-0.125em;" aria-hidden="true" role="img" ><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"></path></svg></button>
+<button class="collapse-toggle" type="button" title="Toggle sidebar" aria-expanded="true" aria-controls="bslib-sidebar-6497"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="bi bi-chevron-left collapse-icon" style="height:;width:;fill:currentColor;vertical-align:-0.125em;" aria-hidden="true" role="img" ><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"></path></svg></button>
 <script data-bslib-sidebar-init>bslib.Sidebar.initCollapsibleAll()</script>
 </div>
 </div>
 </body>
-]
 
 ---
 # Layout con `bslib`
@@ -472,26 +457,26 @@ Interesante
 
 - `accordion`
 
-<div id="bslib-accordion-1612" class="accordion" data-require-bs-version="5" data-require-bs-caller="accordion()">
+<div id="bslib-accordion-7525" class="accordion" data-require-bs-version="5" data-require-bs-caller="accordion()">
 <div class="accordion-item" data-value="Controles A">
 <div class="accordion-header">
-<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#bslib-accordion-panel-8367" aria-controls="bslib-accordion-panel-8367" aria-expanded="true">
+<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#bslib-accordion-panel-6061" aria-controls="bslib-accordion-panel-6061" aria-expanded="true">
 <div class="accordion-icon"></div>
 <div class="accordion-title">Controles A</div>
 </button>
 </div>
-<div id="bslib-accordion-panel-8367" class="accordion-collapse collapse show">
+<div id="bslib-accordion-panel-6061" class="accordion-collapse collapse show">
 <div class="accordion-body">Contenido</div>
 </div>
 </div>
 <div class="accordion-item" data-value="Controles B">
 <div class="accordion-header">
-<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#bslib-accordion-panel-4110" aria-expanded="false" aria-controls="bslib-accordion-panel-4110">
+<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#bslib-accordion-panel-8841" aria-expanded="false" aria-controls="bslib-accordion-panel-8841">
 <div class="accordion-icon"></div>
 <div class="accordion-title">Controles B</div>
 </button>
 </div>
-<div id="bslib-accordion-panel-4110" class="accordion-collapse collapse">
+<div id="bslib-accordion-panel-8841" class="accordion-collapse collapse">
 <div class="accordion-body">Contenido</div>
 </div>
 </div>
@@ -499,7 +484,146 @@ Interesante
 
 ---
 
+# layout_columns
+
+&lt;br&gt;
+
+
+```r
+ui &lt;-page_fluid(
+  title = "Página A",
+  
+  layout_columns(
+    
+    value_box(
+      title = "Value 1",
+      value = "99%",
+      showcase = bs_icon(name = "geo"),
+      "Interesante"
+    ),
+    
+    
+    value_box(
+      title = "Value 2",
+      value = "12%",
+      showcase = bs_icon(name = "geo"),
+      "No tan interesante"
+    )
+  )
+)
+```
+
+---
+
+&lt;br&gt;
+
+<div class="container-fluid">
+<bslib-layout-columns class="bslib-grid grid bslib-mb-spacing html-fill-item" data-require-bs-caller="layout_columns()" data-require-bs-version="5">
+<div class="bslib-grid-item bslib-gap-spacing html-fill-container">
+<div class="card bslib-card bslib-mb-spacing html-fill-item html-fill-container bslib-value-box default showcase-left-center" data-bslib-card-init data-require-bs-caller="card() value_box()" data-require-bs-version="5 5">
+<div class="card-body bslib-gap-spacing html-fill-item html-fill-container" style="margin-top:auto;margin-bottom:auto;flex:1 1 auto; padding:0;">
+<div class="value-box-grid html-fill-item" style="--bslib-grid-height:auto;--bslib-grid-height-mobile:auto;---bslib-value-box-showcase-w:30%;---bslib-value-box-showcase-w-fs:1fr;---bslib-value-box-showcase-max-h:100px;---bslib-value-box-showcase-max-h-fs:67%;">
+<div class="value-box-showcase html-fill-item html-fill-container"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="bi bi-geo " style="height:1em;width:1em;fill:currentColor;vertical-align:-0.125em;" aria-hidden="true" role="img" ><path fill-rule="evenodd" d="M8 1a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999zm2.493 8.574a.5.5 0 0 1-.411.575c-.712.118-1.28.295-1.655.493a1.319 1.319 0 0 0-.37.265.301.301 0 0 0-.057.09V14l.002.008a.147.147 0 0 0 .016.033.617.617 0 0 0 .145.15c.165.13.435.27.813.395.751.25 1.82.414 3.024.414s2.273-.163 3.024-.414c.378-.126.648-.265.813-.395a.619.619 0 0 0 .146-.15.148.148 0 0 0 .015-.033L12 14v-.004a.301.301 0 0 0-.057-.09 1.318 1.318 0 0 0-.37-.264c-.376-.198-.943-.375-1.655-.493a.5.5 0 1 1 .164-.986c.77.127 1.452.328 1.957.594C12.5 13 13 13.4 13 14c0 .426-.26.752-.544.977-.29.228-.68.413-1.116.558-.878.293-2.059.465-3.34.465-1.281 0-2.462-.172-3.34-.465-.436-.145-.826-.33-1.116-.558C3.26 14.752 3 14.426 3 14c0-.599.5-1 .961-1.243.505-.266 1.187-.467 1.957-.594a.5.5 0 0 1 .575.411z"></path></svg></div>
+<div class="value-box-area html-fill-item html-fill-container">
+<p class="value-box-title">Value 1</p>
+<p class="value-box-value">99%</p>
+Interesante
+</div>
+</div>
+</div>
+<script data-bslib-card-init>bslib.Card.initializeAllCards();</script>
+</div>
+</div>
+<div class="bslib-grid-item bslib-gap-spacing html-fill-container">
+<div class="card bslib-card bslib-mb-spacing html-fill-item html-fill-container bslib-value-box default showcase-left-center" data-bslib-card-init data-require-bs-caller="card() value_box()" data-require-bs-version="5 5">
+<div class="card-body bslib-gap-spacing html-fill-item html-fill-container" style="margin-top:auto;margin-bottom:auto;flex:1 1 auto; padding:0;">
+<div class="value-box-grid html-fill-item" style="--bslib-grid-height:auto;--bslib-grid-height-mobile:auto;---bslib-value-box-showcase-w:30%;---bslib-value-box-showcase-w-fs:1fr;---bslib-value-box-showcase-max-h:100px;---bslib-value-box-showcase-max-h-fs:67%;">
+<div class="value-box-showcase html-fill-item html-fill-container"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="bi bi-geo " style="height:1em;width:1em;fill:currentColor;vertical-align:-0.125em;" aria-hidden="true" role="img" ><path fill-rule="evenodd" d="M8 1a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999zm2.493 8.574a.5.5 0 0 1-.411.575c-.712.118-1.28.295-1.655.493a1.319 1.319 0 0 0-.37.265.301.301 0 0 0-.057.09V14l.002.008a.147.147 0 0 0 .016.033.617.617 0 0 0 .145.15c.165.13.435.27.813.395.751.25 1.82.414 3.024.414s2.273-.163 3.024-.414c.378-.126.648-.265.813-.395a.619.619 0 0 0 .146-.15.148.148 0 0 0 .015-.033L12 14v-.004a.301.301 0 0 0-.057-.09 1.318 1.318 0 0 0-.37-.264c-.376-.198-.943-.375-1.655-.493a.5.5 0 1 1 .164-.986c.77.127 1.452.328 1.957.594C12.5 13 13 13.4 13 14c0 .426-.26.752-.544.977-.29.228-.68.413-1.116.558-.878.293-2.059.465-3.34.465-1.281 0-2.462-.172-3.34-.465-.436-.145-.826-.33-1.116-.558C3.26 14.752 3 14.426 3 14c0-.599.5-1 .961-1.243.505-.266 1.187-.467 1.957-.594a.5.5 0 0 1 .575.411z"></path></svg></div>
+<div class="value-box-area html-fill-item html-fill-container">
+<p class="value-box-title">Value 2</p>
+<p class="value-box-value">12%</p>
+No tan interesante
+</div>
+</div>
+</div>
+<script data-bslib-card-init>bslib.Card.initializeAllCards();</script>
+</div>
+</div>
+</bslib-layout-columns>
+</div>
+
+---
+
+&lt;br&gt;
+
+
+```r
+ui &lt;-page_fluid(
+  title = "Página A",
+  
+  layout_columns(col_widths = c(4, 8),
+    
+    value_box(
+      title = "Value 1",
+      value = "99%",
+      showcase = bs_icon(name = "geo"),
+      "Interesante"
+    ),
+    
+    
+    value_box(
+      title = "Value 2",
+      value = "12%",
+      showcase = bs_icon(name = "geo"),
+      "No tan interesante"
+    )
+  )
+)
+```
+
+---
+&lt;br&gt;
+
+<div class="container-fluid">
+<bslib-layout-columns class="bslib-grid grid bslib-mb-spacing html-fill-item" col-widths-sm="4,8" data-require-bs-caller="layout_columns()" data-require-bs-version="5">
+<div class="bslib-grid-item bslib-gap-spacing html-fill-container">
+<div class="card bslib-card bslib-mb-spacing html-fill-item html-fill-container bslib-value-box default showcase-left-center" data-bslib-card-init data-require-bs-caller="card() value_box()" data-require-bs-version="5 5">
+<div class="card-body bslib-gap-spacing html-fill-item html-fill-container" style="margin-top:auto;margin-bottom:auto;flex:1 1 auto; padding:0;">
+<div class="value-box-grid html-fill-item" style="--bslib-grid-height:auto;--bslib-grid-height-mobile:auto;---bslib-value-box-showcase-w:30%;---bslib-value-box-showcase-w-fs:1fr;---bslib-value-box-showcase-max-h:100px;---bslib-value-box-showcase-max-h-fs:67%;">
+<div class="value-box-showcase html-fill-item html-fill-container"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="bi bi-geo " style="height:1em;width:1em;fill:currentColor;vertical-align:-0.125em;" aria-hidden="true" role="img" ><path fill-rule="evenodd" d="M8 1a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999zm2.493 8.574a.5.5 0 0 1-.411.575c-.712.118-1.28.295-1.655.493a1.319 1.319 0 0 0-.37.265.301.301 0 0 0-.057.09V14l.002.008a.147.147 0 0 0 .016.033.617.617 0 0 0 .145.15c.165.13.435.27.813.395.751.25 1.82.414 3.024.414s2.273-.163 3.024-.414c.378-.126.648-.265.813-.395a.619.619 0 0 0 .146-.15.148.148 0 0 0 .015-.033L12 14v-.004a.301.301 0 0 0-.057-.09 1.318 1.318 0 0 0-.37-.264c-.376-.198-.943-.375-1.655-.493a.5.5 0 1 1 .164-.986c.77.127 1.452.328 1.957.594C12.5 13 13 13.4 13 14c0 .426-.26.752-.544.977-.29.228-.68.413-1.116.558-.878.293-2.059.465-3.34.465-1.281 0-2.462-.172-3.34-.465-.436-.145-.826-.33-1.116-.558C3.26 14.752 3 14.426 3 14c0-.599.5-1 .961-1.243.505-.266 1.187-.467 1.957-.594a.5.5 0 0 1 .575.411z"></path></svg></div>
+<div class="value-box-area html-fill-item html-fill-container">
+<p class="value-box-title">Value 1</p>
+<p class="value-box-value">99%</p>
+Interesante
+</div>
+</div>
+</div>
+<script data-bslib-card-init>bslib.Card.initializeAllCards();</script>
+</div>
+</div>
+<div class="bslib-grid-item bslib-gap-spacing html-fill-container">
+<div class="card bslib-card bslib-mb-spacing html-fill-item html-fill-container bslib-value-box default showcase-left-center" data-bslib-card-init data-require-bs-caller="card() value_box()" data-require-bs-version="5 5">
+<div class="card-body bslib-gap-spacing html-fill-item html-fill-container" style="margin-top:auto;margin-bottom:auto;flex:1 1 auto; padding:0;">
+<div class="value-box-grid html-fill-item" style="--bslib-grid-height:auto;--bslib-grid-height-mobile:auto;---bslib-value-box-showcase-w:30%;---bslib-value-box-showcase-w-fs:1fr;---bslib-value-box-showcase-max-h:100px;---bslib-value-box-showcase-max-h-fs:67%;">
+<div class="value-box-showcase html-fill-item html-fill-container"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="bi bi-geo " style="height:1em;width:1em;fill:currentColor;vertical-align:-0.125em;" aria-hidden="true" role="img" ><path fill-rule="evenodd" d="M8 1a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999zm2.493 8.574a.5.5 0 0 1-.411.575c-.712.118-1.28.295-1.655.493a1.319 1.319 0 0 0-.37.265.301.301 0 0 0-.057.09V14l.002.008a.147.147 0 0 0 .016.033.617.617 0 0 0 .145.15c.165.13.435.27.813.395.751.25 1.82.414 3.024.414s2.273-.163 3.024-.414c.378-.126.648-.265.813-.395a.619.619 0 0 0 .146-.15.148.148 0 0 0 .015-.033L12 14v-.004a.301.301 0 0 0-.057-.09 1.318 1.318 0 0 0-.37-.264c-.376-.198-.943-.375-1.655-.493a.5.5 0 1 1 .164-.986c.77.127 1.452.328 1.957.594C12.5 13 13 13.4 13 14c0 .426-.26.752-.544.977-.29.228-.68.413-1.116.558-.878.293-2.059.465-3.34.465-1.281 0-2.462-.172-3.34-.465-.436-.145-.826-.33-1.116-.558C3.26 14.752 3 14.426 3 14c0-.599.5-1 .961-1.243.505-.266 1.187-.467 1.957-.594a.5.5 0 0 1 .575.411z"></path></svg></div>
+<div class="value-box-area html-fill-item html-fill-container">
+<p class="value-box-title">Value 2</p>
+<p class="value-box-value">12%</p>
+No tan interesante
+</div>
+</div>
+</div>
+<script data-bslib-card-init>bslib.Card.initializeAllCards();</script>
+</div>
+</div>
+</bslib-layout-columns>
+</div>
+
+---
+
 # Layout con Shiny base:
+
+&lt;br&gt;
 
 - `fluidPage()`
 
@@ -627,17 +751,17 @@ ui &lt;- fluidPage(
 .pull-right[
 <div class="container-fluid">
 <div class="tabbable">
-<ul class="nav nav-tabs" data-tabsetid="7580">
+<ul class="nav nav-tabs" data-tabsetid="1791">
 <li class="active">
-<a href="#tab-7580-1" data-toggle="tab" data-bs-toggle="tab" data-value="tab 1">tab 1</a>
+<a href="#tab-1791-1" data-toggle="tab" data-bs-toggle="tab" data-value="tab 1">tab 1</a>
 </li>
 <li>
-<a href="#tab-7580-2" data-toggle="tab" data-bs-toggle="tab" data-value="tab 2">tab 2</a>
+<a href="#tab-1791-2" data-toggle="tab" data-bs-toggle="tab" data-value="tab 2">tab 2</a>
 </li>
 </ul>
-<div class="tab-content" data-tabsetid="7580">
-<div class="tab-pane active" data-value="tab 1" id="tab-7580-1">..1</div>
-<div class="tab-pane" data-value="tab 2" id="tab-7580-2">..2</div>
+<div class="tab-content" data-tabsetid="1791">
+<div class="tab-pane active" data-value="tab 1" id="tab-1791-1">..1</div>
+<div class="tab-pane" data-value="tab 2" id="tab-1791-2">..2</div>
 </div>
 </div>
 </div>
@@ -668,17 +792,17 @@ ui &lt;- fluidPage(
 </div>
 <div class="col-sm-8" role="main">
 <div class="tabbable">
-<ul class="nav nav-tabs" data-tabsetid="9158">
+<ul class="nav nav-tabs" data-tabsetid="3327">
 <li class="active">
-<a href="#tab-9158-1" data-toggle="tab" data-bs-toggle="tab" data-value="tab 1">tab 1</a>
+<a href="#tab-3327-1" data-toggle="tab" data-bs-toggle="tab" data-value="tab 1">tab 1</a>
 </li>
 <li>
-<a href="#tab-9158-2" data-toggle="tab" data-bs-toggle="tab" data-value="tab 2">tab 2</a>
+<a href="#tab-3327-2" data-toggle="tab" data-bs-toggle="tab" data-value="tab 2">tab 2</a>
 </li>
 </ul>
-<div class="tab-content" data-tabsetid="9158">
-<div class="tab-pane active" data-value="tab 1" id="tab-9158-1">1</div>
-<div class="tab-pane" data-value="tab 2" id="tab-9158-2">2</div>
+<div class="tab-content" data-tabsetid="3327">
+<div class="tab-pane active" data-value="tab 1" id="tab-3327-1">1</div>
+<div class="tab-pane" data-value="tab 2" id="tab-3327-2">2</div>
 </div>
 </div>
 </div>
@@ -709,19 +833,19 @@ ui &lt;- fluidPage(
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-4 well">
-<ul class="nav nav-pills nav-stacked" data-tabsetid="9666">
+<ul class="nav nav-pills nav-stacked" data-tabsetid="2711">
 <li class="active">
-<a href="#tab-9666-1" data-toggle="tab" data-bs-toggle="tab" data-value="tab 1">tab 1</a>
+<a href="#tab-2711-1" data-toggle="tab" data-bs-toggle="tab" data-value="tab 1">tab 1</a>
 </li>
 <li>
-<a href="#tab-9666-2" data-toggle="tab" data-bs-toggle="tab" data-value="tab 2">tab 2</a>
+<a href="#tab-2711-2" data-toggle="tab" data-bs-toggle="tab" data-value="tab 2">tab 2</a>
 </li>
 </ul>
 </div>
 <div class="col-sm-8">
-<div class="tab-content" data-tabsetid="9666">
-<div class="tab-pane active" data-value="tab 1" id="tab-9666-1">..1</div>
-<div class="tab-pane" data-value="tab 2" id="tab-9666-2">..2</div>
+<div class="tab-content" data-tabsetid="2711">
+<div class="tab-pane active" data-value="tab 1" id="tab-2711-1">..1</div>
+<div class="tab-pane" data-value="tab 2" id="tab-2711-2">..2</div>
 </div>
 </div>
 </div>
@@ -759,21 +883,21 @@ ui &lt;- navbarPage(
 <div class="navbar-header">
 <span class="navbar-brand">Título</span>
 </div>
-<ul class="nav navbar-nav nav-underline" data-tabsetid="8141">
+<ul class="nav navbar-nav nav-underline" data-tabsetid="7628">
 <li class="active">
-<a href="#tab-8141-1" data-toggle="tab" data-bs-toggle="tab" data-value="tab 1">tab 1</a>
+<a href="#tab-7628-1" data-toggle="tab" data-bs-toggle="tab" data-value="tab 1">tab 1</a>
 </li>
 <li>
-<a href="#tab-8141-2" data-toggle="tab" data-bs-toggle="tab" data-value="tab 2">tab 2</a>
+<a href="#tab-7628-2" data-toggle="tab" data-bs-toggle="tab" data-value="tab 2">tab 2</a>
 </li>
 <li class="dropdown">
 <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" data-value="Otros">
 Otros
 <b class="caret"></b>
 </a>
-<ul class="dropdown-menu" data-tabsetid="9892">
+<ul class="dropdown-menu" data-tabsetid="9420">
 <li>
-<a href="#tab-9892-1" data-toggle="tab" data-bs-toggle="tab" data-value="tab 3">tab 3</a>
+<a href="#tab-9420-1" data-toggle="tab" data-bs-toggle="tab" data-value="tab 3">tab 3</a>
 </li>
 </ul>
 </li>
@@ -781,16 +905,16 @@ Otros
 </div>
 </nav>
 <div class="container-fluid">
-<div class="tab-content" data-tabsetid="8141">
-<div class="tab-pane active" data-value="tab 1" id="tab-8141-1">..1</div>
-<div class="tab-pane" data-value="tab 2" id="tab-8141-2">..2</div>
-<div class="tab-pane" data-value="tab 3" id="tab-9892-1">..3</div>
+<div class="tab-content" data-tabsetid="7628">
+<div class="tab-pane active" data-value="tab 1" id="tab-7628-1">..1</div>
+<div class="tab-pane" data-value="tab 2" id="tab-7628-2">..2</div>
+<div class="tab-pane" data-value="tab 3" id="tab-9420-1">..3</div>
 </div>
 </div>
 </body>
 ]
 
---
+---
 
 # Ejercicios
 
@@ -806,7 +930,7 @@ Replique los siguientes *layouts*:
 <nav class="navbar navbar-default navbar-static-top" role="navigation">
 <div class="container-fluid">
 <div class="navbar-header">
-<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-4126" data-bs-toggle="collapse" data-bs-target="#navbar-collapse-4126">
+<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-6445" data-bs-toggle="collapse" data-bs-target="#navbar-collapse-6445">
 <span class="sr-only visually-hidden">Toggle navigation</span>
 <span class="icon-bar"></span>
 <span class="icon-bar"></span>
@@ -814,22 +938,22 @@ Replique los siguientes *layouts*:
 </button>
 <span class="navbar-brand">App increíble</span>
 </div>
-<div class="navbar-collapse collapse" id="navbar-collapse-4126">
-<ul class="nav navbar-nav nav-underline" data-tabsetid="3262">
+<div class="navbar-collapse collapse" id="navbar-collapse-6445">
+<ul class="nav navbar-nav nav-underline" data-tabsetid="5051">
 <li class="active">
-<a href="#tab-3262-1" data-toggle="tab" data-bs-toggle="tab" data-value="Datos increíbles">Datos increíbles</a>
+<a href="#tab-5051-1" data-toggle="tab" data-bs-toggle="tab" data-value="Datos increíbles">Datos increíbles</a>
 </li>
 <li class="dropdown">
 <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" data-value="Más">
 Más
 <b class="caret"></b>
 </a>
-<ul class="dropdown-menu" data-tabsetid="2520">
+<ul class="dropdown-menu" data-tabsetid="2428">
 <li>
-<a href="#tab-2520-1" data-toggle="tab" data-bs-toggle="tab" data-value="Metodología">Metodología</a>
+<a href="#tab-2428-1" data-toggle="tab" data-bs-toggle="tab" data-value="Metodología">Metodología</a>
 </li>
 <li>
-<a href="#tab-2520-2" data-toggle="tab" data-bs-toggle="tab" data-value="Contacto">Contacto</a>
+<a href="#tab-2428-2" data-toggle="tab" data-bs-toggle="tab" data-value="Contacto">Contacto</a>
 </li>
 </ul>
 </li>
@@ -838,26 +962,85 @@ Más
 </div>
 </nav>
 <div class="container-fluid html-fill-item html-fill-container">
-<div class="tab-content html-fill-item html-fill-container" data-tabsetid="3262">
-<div class="tab-pane active html-fill-item html-fill-container bslib-gap-spacing" data-value="Datos increíbles" id="tab-3262-1" style="--bslib-navbar-margin:0;">
+<div class="tab-content html-fill-item html-fill-container" data-tabsetid="5051">
+<div class="tab-pane active html-fill-item html-fill-container bslib-gap-spacing" data-value="Datos increíbles" id="tab-5051-1" style="--bslib-navbar-margin:0;">
 <div class="tabbable">
-<ul class="nav nav-tabs" data-tabsetid="4249">
+<ul class="nav nav-tabs" data-tabsetid="9164">
 <li class="active">
-<a href="#tab-4249-1" data-toggle="tab" data-bs-toggle="tab" data-value="Datos A">Datos A</a>
+<a href="#tab-9164-1" data-toggle="tab" data-bs-toggle="tab" data-value="Datos A">Datos A</a>
 </li>
 <li>
-<a href="#tab-4249-2" data-toggle="tab" data-bs-toggle="tab" data-value="Datos B">Datos B</a>
+<a href="#tab-9164-2" data-toggle="tab" data-bs-toggle="tab" data-value="Datos B">Datos B</a>
 </li>
 </ul>
-<div class="tab-content" data-tabsetid="4249">
-<div class="tab-pane active html-fill-item html-fill-container bslib-gap-spacing" data-value="Datos A" id="tab-4249-1" style="--bslib-navbar-margin:0;">Acá van datos increíbles</div>
-<div class="tab-pane html-fill-item html-fill-container bslib-gap-spacing" data-value="Datos B" id="tab-4249-2" style="--bslib-navbar-margin:0;">Acá van más datos increíbles</div>
+<div class="tab-content" data-tabsetid="9164">
+<div class="tab-pane active html-fill-item html-fill-container bslib-gap-spacing" data-value="Datos A" id="tab-9164-1" style="--bslib-navbar-margin:0;">Acá van datos increíbles</div>
+<div class="tab-pane html-fill-item html-fill-container bslib-gap-spacing" data-value="Datos B" id="tab-9164-2" style="--bslib-navbar-margin:0;">Acá van más datos increíbles</div>
 </div>
 </div>
 </div>
-<div class="tab-pane html-fill-item html-fill-container bslib-gap-spacing" data-value="Metodología" id="tab-2520-1" style="--bslib-navbar-margin:0;">Texto con la metodología increíble</div>
-<div class="tab-pane html-fill-item html-fill-container bslib-gap-spacing" data-value="Contacto" id="tab-2520-2" style="--bslib-navbar-margin:0;">Contacto de la persona increíble que desarrolló esta app</div>
+<div class="tab-pane html-fill-item html-fill-container bslib-gap-spacing" data-value="Metodología" id="tab-2428-1" style="--bslib-navbar-margin:0;">Texto con la metodología increíble</div>
+<div class="tab-pane html-fill-item html-fill-container bslib-gap-spacing" data-value="Contacto" id="tab-2428-2" style="--bslib-navbar-margin:0;">Contacto de la persona increíble que desarrolló esta app</div>
 </div>
+</div>
+</body>
+
+---
+
+<body class="bslib-page-fill bslib-gap-spacing bslib-flow-mobile bslib-page-sidebar html-fill-container" style="padding:0px;gap:0px;">
+<div class="navbar navbar-static-top">
+<div class="container-fluid">
+<h1 class="bslib-page-title navbar-brand">Página sidebar</h1>
+</div>
+</div>
+<div class="bslib-sidebar-layout bslib-mb-spacing html-fill-item" data-bslib-sidebar-border="false" data-bslib-sidebar-border-radius="false" data-bslib-sidebar-init="TRUE" data-collapsible-desktop="true" data-collapsible-mobile="false" data-open-desktop="open" data-open-mobile="always" data-require-bs-caller="layout_sidebar()" data-require-bs-version="5" style="--_sidebar-width:250px;">
+<div class="main bslib-gap-spacing html-fill-container">
+<bslib-layout-columns class="bslib-grid grid bslib-mb-spacing html-fill-item" data-require-bs-caller="layout_columns()" data-require-bs-version="5">
+<div class="bslib-grid-item bslib-gap-spacing html-fill-container">
+<div id="bslib-accordion-9740" class="accordion" data-require-bs-version="5" data-require-bs-caller="accordion()">
+<div class="accordion-item" data-value="Info">
+<div class="accordion-header">
+<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#bslib-accordion-panel-1707" aria-controls="bslib-accordion-panel-1707" aria-expanded="true">
+<div class="accordion-icon"></div>
+<div class="accordion-title">Info</div>
+</button>
+</div>
+<div id="bslib-accordion-panel-1707" class="accordion-collapse collapse show">
+<div class="accordion-body">Contenido</div>
+</div>
+</div>
+<div class="accordion-item" data-value="Links">
+<div class="accordion-header">
+<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#bslib-accordion-panel-6476" aria-expanded="false" aria-controls="bslib-accordion-panel-6476">
+<div class="accordion-icon"></div>
+<div class="accordion-title">Links</div>
+</button>
+</div>
+<div id="bslib-accordion-panel-6476" class="accordion-collapse collapse">
+<div class="accordion-body">Contenido</div>
+</div>
+</div>
+</div>
+</div>
+<div class="bslib-grid-item bslib-gap-spacing html-fill-container">
+<div class="card bslib-card bslib-mb-spacing html-fill-item html-fill-container bslib-value-box default" data-bslib-card-init data-require-bs-caller="card() value_box()" data-require-bs-version="5 5">
+<div class="card-body bslib-gap-spacing html-fill-item html-fill-container" style="margin-top:auto;margin-bottom:auto;flex:1 1 auto;">
+<div class="value-box-area html-fill-item html-fill-container">
+<p class="value-box-title">Valor</p>
+<p class="value-box-value">123</p>
+Muy bueno
+</div>
+</div>
+<script data-bslib-card-init>bslib.Card.initializeAllCards();</script>
+</div>
+</div>
+</bslib-layout-columns>
+</div>
+<aside id="bslib-sidebar-2285" class="sidebar" hidden>
+<div class="sidebar-content bslib-gap-spacing">Barra con inputs</div>
+</aside>
+<button class="collapse-toggle" type="button" title="Toggle sidebar" aria-expanded="true" aria-controls="bslib-sidebar-2285"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="bi bi-chevron-left collapse-icon" style="height:;width:;fill:currentColor;vertical-align:-0.125em;" aria-hidden="true" role="img" ><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"></path></svg></button>
+<script data-bslib-sidebar-init>bslib.Sidebar.initCollapsibleAll()</script>
 </div>
 </body>
 
@@ -869,18 +1052,18 @@ Shiny base
 <h2>App muy interesante</h2>
 <div class="row">
 <div class="col-sm-4 well">
-<ul class="nav nav-pills nav-stacked" data-tabsetid="8750">
+<ul class="nav nav-pills nav-stacked" data-tabsetid="2870">
 <li class="active">
-<a href="#tab-8750-1" data-toggle="tab" data-bs-toggle="tab" data-value="Panel con datos interesantes">Panel con datos interesantes</a>
+<a href="#tab-2870-1" data-toggle="tab" data-bs-toggle="tab" data-value="Panel con datos interesantes">Panel con datos interesantes</a>
 </li>
 <li>
-<a href="#tab-8750-2" data-toggle="tab" data-bs-toggle="tab" data-value="Panel con texto aburrido">Panel con texto aburrido</a>
+<a href="#tab-2870-2" data-toggle="tab" data-bs-toggle="tab" data-value="Panel con texto aburrido">Panel con texto aburrido</a>
 </li>
 </ul>
 </div>
 <div class="col-sm-8">
-<div class="tab-content" data-tabsetid="8750">
-<div class="tab-pane active" data-value="Panel con datos interesantes" id="tab-8750-1">
+<div class="tab-content" data-tabsetid="2870">
+<div class="tab-pane active" data-value="Panel con datos interesantes" id="tab-2870-1">
 <div class="row">
 <div class="col-sm-4">
 <form class="well" role="complementary">Inputs para filtrar datos</form>
@@ -888,7 +1071,7 @@ Shiny base
 <div class="col-sm-8" role="main">Datos interesantes</div>
 </div>
 </div>
-<div class="tab-pane" data-value="Panel con texto aburrido" id="tab-8750-2">Texto aburrido</div>
+<div class="tab-pane" data-value="Panel con texto aburrido" id="tab-2870-2">Texto aburrido</div>
 </div>
 </div>
 </div>

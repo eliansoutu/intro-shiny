@@ -89,7 +89,7 @@ Semantic
 
 .pull-right[
 Material
-[<img src="recursos/material.png">](https://ericrayanderson.shinyapps.io/shinymaterial_dashboard/)
+[<img src="recursos/material.png">](https://ericrayanderson.github.io/shinymaterial_showcase/)
 ]
 
 ---
@@ -132,9 +132,8 @@ Podemos entender al layout como nuestra estructura de jerarquías base para la o
  - `nav_menu()`
  - `nav_item()`
 
-- `navset_tab()` contenedor de paneles (tabs horizontales)
 
-- `navset_pill()`  contenedor de paneles (tabs verticales)
+- `navset_tab()`/`navset_pill()` contenedor de paneles (tabs horizontales/verticales)
 
 - `layout_column()` controla el ancho de los componentes por fila.
 
@@ -179,7 +178,6 @@ Si nuestra app va a abarcar mucho contenido o temas diversos podemos utilizar un
 ```{r echo=TRUE, warning=FALSE, message=FALSE}
 ui <-page_navbar(
   title = "Navbar page",
-  sidebar = "Sidebar",
   
   nav_panel("Panel 1", "..1"),
   nav_panel("Panel 2", "..2")
@@ -195,7 +193,7 @@ ui
 
 ---
 
-.pull-left[
+
 ```{r echo=TRUE, warning=FALSE, message=FALSE}
 ui <-page_navbar(
   title = "Navbar page",
@@ -208,17 +206,16 @@ ui <-page_navbar(
            )
 )
 ```
-]
 
-.pull-right[
+
 ```{r}
 ui
 ```
-]
+
 
 ---
 
-.pull-left[
+
 ```{r echo=TRUE, warning=FALSE, message=FALSE}
 ui <-page_navbar(
   title = "Navbar page",
@@ -235,13 +232,10 @@ ui <-page_navbar(
   )
 )
 ```
-]
 
-.pull-right[
 ```{r}
 ui
 ```
-]
 
 ---
 # Layout con `bslib`
@@ -296,7 +290,82 @@ accordion(
 
 ---
 
+# layout_columns
+
+<br>
+
+```{r echo=TRUE, warning=FALSE, message=FALSE}
+ui <-page_fluid(
+  title = "Página A",
+  
+  layout_columns(
+    
+    value_box(
+      title = "Value 1",
+      value = "99%",
+      showcase = bs_icon(name = "geo"),
+      "Interesante"
+    ),
+    
+    
+    value_box(
+      title = "Value 2",
+      value = "12%",
+      showcase = bs_icon(name = "geo"),
+      "No tan interesante"
+    )
+  )
+)
+```
+
+---
+
+<br>
+
+```{r}
+ui
+```
+
+---
+
+<br>
+
+```{r echo=TRUE, warning=FALSE, message=FALSE}
+ui <-page_fluid(
+  title = "Página A",
+  
+  layout_columns(col_widths = c(4, 8),
+    
+    value_box(
+      title = "Value 1",
+      value = "99%",
+      showcase = bs_icon(name = "geo"),
+      "Interesante"
+    ),
+    
+    
+    value_box(
+      title = "Value 2",
+      value = "12%",
+      showcase = bs_icon(name = "geo"),
+      "No tan interesante"
+    )
+  )
+)
+```
+
+---
+<br>
+
+```{r}
+ui
+```
+
+---
+
 # Layout con Shiny base:
+
+<br>
 
 - `fluidPage()`
 
@@ -502,7 +571,7 @@ ui
 ```
 ]
 
---
+---
 
 # Ejercicios
 
@@ -529,6 +598,38 @@ ui <- page_navbar(title = "App increíble",
              
              nav_panel("Metodología","Texto con la metodología increíble"),
              nav_panel("Contacto", "Contacto de la persona increíble que desarrolló esta app"))
+)
+
+ui
+```
+
+---
+
+```{r}
+ui <- page_sidebar(title = "Página sidebar",
+  
+  sidebar = sidebar("Barra con inputs"),
+  
+  layout_columns(
+    
+    accordion(
+      accordion_panel(
+        "Info",
+        "Contenido"
+      ),
+      accordion_panel(
+        "Links", 
+        "Contenido"
+      )
+    ),
+    
+    value_box(
+      title = "Valor",
+      value = "123",
+      "Muy bueno"
+    )
+    
+  )
 )
 
 ui

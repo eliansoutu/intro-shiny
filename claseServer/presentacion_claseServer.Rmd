@@ -189,6 +189,8 @@ Este paquete nos provee funciones para generar algunos outputs random que sirven
 
 - etc.
 
+También podemos optar por usar [Shiny Assistant](https://gallery.shinyapps.io/assistant/) para generar un app de ejemplo utilizando IA.
+
 ---
 
 # Prototipo
@@ -322,7 +324,6 @@ class: center, middle inverse
 
 [Repaso sobre input-output](https://shiny.posit.co/r/getstarted/shiny-basics/lesson4/)
 
-<br>
 
 Para datos y textos de juguete:
 
@@ -341,3 +342,5 @@ Para prototipar sin escribir código:
 - [`shinyUiEditor`](https://rstudio.github.io/shinyuieditor/)
 
 - [`dashboardBuilder`](https://github.com/petergandenberger/dashboard-builder)
+
+- [Shiny Assistant](https://gallery.shinyapps.io/assistant/)
