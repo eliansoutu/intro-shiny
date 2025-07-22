@@ -1,19 +1,17 @@
+library(bslib)
 library(shiny)
 library(shinipsum)
 
-ui <- fluidPage(
-  titlePanel("Mi Shiny app de prueba"),
+ui <- page_fluid(title = "Mi Shiny app de prueba",
   
-  sidebarLayout(
-    sidebarPanel(
+  layout_sidebar(
+    sidebar = sidebar(
       selectInput("selector", "Selector de algo", choices = c("Opción A", "Opción B")),
       checkboxGroupInput("checkbox", "Opciones", choices = c(1,2,3))
     ),
     
-    mainPanel(
-      fluidRow(
-        column(6, plotOutput("grafico")),
-        column(6, tableOutput("tabla"))))
+    layout_columns(plotOutput("grafico"),
+                   tableOutput("tabla"))
   )
 )
 

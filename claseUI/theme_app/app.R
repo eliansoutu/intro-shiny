@@ -3,7 +3,7 @@ library(shiny)
 library(bslib)
 
 #Activar plot thematic
-thematic::thematic_shiny()
+#thematic::thematic_shiny()
 
 # Use a fluid Bootstrap layout
 ui <- page_fluid(
@@ -22,13 +22,15 @@ ui <- page_fluid(
   #includeCSS("styles.css"),
   layout_sidebar(
     sidebar = sidebar(
-  selectInput("region", "Region:", 
-              choices=colnames(WorldPhones)),
+      
+  selectInput(inputId = "region", 
+              label = "Region:", 
+              choices = colnames(WorldPhones)),
   hr(),
   helpText("Data from AT&T (1961) The World's Telephones."),
   ),
   
-  plotOutput("phonePlot")  
+  plotOutput(outputId = "phonePlot")  
   )
 )
 
