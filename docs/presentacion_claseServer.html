@@ -3,7 +3,7 @@
   <head>
     <title>Introducción a Shiny</title>
     <meta charset="utf-8" />
-    <script src="presentacion_claseServer_files/header-attrs-2.26/header-attrs.js"></script>
+    <script src="presentacion_claseServer_files/header-attrs-2.20/header-attrs.js"></script>
     <link href="presentacion_claseServer_files/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="presentacion_claseServer_files/remark-css-0.0.1/nhsr.css" rel="stylesheet" />
   </head>
@@ -127,9 +127,10 @@ Nuestro código luciría así:
 
 ```
 library(shiny)
+library(bslib)
 library(ggplot2)
 
-ui &lt;- fluidPage(
+ui &lt;- page_fluid(
   h1("Palmer Penguins"),
   plotOutput("grafico")
 )
@@ -207,22 +208,18 @@ Por ejemplo, tomemos esta app:
 
 ```
 library(shiny)
+library(bslib)
 
-ui &lt;- fluidPage(
-
- titlePanel("Mi Shiny app de prueba"),
+ui &lt;- page_fluid(title = "Mi Shiny app de prueba",
   
-  sidebarLayout(
-    sidebarPanel(
+  layout_sidebar(
+    sidebar = sidebar(
       selectInput("selector", "Selector de algo", choices = c("Opción A", "Opción B")),
       checkboxGroupInput("checkbox", "Opciones", choices = c(1,2,3))
     ),
     
-    mainPanel(
-      fluidRow(
-        column(6, plotOutput("grafico")),
-        column(6, tableOutput("tabla")))
-    )
+    layout_columns(plotOutput("grafico"),
+                   tableOutput("tabla"))
   )
 )
 ```
