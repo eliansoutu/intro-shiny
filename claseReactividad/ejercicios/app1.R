@@ -1,24 +1,23 @@
 library(shiny)
+library(bslib)
 library(tidyverse)
 
 data <- iris
 
-ui <- fluidPage(
+ui <- page_fluid(
   
-  sidebarLayout(
+  layout_sidebar(
     
-    sidebarPanel(
+    sidebar = sidebar(
       
       #Select de especie
       selectInput(...)
       
     ),
     
-    mainPanel(
-      
-      #Output
-      ...Output(...)
-    )
+    #Output
+    ...Output(...)
+    
   )
 )
 

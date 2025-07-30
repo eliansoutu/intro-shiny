@@ -1,25 +1,23 @@
 library(shiny)
+library(bslib)
 library(DT)
 
 data <- iris
 
-ui <- fluidPage(
+ui <- page_fluid(
   
-  sidebarLayout(
+  layout_sidebar(
     
-    sidebarPanel(
+    sidebar = sidebar(
       
       selectInput("selectSpecies", "Especie", unique(data$Species)) #Automatizo choices
       
     ),
     
-    mainPanel(
-      
-      textOutput("textSpecie"), #en UI defino solo ID del Output
-      
-      dataTableOutput("tableIris")
-      
-    )
+    textOutput("textSpecie"), #en UI defino solo ID del Output
+    
+    dataTableOutput("tableIris")
+    
   )
 )
 
@@ -27,7 +25,7 @@ server <- function(input, output) {
   
   reactivo <- reactive({
     
-    filter(data, Species == input$selectSpecies) #Corrijo ID
+    subset(data, Species == input$selectSpecies) #Corrijo ID
     
   })
   

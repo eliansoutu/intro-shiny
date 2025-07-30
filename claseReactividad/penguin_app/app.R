@@ -4,38 +4,33 @@ library(plotly)
 
 penguins <- palmerpenguins::penguins
 
-ui <- fluidPage(
+ui <- page_sidebar(
   
-  titlePanel("Exploración de Palmer Penguins"),
+  title = "Exploración de Palmer Penguins",
   
-  sidebarLayout(
-    
-    sidebarPanel(
-      
-      #Creamos inputs automatizados
-      selectInput("islandSelect", "Isla", unique(penguins$island)),
-      
-      sliderInput("bodySlider", "Masa corporal", 
-                  min = min(penguins$body_mass_g, na.rm = T),
-                  max = max(penguins$body_mass_g, na.rm = T),
-                  value = c(min(penguins$body_mass_g, na.rm = T), 
-                            max(penguins$body_mass_g, na.rm = T))),
-      
-      br(),
-      
-      imageOutput("penguinImage", height = 200)
-      
-    ),
-    
-    mainPanel(
-      
-      plotlyOutput("plotPenguin"),
-      
-      tableOutput("tablePenguin"),
-      
-      helpText("Fuente: https://allisonhorst.github.io/palmerpenguins/index.html")
-    )
-  )
+  sidebar = sidebar(width = 400, 
+                    
+                    #Creamos inputs automatizados
+                    selectInput("islandSelect", "Isla", unique(penguins$island)),
+                    
+                    sliderInput("bodySlider", "Masa corporal", 
+                                min = min(penguins$body_mass_g, na.rm = T),
+                                max = max(penguins$body_mass_g, na.rm = T),
+                                value = c(min(penguins$body_mass_g, na.rm = T), 
+                                          max(penguins$body_mass_g, na.rm = T))),
+                    
+                    br(),
+                    
+                    imageOutput("penguinImage", height = 50)
+                    
+  ),
+  
+  plotlyOutput("plotPenguin"),
+  
+  #tableOutput("tablePenguin"),
+  
+  helpText("Fuente: https://allisonhorst.github.io/palmerpenguins/index.html")
+  
 )
 
 server <- function(input, output, session) {
