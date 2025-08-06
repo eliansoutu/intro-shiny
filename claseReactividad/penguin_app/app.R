@@ -1,4 +1,5 @@
 library(shiny)
+library(bslib)
 library(tidyverse)
 library(plotly)
 
@@ -11,7 +12,8 @@ ui <- page_sidebar(
   sidebar = sidebar(width = 400, 
                     
                     #Creamos inputs automatizados
-                    selectInput("islandSelect", "Isla", unique(penguins$island)),
+                    selectInput("islandSelect", "Isla", unique(penguins$island),
+                                multiple = T),
                     
                     sliderInput("bodySlider", "Masa corporal", 
                                 min = min(penguins$body_mass_g, na.rm = T),
@@ -19,15 +21,19 @@ ui <- page_sidebar(
                                 value = c(min(penguins$body_mass_g, na.rm = T), 
                                           max(penguins$body_mass_g, na.rm = T))),
                     
+                    actionButton("botonFiltro", "Filtrar datos"),
+                    
                     br(),
                     
                     imageOutput("penguinImage", height = 50)
                     
   ),
   
+  layout_columns(
   plotlyOutput("plotPenguin"),
   
-  #tableOutput("tablePenguin"),
+  tableOutput("tablePenguin")
+  ),
   
   helpText("Fuente: https://allisonhorst.github.io/palmerpenguins/index.html")
   
@@ -39,11 +45,11 @@ server <- function(input, output, session) {
   data <- reactive({
     
     penguins %>% 
-    filter(island == input$islandSelect,
+    filter(island %in% input$islandSelect,
            body_mass_g >= input$bodySlider[1] &
              body_mass_g <= input$bodySlider[2])
     
-  })
+  }) %>% bindEvent(input$botonFiltro)
   
 
   output$plotPenguin <- renderPlotly({
@@ -53,7 +59,7 @@ server <- function(input, output, session) {
       geom_point() +
       theme_minimal()
     
-    #Converitmos en plotly
+    #Convertimos en plotly
     ggplotly(plot)
     
   })
