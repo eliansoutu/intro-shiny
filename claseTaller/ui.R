@@ -60,8 +60,6 @@ shinyUI(
                                                        multiple = T,
                                                        options = list(maxItems = 6)),
                                         
-                                        textOutput("alertaMax"),
-                                        
                                         sliderInput("anioSelect", "Año", 
                                                     min = min(data$anio), max = max(data$anio), 
                                                     value = c(min(data$anio),max(data$anio)),
