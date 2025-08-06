@@ -124,16 +124,7 @@ shinyServer(function(input, output, session) {
   # Alerta maxímo n de países
   observeEvent(input$paisSelect, {
     
-    output$alertaMax <- renderText({
-      
-      if(length(input$paisSelect) == 6){
-        
-      "Máximo de 6 países alcanzado"
-        
-        } else {
-        ""
-        }
-    })
+    if (length(input$paisSelect) == 6) shinyalert("Oops!", "Máximo de 6 países alcanzado", type = "info")
   })
   
   # Descarga de datos

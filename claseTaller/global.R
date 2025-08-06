@@ -5,6 +5,7 @@ library(tidyverse)
 library(highcharter)
 library(shinyWidgets)
 library(DT)
+library(shinyalert)
 
 #Cargo data
 data <- read_csv("data_shiny.csv")
