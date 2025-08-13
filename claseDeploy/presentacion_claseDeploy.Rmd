@@ -21,9 +21,6 @@ class: center, middle inverse
 
 El *deploy* (despliegue) de una Shiny es el último paso para poder compartir nuestra app con otras personas. Necesitamos contar con un servidor acorde para poder alojar nuestra aplicación, es decir, un sistema que pueda ejecutar R y Shiny, con todas sus dependencias.
 
-En resumen necesitamos un [Shiny Server](https://posit.co/products/open-source/shinyserver/), una herramienta de código abierto para alojar múltiples aplicaciones en un solo lugar.
-
-
 .pull-left[
 ```{r}
 knitr::include_graphics("recursos/servidor.jpg")
@@ -45,19 +42,19 @@ knitr::include_graphics("recursos/linux.png")
 
 <br>
 
-¿Qué opciones tenemos para desplegar una app?
+¿Qué opciones tenemos para desplegar una app? Principalmente:
 
 --
 
-- [Posit Connect](https://posit.co/products/enterprise/connect/)
+- [Posit Connect](https://posit.co/products/enterprise/connect/): empresarial
 
 --
 
-- [Shiny Server](https://posit.co/download/shiny-server/)
+- [Shiny Server](https://posit.co/download/shiny-server/): open source
 
 --
 
-- [shinyapps.io](https://www.shinyapps.io/)
+- [shinyapps.io](https://www.shinyapps.io/) / [Posit Cloud](https://connect.posit.cloud/): planes para profesionales con opción gratuita
 
 ---
 
@@ -158,7 +155,7 @@ class: center, middle inverse
 
 --
 
-- Funcionalizar, modularizar, paquetizar
+- Modularizar, paquetizar
 
 --
 
@@ -166,7 +163,7 @@ class: center, middle inverse
 
 --
 
-- Minimizar la reactividad: lógica app vs negocio
+- Minimizar la reactividad
 
 --
 
