@@ -195,14 +195,14 @@ ui
 
 
 ```{r echo=TRUE, warning=FALSE, message=FALSE}
-ui <-page_navbar(
+ui <- page_navbar(
   title = "Navbar page",
   sidebar = "Sidebar",
   
   nav_panel("Panel 1", "..1"),
   nav_menu("Panel 2", 
-           nav_item("Menú 1"),
-           nav_item("Menú 2")
+           nav_item("Menú 1", "Contenido del menú 1"),
+           nav_item("Menú 2", "Contenido del menú 2")
            )
 )
 ```
