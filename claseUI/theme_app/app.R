@@ -5,17 +5,28 @@ library(bslib)
 #Activar plot thematic
 #thematic::thematic_shiny()
 
+# Tema propio
+# tema_app <- bs_theme(bg = "#202123", 
+#                   fg = "#B8BCC2",
+#                   primary = "#EA80FC", 
+#                   secondary = "#48DAC6",
+#                   base_font = c("Grandstander", "sans-serif")
+# )
+
 # Use a fluid Bootstrap layout
 ui <- page_fluid(
+  
+  #Uso tema propio
+  #theme = tema_app,
   
   ### bslib theme
   #theme = bslib::bs_theme(bootswatch = "superhero"),
   
   ### bslib theme editado
-  # theme = bslib::bs_theme(bootswatch = "superhero", 
-  #                         bg = "#495660", 
-  #                         base_font = "San Serif", 
-  #                         fg = "#ebebeb"),  
+  # theme = bslib::bs_theme(bootswatch = "superhero",
+  #                         bg = "#495660",
+  #                         base_font = "San Serif",
+  #                         fg = "#ebebeb"),
   
   
   ### css personalizado
