@@ -34,23 +34,36 @@ ui <- page_sidebar(
 
 server <- function(input, output, session) {
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   #Renderizamos nuestro plot
   output$plotPenguin <- renderPlotly({
-    
+
     #Aplicamos filtros accediendo a los valores de inputs y asignamos a objeto
-    data <- penguins %>% 
+    data <- penguins %>%
       filter(island == input$islandSelect,
              body_mass_g >= input$bodySlider[1] &
                body_mass_g <= input$bodySlider[2])
-    
+
     #Generamos ggplot con los datos filtrados
     plot <- ggplot(data, aes(bill_length_mm, bill_depth_mm, color = species)) +
       geom_point() +
       theme_minimal()
-    
+
     #Converitmos en plotly
     ggplotly(plot)
-    
+
   })
   
   output$penguinImage <- renderImage({
