@@ -59,7 +59,6 @@ shinyServer(function(input, output, session) {
       filter(indicator_name == input$indicadorButton,
              anio == max(anio)) %>%
       slice_max(valor, n = 10) %>% 
-      mutate(country_name = fct_reorder(country_name, valor)) %>% 
       hchart("column", hcaes(country_name, valor), color = "green")
     
   })

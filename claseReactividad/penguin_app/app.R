@@ -49,7 +49,7 @@ server <- function(input, output, session) {
            body_mass_g >= input$bodySlider[1] &
              body_mass_g <= input$bodySlider[2])
     
-  }) %>% bindEvent(input$botonFiltro)
+  }) #%>% bindEvent(input$botonFiltro)
   
 
   output$plotPenguin <- renderPlotly({

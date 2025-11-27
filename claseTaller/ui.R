@@ -5,10 +5,10 @@ shinyUI(
               
               nav_panel("Info", icon = bs_icon("info-circle"),
                         
-                        h5("Este tablero fue realizado en el marco del curso de ", tags$b("Introducción a Shiny"), "de", 
+                        p("Este tablero fue realizado en el marco del curso de ", tags$b("Introducción a Shiny"), "de", 
                            tags$a("estación-r", href = "https://estacion-r.netlify.app/", target = "_blank")),
                         
-                        h5("La información presentada refiere a la superficie de bosques en países de todo el mundo y su evolución en el tiempo, en base a datos abiertos del", 
+                        p("La información presentada refiere a la superficie de bosques en países de todo el mundo y su evolución en el tiempo, en base a datos abiertos del", 
                            tags$a("Banco Mundial", href = "https://data.worldbank.org/", target = "_blank")),
                         
                         card(full_screen = TRUE,
@@ -22,7 +22,7 @@ shinyUI(
                         navset_card_tab(
                           nav_panel("Últimos datos",
                                     
-                                    layout_columns(fill = F, height = "150px", 
+                                    layout_columns(fill = F,
                                                    value_box("País con mayor superficie de bosques", value = textOutput("valorSuperficie"), 
                                                              showcase = bs_icon("tree"), h3(textOutput("paisSuperficie")),
                                                              theme = "teal"), 
