@@ -104,7 +104,7 @@ knitr::include_graphics("recursos/atencion.png")
 
 <br>
 
-Recientemente, Shiny incorporó `bslib` en su documentación oficial por lo que muchas funciones de base fueron reemplazadas por una versión de este paquete. En este curso nos centraremos en la nueva versión, aunque en algunos casos veremos ejemplos de shiny base ya que mucho del material y el código de aplicaciones desarrolladas se mantiene con la anterior versión.
+Shiny incorporó `bslib` en su documentación oficial por lo que muchas funciones de base fueron reemplazadas por una versión de este paquete. En este curso nos centraremos en la nueva versión, aunque en algunos casos podremos ver ejemplos de shiny base ya que mucho del material y el código de aplicaciones desarrolladas se mantiene con la anterior versión.
 
 ---
 
@@ -623,7 +623,7 @@ ui <- page_sidebar(title = "Página sidebar",
       )
     ),
     
-    value_box(
+    value_box(fill = F,
       title = "Valor",
       value = "123",
       "Muy bueno"

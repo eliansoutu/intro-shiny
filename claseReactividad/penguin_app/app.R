@@ -21,7 +21,8 @@ ui <- page_sidebar(
                                 value = c(min(penguins$body_mass_g, na.rm = T), 
                                           max(penguins$body_mass_g, na.rm = T))),
                     
-                    actionButton("botonFiltro", "Filtrar datos"),
+                    helpText("Presione el botón para visualizar los datos"),
+                    actionButton("botonFiltro", "Vamos!"),
                     
                     br(),
                     

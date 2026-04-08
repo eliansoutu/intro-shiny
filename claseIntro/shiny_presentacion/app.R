@@ -20,8 +20,8 @@ ui <- page_sidebar(
     selectInput("filtro_lugar", "Filtrar por lugar:",
                 choices = c("Todos" = "", unique(datos_inscriptos$lugar)),
                 selected = ""),
-    selectInput("filtro_profesion", "Filtrar por profesión/cargo:",
-                choices = c("Todos" = "", unique(datos_inscriptos$profesion_cargo)),
+    selectInput("filtro_profesion", "Filtrar por profesión:",
+                choices = c("Todos" = "", unique(datos_inscriptos$profesion)),
                 selected = ""),
     textInput("buscar_nombre", "Buscar por nombre:",
               placeholder = "Ingrese nombre..."),
@@ -45,13 +45,13 @@ ui <- page_sidebar(
     ),
     nav_panel("Análisis por Profesión",
               card(
-                card_header("Distribución por profesión/cargo"),
+                card_header("Distribución por profesión"),
                 plotOutput("grafico_profesion")
               )
     ),
-    nav_panel("Temas e Ideas",
+    nav_panel("Temas",
               card(
-                card_header("Temas e ideas de interés"),
+                card_header("Temas de interés"),
                 verbatimTextOutput("lista_temas")
               )
     ),
@@ -77,7 +77,7 @@ server <- function(input, output, session) {
     
     # Filtro por profesión
     if (input$filtro_profesion != "") {
-      datos <- datos[datos$profesion_cargo == input$filtro_profesion, ]
+      datos <- datos[datos$profesion == input$filtro_profesion, ]
     }
     
     # Búsqueda por nombre
@@ -92,7 +92,7 @@ server <- function(input, output, session) {
   output$resumen_datos <- renderText({
     total <- nrow(datos_filtrados())
     lugares <- length(unique(datos_filtrados()$lugar))
-    profesiones <- length(unique(datos_filtrados()$profesion_cargo))
+    profesiones <- length(unique(datos_filtrados()$profesion))
     
     paste0("Total inscriptos: ", total, "\n",
            "Lugares únicos: ", lugares, "\n",
@@ -125,14 +125,14 @@ server <- function(input, output, session) {
   # Gráfico por profesión
   output$grafico_profesion <- renderPlot({
     datos_profesion <- datos_filtrados() %>%
-      count(profesion_cargo) %>%
+      count(profesion) %>%
       arrange(desc(n))
     
-    ggplot(datos_profesion, aes(x = reorder(profesion_cargo, n), y = n)) +
+    ggplot(datos_profesion, aes(x = reorder(profesion, n), y = n)) +
       geom_col(fill = "darkgreen", alpha = 0.7) +
       coord_flip() +
-      labs(title = "Número de inscriptos por profesión/cargo",
-           x = "Profesión/Cargo",
+      labs(title = "Número de inscriptos por profesión",
+           x = "Profesión",
            y = "Cantidad de inscriptos") +
       theme_minimal() +
       theme(plot.title = element_text(hjust = 0.5))
@@ -140,7 +140,7 @@ server <- function(input, output, session) {
   
   # Lista de temas
   output$lista_temas <- renderText({
-    temas <- datos_filtrados()$temas_ideas
+    temas <- datos_filtrados()$temas
     paste(paste0("• ", temas), collapse = "\n")
   })
   
