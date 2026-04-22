@@ -35,53 +35,26 @@ ui <- page_sidebar(
 )
 
 server <- function(input, output, session) {
-  
-  data_filtrada <- reactive({
-    penguins %>% 
-    filter(island == input$islandSelect,
-           body_mass_g >= input$bodySlider[1] &
-             body_mass_g <= input$bodySlider[2])
-    })
-  
-  output$plotPenguin <- renderPlotly({
-    
-    plot <- ggplot(data = data_filtrada(),
-           aes(bill_length_mm, bill_depth_mm, color = species)) +
-      geom_point()
 
+
+  #Renderizamos nuestro plot
+  output$plotPenguin <- renderPlotly({
+
+    #Aplicamos filtros accediendo a los valores de inputs y asignamos a objeto
+    data <- penguins %>%
+      filter(island == input$islandSelect,
+             body_mass_g >= input$bodySlider[1] &
+               body_mass_g <= input$bodySlider[2])
+
+    #Generamos ggplot con los datos filtrados
+    plot <- ggplot(data, aes(bill_length_mm, bill_depth_mm, color = species)) +
+      geom_point() +
+      theme_minimal()
+
+    #Converitmos en plotly
     ggplotly(plot)
 
   })
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  #Renderizamos nuestro plot
-  # output$plotPenguin <- renderPlotly({
-  # 
-  #   #Aplicamos filtros accediendo a los valores de inputs y asignamos a objeto
-  #   data <- penguins %>%
-  #     filter(island == input$islandSelect,
-  #            body_mass_g >= input$bodySlider[1] &
-  #              body_mass_g <= input$bodySlider[2])
-  # 
-  #   #Generamos ggplot con los datos filtrados
-  #   plot <- ggplot(data, aes(bill_length_mm, bill_depth_mm, color = species)) +
-  #     geom_point() +
-  #     theme_minimal()
-  # 
-  #   #Converitmos en plotly
-  #   ggplotly(plot)
-  # 
-  # })
   
   output$penguinImage <- renderImage({
     
