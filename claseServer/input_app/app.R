@@ -58,7 +58,7 @@ server <- function(input, output, session) {
   
   output$penguinImage <- renderImage({
     
-    list(src = "../recursos/penguins.png",
+    list(src = "penguins.png",
          width = 360,
          height = 200,
          alt = "Palmer penguins")
